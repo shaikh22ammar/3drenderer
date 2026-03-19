@@ -7,6 +7,9 @@
 #include <SDL3/SDL_main.h>
 #include "vector.h"
 
+#define FPS 60
+#define FRAME_TARGET_TIME (1000/FPS)
+
 typedef struct {int i; int j;} pixel_t;
 
 extern bool isRunning; 

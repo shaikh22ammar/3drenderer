@@ -907,6 +907,8 @@ EGLsizeiANDROID	/opt/homebrew/include/SDL3/SDL_egl.h	/^typedef khronos_ssize_t E
 EGLuint64KHR	/opt/homebrew/include/SDL3/SDL_egl.h	/^typedef khronos_uint64_t EGLuint64KHR;$/;"	t	typeref:typename:khronos_uint64_t
 EGLuint64NV	/opt/homebrew/include/SDL3/SDL_egl.h	/^typedef khronos_utime_nanoseconds_t EGLuint64NV;$/;"	t	typeref:typename:khronos_utime_nanoseconds_t
 FONT_LINE_HEIGHT	/opt/homebrew/include/SDL3/SDL_test_font.h	/^#define FONT_LINE_HEIGHT /;"	d
+FPS	./src/display.h	/^#define FPS /;"	d
+FRAME_TARGET_TIME	./src/display.h	/^#define FRAME_TARGET_TIME /;"	d
 GLAPI	/opt/homebrew/include/SDL3/SDL_opengl.h	/^#    define GLAPI /;"	d
 GLAPI	/opt/homebrew/include/SDL3/SDL_opengl.h	/^#  define GLAPI /;"	d
 GLAPI	/opt/homebrew/include/SDL3/SDL_opengl.h	/^#define GLAPI /;"	d
@@ -17491,7 +17493,9 @@ country	/opt/homebrew/include/SDL3/SDL_locale.h	/^    const char *country;  \/**
 crc32_table	/opt/homebrew/include/SDL3/SDL_test_crc32.h	/^    CrcUint32    crc32_table[256]; \/* CRC table *\/$/;"	m	struct:SDLTest_Crc32Context	typeref:typename:CrcUint32[256]
 create_time	/opt/homebrew/include/SDL3/SDL_filesystem.h	/^    SDL_Time create_time;   \/**< the time when the path was created *\/$/;"	m	struct:SDL_PathInfo	typeref:typename:SDL_Time
 cubePointCloud	./src/main.c	/^vec3_t cubePointCloud[CUBE_DIM * CUBE_DIM * CUBE_DIM];$/;"	v	typeref:typename:vec3_t[]
+cubeRotation	./src/main.c	/^vec3_t cubeRotation = {.x = 0, .y = 0, .z = 0};$/;"	v	typeref:typename:vec3_t
 cubeStart	./src/main.c	/^vec3_t cubeStart;$/;"	v	typeref:typename:vec3_t
+cubeStep	./src/main.c	/^float cubeStep;$/;"	v	typeref:typename:float
 cull_mode	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUCullMode cull_mode;         \/**< The facing direction in which triangles will be cul/;"	m	struct:SDL_GPURasterizerState	typeref:typename:SDL_GPUCullMode
 current	/opt/homebrew/include/SDL3/SDL_test_font.h	/^    int current;$/;"	m	struct:SDLTest_TextWindow	typeref:typename:int
 custom	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    SDL_HapticCustom custom;        \/**< Custom effect. *\/$/;"	m	union:SDL_HapticEffect	typeref:typename:SDL_HapticCustom
@@ -18011,6 +18015,7 @@ pproximity	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_PenProximityEvent p
 pressure	/opt/homebrew/include/SDL3/SDL_events.h	/^    float pressure;     \/**< Normalized in the range 0...1 *\/$/;"	m	struct:SDL_GamepadTouchpadEvent	typeref:typename:float
 pressure	/opt/homebrew/include/SDL3/SDL_events.h	/^    float pressure;     \/**< Normalized in the range 0...1 *\/$/;"	m	struct:SDL_TouchFingerEvent	typeref:typename:float
 pressure	/opt/homebrew/include/SDL3/SDL_touch.h	/^    float pressure; \/**< the quantity of pressure applied, normalized (0...1) *\/$/;"	m	struct:SDL_Finger	typeref:typename:float
+previousFrameTime	./src/main.c	/^int previousFrameTime = 0;$/;"	v	typeref:typename:int
 primitive_type	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUPrimitiveType primitive_type;            \/**< The primitive topology of the graphics/;"	m	struct:SDL_GPUGraphicsPipelineCreateInfo	typeref:typename:SDL_GPUPrimitiveType
 processInput	./src/main.c	/^void processInput(void) {$/;"	f	typeref:typename:void
 product_id	/opt/homebrew/include/SDL3/SDL_hidapi.h	/^    unsigned short product_id;$/;"	m	struct:SDL_hid_device_info	typeref:typename:unsigned short
@@ -18101,6 +18106,8 @@ resolve_texture	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUTexture *resol
 result	/opt/homebrew/include/SDL3/SDL_asyncio.h	/^    SDL_AsyncIOResult result;  \/**< the result of the work (success, failure, cancellation). *\/$/;"	m	struct:SDL_AsyncIOOutcome	typeref:typename:SDL_AsyncIOResult
 right_coeff	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Sint16 right_coeff[3];  \/**< How fast to increase the force towards the positive side. *\/$/;"	m	struct:SDL_HapticCondition	typeref:typename:Sint16[3]
 right_sat	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint16 right_sat[3];    \/**< Level when joystick is to the positive side; max 0xFFFF. *\/$/;"	m	struct:SDL_HapticCondition	typeref:typename:Uint16[3]
+rotateVec2	./src/vector.c	/^vec2_t rotateVec2(vec2_t v, float theta) {$/;"	f	typeref:typename:vec2_t
+rotateVec3	./src/vector.c	/^vec3_t rotateVec3(vec3_t v, float theta, char axis) {$/;"	f	typeref:typename:vec3_t
 rows_per_layer	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 rows_per_layer;                   \/**< The number of rows from one layer\/depth-slic/;"	m	struct:SDL_GPUTextureTransferInfo	typeref:typename:Uint32
 sample_count	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUSampleCount sample_count;  \/**< The number of samples per texel. Only applies if the/;"	m	struct:SDL_GPUTextureCreateInfo	typeref:typename:SDL_GPUSampleCount
 sample_count	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUSampleCount sample_count;  \/**< The number of samples to be used in rasterization. */;"	m	struct:SDL_GPUMultisampleState	typeref:typename:SDL_GPUSampleCount

@@ -11,8 +11,8 @@ LFLAGS += -lm
 run: renderer.out
 	./render.out
 
-renderer.out: src/display.c src/main.c
-	$(CC) src/main.c src/display.c -o render.out $(CFLAGS) $(LFLAGS)
+renderer.out: src/display.c src/main.c src/vector.c
+	$(CC) src/*.c -o render.out $(CFLAGS) $(LFLAGS)
 
 
 clean: 

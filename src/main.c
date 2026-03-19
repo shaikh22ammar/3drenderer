@@ -5,11 +5,16 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include "display.h"
+#include "vector.h"
 
 #define CUBE_DIM 10
 vec3_t cubePointCloud[CUBE_DIM * CUBE_DIM * CUBE_DIM];
 vec3_t cubeStart;
 vec2_t projectedPoints[CUBE_DIM * CUBE_DIM * CUBE_DIM];
+vec3_t cubeRotation = {.x = 0, .y = 0, .z = 0};
+float cubeStep;
+
+int previousFrameTime = 0;
 
 bool setup(void) {
 	// Creating raw pixel buffer
@@ -35,7 +40,7 @@ bool setup(void) {
 	// Creating cube point cloud
 	cubeStart = (vec3_t) {.x = -1, .y = -1, .z = -2};
 	vec3_t currentPoint = cubeStart;
-	float cubeStep = 2.0 / (CUBE_DIM - 1);
+	cubeStep = 2.0 / (CUBE_DIM - 1);
 	int  zCount = 0;
 	while (zCount < CUBE_DIM) {
 		int yCount = 0;
@@ -73,9 +78,28 @@ void processInput(void) {
 }
 
 void update(void) {
+	cubeRotation.x += 0.01;
+	cubeRotation.y += 0.01;
+	cubeRotation.z += 0.01;
+	vec3_t cubeCenter = {
+		.x = (cubeStart.x + cubeStart.x + cubeStep*CUBE_DIM) * 0.5,
+		.y = (cubeStart.y + cubeStart.y + cubeStep*CUBE_DIM) * 0.5,
+		.z = (cubeStart.z + cubeStart.z - cubeStep*CUBE_DIM) * 0.5,
+	};
 	for (int i = 0; i < CUBE_DIM * CUBE_DIM * CUBE_DIM; i++) {
-		projectedPoints[i] = projectPoint(cubePointCloud[i]);
+		vec3_t point = cubePointCloud[i];
+		point = addVec3(point, scaleVec3(-1.0, cubeCenter));
+		point = rotateVec3(point, cubeRotation.x, 'x');
+		point = rotateVec3(point, cubeRotation.y, 'y');
+		point = rotateVec3(point, cubeRotation.z, 'z');
+		point = addVec3(point, cubeCenter);
+		projectedPoints[i] = projectPoint(point);
 	}
+
+	int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - previousFrameTime);
+	if (timeToWait >0 && timeToWait <= FRAME_TARGET_TIME)
+		SDL_Delay(timeToWait);
+	previousFrameTime = SDL_GetTicks();
 }
 
 void render(void) {
