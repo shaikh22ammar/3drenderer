@@ -17491,6 +17491,7 @@ country	/opt/homebrew/include/SDL3/SDL_locale.h	/^    const char *country;  \/**
 crc32_table	/opt/homebrew/include/SDL3/SDL_test_crc32.h	/^    CrcUint32    crc32_table[256]; \/* CRC table *\/$/;"	m	struct:SDLTest_Crc32Context	typeref:typename:CrcUint32[256]
 create_time	/opt/homebrew/include/SDL3/SDL_filesystem.h	/^    SDL_Time create_time;   \/**< the time when the path was created *\/$/;"	m	struct:SDL_PathInfo	typeref:typename:SDL_Time
 cubePointCloud	./src/main.c	/^vec3_t cubePointCloud[CUBE_DIM * CUBE_DIM * CUBE_DIM];$/;"	v	typeref:typename:vec3_t[]
+cubeStart	./src/main.c	/^vec3_t cubeStart;$/;"	v	typeref:typename:vec3_t
 cull_mode	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUCullMode cull_mode;         \/**< The facing direction in which triangles will be cul/;"	m	struct:SDL_GPURasterizerState	typeref:typename:SDL_GPUCullMode
 current	/opt/homebrew/include/SDL3/SDL_test_font.h	/^    int current;$/;"	m	struct:SDLTest_TextWindow	typeref:typename:int
 custom	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    SDL_HapticCustom custom;        \/**< Custom effect. *\/$/;"	m	union:SDL_HapticEffect	typeref:typename:SDL_HapticCustom
@@ -18015,6 +18016,7 @@ product_id	/opt/homebrew/include/SDL3/SDL_hidapi.h	/^    unsigned short product_
 product_id	/opt/homebrew/include/SDL3/SDL_joystick.h	/^    Uint16 product_id;  \/**< the USB product ID of this joystick *\/$/;"	m	struct:SDL_VirtualJoystickDesc	typeref:typename:Uint16
 product_string	/opt/homebrew/include/SDL3/SDL_hidapi.h	/^    wchar_t *product_string;$/;"	m	struct:SDL_hid_device_info	typeref:typename:wchar_t *
 projectPoint	./src/display.c	/^vec2_t projectPoint(vec3_t point) {$/;"	f	typeref:typename:vec2_t
+projectedPoints	./src/main.c	/^vec2_t projectedPoints[CUBE_DIM * CUBE_DIM * CUBE_DIM];$/;"	v	typeref:typename:vec2_t[]
 props	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_PropertiesID props;                         \/**< A properties ID for extensions. Should/;"	m	struct:SDL_GPUGraphicsPipelineCreateInfo	typeref:typename:SDL_PropertiesID
 props	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_PropertiesID props;                    \/**< A properties ID for extensions. Should be 0/;"	m	struct:SDL_GPUSamplerCreateInfo	typeref:typename:SDL_PropertiesID
 props	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_PropertiesID props;                 \/**< A properties ID for extensions. Should be 0 if/;"	m	struct:SDL_GPUComputePipelineCreateInfo	typeref:typename:SDL_PropertiesID

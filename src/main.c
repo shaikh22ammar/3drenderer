@@ -8,7 +8,8 @@
 
 #define CUBE_DIM 10
 vec3_t cubePointCloud[CUBE_DIM * CUBE_DIM * CUBE_DIM];
-vec3_t cubeStart = (vec3_t) {.x = -1, .y = 1, .z = -1};
+vec3_t cubeStart;
+vec2_t projectedPoints[CUBE_DIM * CUBE_DIM * CUBE_DIM];
 
 bool setup(void) {
 	// Creating raw pixel buffer
@@ -32,6 +33,7 @@ bool setup(void) {
 	}
 
 	// Creating cube point cloud
+	cubeStart = (vec3_t) {.x = -1, .y = -1, .z = -2};
 	vec3_t currentPoint = cubeStart;
 	float cubeStep = 2.0 / (CUBE_DIM - 1);
 	int  zCount = 0;
@@ -47,7 +49,7 @@ bool setup(void) {
 				xCount++;
 
 			}
-			currentPoint.y -= cubeStep;
+			currentPoint.y += cubeStep;
 			yCount++;
 		}
 		currentPoint.z -= cubeStep;
@@ -72,12 +74,7 @@ void processInput(void) {
 
 void update(void) {
 	for (int i = 0; i < CUBE_DIM * CUBE_DIM * CUBE_DIM; i++) {
-		pixel_t currentPixel = 
-				screenSpaceToPixelSpace(
-				projectPoint(
-					cubePointCloud[i]
-				));
-		drawPixel(currentPixel.i, currentPixel.j, 0xFFFFFF00);
+		projectedPoints[i] = projectPoint(cubePointCloud[i]);
 	}
 }
 
@@ -86,14 +83,25 @@ void render(void) {
 	SDL_RenderClear(renderer);
 	
 	clearColorBuffer(0xFF000000);
-	drawDotGrid(30, 0x00FFFFFF + (65U << 24));
+	drawDotGrid(30, 0x00FFFFFF | (65U << 24));
+	
+	//vec3_t pointToDisplay = (vec3_t) {.x = -1, .y = 0, .z = -1};
+	//vec2_t point = projectPoint(pointToDisplay);
+	//pixel_t pixel = screenSpaceToPixelSpace(point);
+	//drawPixel(pixel.i, pixel.j, 0xFFFFFFFF);
+	for (int i = 0; i < CUBE_DIM * CUBE_DIM * CUBE_DIM; i++) {
+		pixel_t currentPixel = screenSpaceToPixelSpace(projectedPoints[i]);
+		drawRectangle(currentPixel.i, currentPixel.j, 4, 4,  0xFFFFFF00);
+	}
+	
 	renderColorBuffer();
 
 	SDL_RenderPresent(renderer);
 }
 
 int main() {
-	isRunning = initializeWindow() && setup();
+	isRunning = initializeWindow();
+	isRunning = setup();
 	while(isRunning) {
 		processInput();
 		update();	

@@ -19,14 +19,14 @@ float screenDown;
 float camZ = 1;
 
 void updateScreenSpaceCoordinates(void) {
-	screenUp = 0.5 * windowHeight / windowWidth;
+	screenUp = windowHeight * ((screenRight - screenLeft)/2.0) * 1.0 / windowWidth;
 	screenDown = -screenUp;
 }
 
 pixel_t screenSpaceToPixelSpace(vec2_t coordinate) {
-	int x = (int) (coordinate.x - screenLeft) * 2.0 / windowWidth;
-	int y = (int) (coordinate.y - screenDown) * 2.0 / windowWidth;
-	return (pixel_t) {.i = x, .j = y};
+	int x = (int) ((coordinate.x - screenLeft) * windowWidth / 2.0);
+	int y = (int) ((coordinate.y - screenDown) * windowWidth / 2.0);
+	return (pixel_t) {.i = y, .j = x};
 }
 
 bool initializeWindow(void) {
@@ -97,8 +97,8 @@ void destroyWindow(void) {
 }
 
 vec2_t projectPoint(vec3_t point) {
-	float x = point.x * camZ / (point.z - camZ);
-	float y = point.y * camZ / (point.z - camZ);
+	float x = point.x * camZ / (-point.z + camZ);
+	float y = point.y * camZ / (-point.z + camZ);
 	return (vec2_t) {.x = x, .y = y};
 }
 
@@ -134,7 +134,7 @@ void drawDotGrid(int step, uint32_t color) {
 void drawRectangle(int i, int j, int width, int height, uint32_t color) {
 	for (int y = i; y < i + height; y++) {
 		for (int x = j; x < j + width; x++) {
-			drawPixel(i, j, color);
+			drawPixel(y, x, color);
 		}
 	}
 }
