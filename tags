@@ -17924,6 +17924,7 @@ offset	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 offset;          \/**< 
 offset	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 offset;          \/**< The starting byte within the buffer. *\/$/;"	m	struct:SDL_GPUBufferLocation	typeref:typename:Uint32
 offset	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 offset;          \/**< The starting byte within the buffer. *\/$/;"	m	struct:SDL_GPUBufferRegion	typeref:typename:Uint32
 offset	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Sint16 offset;      \/**< Mean value of the wave. *\/$/;"	m	struct:SDL_HapticPeriodic	typeref:typename:Sint16
+oneByPixelDim	./src/display.c	/^float oneByPixelDim;$/;"	v	typeref:typename:float
 output	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    } output;$/;"	m	struct:SDL_GamepadBinding	typeref:union:SDL_GamepadBinding::__anonb13838dd040a
 output_type	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    SDL_GamepadBindingType output_type;$/;"	m	struct:SDL_GamepadBinding	typeref:typename:SDL_GamepadBindingType
 owner	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool owner;         \/**< are we owning the clipboard (internal update) *\/$/;"	m	struct:SDL_ClipboardEvent	typeref:typename:bool
@@ -18113,10 +18114,10 @@ scaleVec2	./src/vector.h	/^inline vec2_t scaleVec2(float r, vec2_t u) {$/;"	f	ty
 scaleVec3	./src/vector.h	/^inline vec3_t scaleVec3(float r, vec3_t u) {$/;"	f	typeref:typename:vec3_t
 scancode	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_Scancode scancode;  \/**< SDL physical key code *\/$/;"	m	struct:SDL_KeyboardEvent	typeref:typename:SDL_Scancode
 screenDown	./src/display.c	/^float screenDown;$/;"	v	typeref:typename:float
-screenLeft	./src/display.c	/^float screenLeft = -1;$/;"	v	typeref:typename:float
+screenLeft	./src/display.c	/^float screenLeft = -1; $/;"	v	typeref:typename:float
 screenRight	./src/display.c	/^float screenRight = 1;$/;"	v	typeref:typename:float
 screenSpaceToPixelSpace	./src/display.c	/^pixel_t screenSpaceToPixelSpace(vec2_t coordinate) {$/;"	f	typeref:typename:pixel_t
-screenUp	./src/display.c	/^float screenUp;$/;"	v	typeref:typename:float
+screenUp	./src/display.c	/^float screenUp; $/;"	v	typeref:typename:float
 second	/opt/homebrew/include/SDL3/SDL_time.h	/^    int second;                \/**< Seconds [0-60] *\/$/;"	m	struct:SDL_DateTime	typeref:typename:int
 selected_candidate	/opt/homebrew/include/SDL3/SDL_events.h	/^    Sint32 selected_candidate;  \/**< The index of the selected candidate, or -1 if no candidate/;"	m	struct:SDL_TextEditingCandidatesEvent	typeref:typename:Sint32
 sensor	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_SensorEvent sensor;                 \/**< Sensor event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_SensorEvent

@@ -11,22 +11,35 @@ SDL_Texture *colorBufferTexture = NULL;
 int windowWidth = 800; 
 int windowHeight = 600;
 
-float screenLeft = -1;
+// screen space coordinates of left, right, top, and bottom edges of screeen
+float screenLeft = -1; 
 float screenRight = 1;
-float screenUp;
+float screenUp; 
 float screenDown;
+// reciprocal of pixel dimension in screen space coordinates
+float oneByPixelDim;
 
+// coordinate of camera in front of the screen
 float camZ = 1;
 
 void updateScreenSpaceCoordinates(void) {
-	screenUp = windowHeight * ((screenRight - screenLeft)/2.0) * 1.0 / windowWidth;
+	/* Updates the coordiantes of top and bottom edges of screen according to window width and height.
+	 * It is assumed that screenUp = - screenDown.
+	 * We use the equation screenDown + windowHeight * pixelDim = screenUp,
+	 * where pixelDim is the width of the pixel that is found using the equation:
+	 * screenLeft + windowWidth * pixelDim = screenRight */
+	oneByPixelDim = windowWidth * 1.0 / (screenRight - screenLeft);
+	screenUp = 0.5 * windowHeight * (1.0 / oneByPixelDim);
 	screenDown = -screenUp;
 }
 
 pixel_t screenSpaceToPixelSpace(vec2_t coordinate) {
-	int x = (int) ((coordinate.x - screenLeft) * windowWidth / 2.0);
-	int y = (int) ((coordinate.y - screenDown) * windowWidth / 2.0);
-	return (pixel_t) {.i = y, .j = x};
+	/* Maps a coordinate in screen space to the pixel it belongs to using
+	 * screenLeft + j * pixelDim <= p.x < screenLeft + (j+1) * pixelDim,
+	 * screenDown + i * pixelDim <= p.y < screenUp + (i+1) * pixelDim. */
+	int j = (int) ((coordinate.x - screenLeft) * oneByPixelDim);
+	int i = (int) ((coordinate.y - screenDown) * oneByPixelDim);
+	return (pixel_t) {.i = i, .j = j};
 }
 
 bool initializeWindow(void) {
@@ -97,6 +110,9 @@ void destroyWindow(void) {
 }
 
 vec2_t projectPoint(vec3_t point) {
+	/* Projects a point using the fact that
+	 * |point.x|/|x'| = |point.z - camZ|/|camZ|
+	 * |point.y|/|y'| = |point.z - camZ|/|camZ| */
 	float x = point.x * camZ / (-point.z + camZ);
 	float y = point.y * camZ / (-point.z + camZ);
 	return (vec2_t) {.x = x, .y = y};
