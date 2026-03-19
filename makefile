@@ -1,18 +1,28 @@
-CC = clang -Wall -std=c99
-CFLAGS = -Wall -std=c99
+.PHONY: clean tags
+
+CC = clang
+CFLAGS = -Wall -std=c11
 CFLAGS += $(shell pkg-config --cflags sdl3)
 
 LFLAGS = 
 LFLAGS += $(shell pkg-config --libs sdl3)
+LFLAGS += -lm
 
-src/main: src/display.o src/main.c
-	$(CC) src/main.c src/display.o -o render.out $(CFLAGS) $(LFLAGS)
-
-src/display.o: src/display.h src/display.c
-	$(CC) -c src/display.c -o src/display.o $(CFLAGS) 
-
-run:
+run: renderer.out
 	./render.out
+
+renderer.out: src/display.c src/main.c
+	$(CC) src/main.c src/display.c -o render.out $(CFLAGS) $(LFLAGS)
+
 
 clean: 
 	rm render.out
+	rm src/*.o
+
+tags:
+	ctags -R --c-kinds=+tfvse \
+		--languages=C \
+		--langmap=C:.c.h \
+		-f tags \
+		. \
+		/opt/homebrew/include/SDL3/

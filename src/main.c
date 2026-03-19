@@ -6,17 +6,13 @@
 #include <SDL3/SDL_main.h>
 #include "display.h"
 
-bool isRunning = false; 
-SDL_Window *window = NULL;
-SDL_Renderer *renderer = NULL;
-uint32_t *colorBuffer = NULL;
-SDL_Texture *colorBufferTexture = NULL;
-int window_width = 800; 
-int window_height = 600;
+#define CUBE_DIM 10
+vec3_t cubePointCloud[CUBE_DIM * CUBE_DIM * CUBE_DIM];
+vec3_t cubeStart = (vec3_t) {.x = -1, .y = 1, .z = -1};
 
 bool setup(void) {
 	// Creating raw pixel buffer
-	colorBuffer = (uint32_t *) malloc(sizeof(uint32_t) * window_width * window_height);
+	colorBuffer = (uint32_t *) malloc(sizeof(uint32_t) * windowWidth * windowHeight);
 	if (!colorBuffer) {
 		fprintf(stderr, "Failed to allocate memory for color buffer");
 		return false;
@@ -27,12 +23,35 @@ bool setup(void) {
 		renderer,
 		SDL_PIXELFORMAT_ARGB8888,
 		SDL_TEXTUREACCESS_STREAMING,
-		window_width,
-		window_height
+		windowWidth,
+		windowHeight
 	);
 	if (!colorBufferTexture) {
 		SDL_Log("Unable to create color buffer texture %s", SDL_GetError());
 		return false;
+	}
+
+	// Creating cube point cloud
+	vec3_t currentPoint = cubeStart;
+	float cubeStep = 2.0 / (CUBE_DIM - 1);
+	int  zCount = 0;
+	while (zCount < CUBE_DIM) {
+		int yCount = 0;
+		currentPoint.y = cubeStart.y;
+		while (yCount < CUBE_DIM) {
+			int xCount = 0;
+			currentPoint.x = cubeStart.x;
+			while(xCount < CUBE_DIM) {
+				cubePointCloud[zCount*CUBE_DIM*CUBE_DIM + yCount*CUBE_DIM + xCount] = currentPoint;
+				currentPoint.x += cubeStep;
+				xCount++;
+
+			}
+			currentPoint.y -= cubeStep;
+			yCount++;
+		}
+		currentPoint.z -= cubeStep;
+		zCount++;
 	}
 	return true;
 }
@@ -51,13 +70,24 @@ void processInput(void) {
 	}
 }
 
+void update(void) {
+	for (int i = 0; i < CUBE_DIM * CUBE_DIM * CUBE_DIM; i++) {
+		pixel_t currentPixel = 
+				screenSpaceToPixelSpace(
+				projectPoint(
+					cubePointCloud[i]
+				));
+		drawPixel(currentPixel.i, currentPixel.j, 0xFFFFFF00);
+	}
+}
+
 void render(void) {
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
 	
-	drawGrid(100);
-	renderColorBuffer();
 	clearColorBuffer(0xFF000000);
+	drawDotGrid(30, 0x00FFFFFF + (65U << 24));
+	renderColorBuffer();
 
 	SDL_RenderPresent(renderer);
 }
@@ -66,7 +96,7 @@ int main() {
 	isRunning = initializeWindow() && setup();
 	while(isRunning) {
 		processInput();
-		//clearColorBuffer(0xFFFFFF00);
+		update();	
 		render();
 	}
 	destroyWindow();
