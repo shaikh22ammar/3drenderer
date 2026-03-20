@@ -41,7 +41,7 @@ bool createCubeMesh(void) {
 		(face_t) {.a = 3, .b = 2, .c = 6}, // bottom
 		(face_t) {.a = 6, .b = 7, .c = 3},
 	};
-	vec3_t origin = {.x = 0.0, .y = 0.0, .z = 2.0};
+	vec3_t origin = {.x = 0.0, .y = 0.0, .z = 2.5};
 
 	return initializeMesh(&mesh, NUM_VERTICES, NUM_FACES, vertices, faces, origin);
 }
