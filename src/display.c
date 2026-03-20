@@ -56,24 +56,24 @@ bool initializeWindow(void) {
 	}
 
 	// Creating window with properties
-	const SDL_DisplayMode *display_mode = SDL_GetCurrentDisplayMode(SDL_GetPrimaryDisplay());
+	/*const SDL_DisplayMode *display_mode = SDL_GetCurrentDisplayMode(SDL_GetPrimaryDisplay());
 	windowWidth = display_mode->w;
-	windowHeight = display_mode->h;
-	updateScreenSpaceCoordinates();
+	windowHeight = display_mode->h;*/
 	SDL_PropertiesID props = SDL_CreateProperties();
 	if (props == 0) {
 		SDL_Log("Unable to create properties: %s", SDL_GetError());
 		return false;
 	}
 	SDL_SetStringProperty(props, SDL_PROP_WINDOW_CREATE_TITLE_STRING, NULL);
-	SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER, windowWidth);
-	SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER, windowHeight);
-	SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_X_NUMBER, SDL_WINDOWPOS_CENTERED);
-	SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_Y_NUMBER, SDL_WINDOWPOS_CENTERED);
+	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER, windowWidth);
+	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER, windowHeight);
+	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_X_NUMBER, SDL_WINDOWPOS_CENTERED);
+	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_Y_NUMBER, SDL_WINDOWPOS_CENTERED);
 	SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN, true);
 
 	window = SDL_CreateWindowWithProperties(props);
-	//SDL_GetWindowSizeInPixels(window, &windowWidth, &windowHeight);
+	SDL_GetWindowSizeInPixels(window, &windowWidth, &windowHeight);
+	updateScreenSpaceCoordinates();
 	if (window == NULL) {
 		SDL_Log("Unable to create window: %s", SDL_GetError());
 		return false;
