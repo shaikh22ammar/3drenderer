@@ -6,39 +6,29 @@
 #include <SDL3/SDL_main.h>
 #include "display.h"
 #include "vector.h"
+#include "mesh.h"
 
+// Cube point cloud
+/*
 #define CUBE_DIM 10
 vec3_t cubePointCloud[CUBE_DIM * CUBE_DIM * CUBE_DIM];
 vec3_t cubeStart;
 vec2_t projectedPoints[CUBE_DIM * CUBE_DIM * CUBE_DIM];
 vec3_t cubeRotation = {.x = 0, .y = 0, .z = 0};
 vec3_t cubeCenter;
-float cubeStep;
+float cubeStep;*/
+
+// mesh
+#define NUM_VERTICES 8
+#define NUM_FACES 12
+mesh_t mesh;
+vec3_t vertices[NUM_VERTICES];
+face_t faces[NUM_FACES];
 
 int previousFrameTime = 0;
 
-bool setup(void) {
-	// Creating raw pixel buffer
-	colorBuffer = (uint32_t *) malloc(sizeof(uint32_t) * windowWidth * windowHeight);
-	if (!colorBuffer) {
-		fprintf(stderr, "Failed to allocate memory for color buffer");
-		return false;
-	}
-
-	// Creating buffer texture
-	colorBufferTexture = SDL_CreateTexture(
-		renderer,
-		SDL_PIXELFORMAT_ARGB8888,
-		SDL_TEXTUREACCESS_STREAMING,
-		windowWidth,
-		windowHeight
-	);
-	if (!colorBufferTexture) {
-		SDL_Log("Unable to create color buffer texture %s", SDL_GetError());
-		return false;
-	}
-
-	// Creating cube point cloud
+/*
+void createCubePointCloud(void) {
 	cubeStart = (vec3_t) {.x = -1, .y = -1, .z = 2};
 	vec3_t currentPoint = cubeStart;
 	cubeStep = 2.0 / (CUBE_DIM - 1);
@@ -66,6 +56,58 @@ bool setup(void) {
 		currentPoint.z += cubeStep;
 		zCount++;
 	}
+}*/
+
+void createCubeMesh(void) {
+	vec3_t vertices[NUM_VERTICES] = {
+		(vec3_t) {.x = -0.5, .y = -0.5, .z = 3}, // 0
+		(vec3_t) {.x = 0.5, .y = -0.5, .z = 3},  // 1
+		(vec3_t) {.x = 0.5, .y = 0.5, .z = 3},   // 2
+		(vec3_t) {.x = -0.5, .y = 0.5, .z = 3},  // 3
+		(vec3_t) {.x = -0.5, .y = -0.5, .z = 2}, // 4
+		(vec3_t) {.x = 0.5, .y = -0.5, .z = 2},  // 5
+		(vec3_t) {.x = 0.5, .y = 0.5, .z = 2},   // 6
+		(vec3_t) {.x = -0.5, .y = 0.5, .z = 2},  // 7
+	};
+	face_t faces[NUM_FACES] = {
+		(face_t) {.a = 0, .b = 1, .c = 2}, // back
+		(face_t) {.a = 2, .b = 3, .c = 0},
+		(face_t) {.a = 4, .b = 7, .c = 6}, // front
+		(face_t) {.a = 6, .b = 5, .c = 4},
+		(face_t) {.a = 2, .b = 1, .c = 5}, // right
+		(face_t) {.a = 5, .b = 6, .c = 2},
+		(face_t) {.a = 4, .b = 0, .c = 3}, // left
+		(face_t) {.a = 3, .b = 7, .c = 4},
+		(face_t) {.a = 0, .b = 4, .c = 5}, // top
+		(face_t) {.a = 5, .b = 1, .c = 0},
+		(face_t) {.a = 3, .b = 2, .c = 6}, // bottom
+		(face_t) {.a = 6, .b = 7, .c = 3},
+	};
+	intializeMesh(&mesh, NUM_VERTICES, NUM_FACES, vertices, faces);
+}
+
+bool setup(void) {
+	// Creating raw pixel buffer
+	colorBuffer = (uint32_t *) malloc(sizeof(uint32_t) * windowWidth * windowHeight);
+	if (!colorBuffer) {
+		fprintf(stderr, "Failed to allocate memory for color buffer");
+		return false;
+	}
+
+	// Creating buffer texture
+	colorBufferTexture = SDL_CreateTexture(
+		renderer,
+		SDL_PIXELFORMAT_ARGB8888,
+		SDL_TEXTUREACCESS_STREAMING,
+		windowWidth,
+		windowHeight
+	);
+	if (!colorBufferTexture) {
+		SDL_Log("Unable to create color buffer texture %s", SDL_GetError());
+		return false;
+	}
+	
+	//createCubePointCloud();
 	return true;
 }
 
@@ -84,7 +126,7 @@ void processInput(void) {
 }
 
 void update(void) {
-	cubeRotation.x += 0.01;
+	/*cubeRotation.x += 0.01;
 	cubeRotation.y += 0.01;
 	cubeRotation.z += 0.01;
 	for (int i = 0; i < CUBE_DIM * CUBE_DIM * CUBE_DIM; i++) {
@@ -95,7 +137,10 @@ void update(void) {
 		point = rotateVec3(point, cubeRotation.z, 'z');
 		point = addVec3(point, cubeCenter);
 		projectedPoints[i] = projectPoint(point);
-	}
+	}*/
+	rotateMesh(&mesh, 0.01, 'x');
+	rotateMesh(&mesh, 0.01, 'y');
+	rotateMesh(&mesh, 0.01, 'z');
 
 	int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - previousFrameTime);
 	if (timeToWait >0 && timeToWait <= FRAME_TARGET_TIME)
@@ -103,13 +148,14 @@ void update(void) {
 	previousFrameTime = SDL_GetTicks();
 }
 
-void drawCube(void) {
+/*
+void drawCubePointCloud(void) {
 	for (int i = 0; i < CUBE_DIM * CUBE_DIM * CUBE_DIM; i++) {
 		pixel_t currentPixel = screenSpaceToPixelSpace(projectedPoints[i]);
 		drawRectangle(currentPixel.x - 2, currentPixel.y - 2, 4, 4,  0xFFFFFF00);
 	}
 	
-}
+}*/
 
 void render(void) {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -118,16 +164,9 @@ void render(void) {
 	clearColorBuffer(0xFF000000);
 	drawGrid(50, 0x00FFFFFF | (65U << 24));
 	drawGrid(100, 0x00FFFFFF | (100U << 24));
-
-	//drawCube();
-
-	//draw a line from (x0, y0) to (x1, y1)
-	int x0 = 500, x1 = 1000;
-	int y0 = 800, y1 = 800;
-	drawLine(x0, y0, x1, y1, 0xFFFFFF00);
+	drawMesh(&mesh, 0xFFFFFFFF);
 
 	renderColorBuffer();
-
 	SDL_RenderPresent(renderer);
 }
 
@@ -136,9 +175,10 @@ int main() {
 	isRunning = setup();
 	while(isRunning) {
 		processInput();
-		//update();	
+		update();	
 		render();
 	}
 	destroyWindow();
+	destroyMesh(&mesh);
 	return 0;
 }
