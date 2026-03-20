@@ -57,12 +57,10 @@ void rotateMesh(mesh_t *mesh, float theta, char axis) {
 	vec3_t centroid = mesh->centroid;
 	vec3_t negCentroid = scaleVec3(-1.0, centroid);
 	for (int i = 0; i < nVertices; i++) {
-		vertices[i] = 
-			addVec3(centroid,
-				rotateVec3(
-					addVec3(vertices[i],negCentroid),
-					theta,
-					axis));
+		vec3_t currVertex = vertices[i];
+		currVertex = addVec3(vertices[i], negCentroid);
+		currVertex = rotateVec3(currVertex, theta, axis);
+		vertices[i] = addVec3(currVertex, centroid);
 	}
 }
 

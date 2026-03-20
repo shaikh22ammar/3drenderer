@@ -85,8 +85,8 @@ void processInput(void) {
 }
 
 void update(void) {
-	//rotateMesh(&mesh, 0.01, 'y');
-	//rotateMesh(&mesh, 0.01, 'z');
+	rotateMesh(&mesh, 0.01, 'y');
+	rotateMesh(&mesh, 0.01, 'z');
 
 	int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - previousFrameTime);
 	if (timeToWait >0 && timeToWait <= FRAME_TARGET_TIME)
@@ -110,7 +110,6 @@ void render(void) {
 int main() {
 	isRunning = initializeWindow();
 	isRunning = setup();
-	rotateMesh(&mesh, 0.000, 'x');
 	while(isRunning) {
 		processInput();
 		update();	
