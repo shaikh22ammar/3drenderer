@@ -17343,7 +17343,7 @@ __PRFCHWINTRIN_H	/opt/homebrew/include/SDL3/SDL_endian.h	/^#define __PRFCHWINTRI
 __PRFCHWINTRIN_H	/opt/homebrew/include/SDL3/SDL_intrin.h	/^#define __PRFCHWINTRIN_H$/;"	d
 __anon279bd51d010a	/opt/homebrew/include/SDL3/SDL_endian.h	/^    union {$/;"	u	function:SDL_SwapFloat
 __anon688f85460103	/opt/homebrew/include/SDL3/SDL_egl.h	/^typedef enum {$/;"	g
-__anon9ec22d050108	./src/display.h	/^typedef struct {int i; int j;} pixel_t;$/;"	s
+__anon9ec22d050108	./src/display.h	/^typedef struct {int x; int y;} pixel_t;$/;"	s
 __anonb13838dd010a	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    {$/;"	u	struct:SDL_GamepadBinding
 __anonb13838dd0208	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^        {$/;"	s	union:SDL_GamepadBinding::__anonb13838dd010a
 __anonb13838dd0308	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^        {$/;"	s	union:SDL_GamepadBinding::__anonb13838dd010a
@@ -17451,7 +17451,7 @@ buttons	/opt/homebrew/include/SDL3/SDL_messagebox.h	/^    const SDL_MessageBoxBu
 bytes_per_pixel	/opt/homebrew/include/SDL3/SDL_pixels.h	/^    Uint8 bytes_per_pixel;$/;"	m	struct:SDL_PixelFormatDetails	typeref:typename:Uint8
 bytes_requested	/opt/homebrew/include/SDL3/SDL_asyncio.h	/^    Uint64 bytes_requested;  \/**< number of bytes the task was to read\/write. *\/$/;"	m	struct:SDL_AsyncIOOutcome	typeref:typename:Uint64
 bytes_transferred	/opt/homebrew/include/SDL3/SDL_asyncio.h	/^    Uint64 bytes_transferred;  \/**< actual number of bytes that were read\/written. *\/$/;"	m	struct:SDL_AsyncIOOutcome	typeref:typename:Uint64
-camZ	./src/display.c	/^float camZ = 1;$/;"	v	typeref:typename:float
+camZ	./src/display.c	/^float camZ = -1.0;$/;"	v	typeref:typename:float
 candidates	/opt/homebrew/include/SDL3/SDL_events.h	/^    const char * const *candidates;    \/**< The list of candidates, or NULL if there are no can/;"	m	struct:SDL_TextEditingCandidatesEvent	typeref:typename:const char * const *
 cdevice	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_CameraDeviceEvent cdevice;          \/**< Camera device event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_CameraDeviceEvent
 center	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Sint16 center[3];       \/**< Position of the dead zone. *\/$/;"	m	struct:SDL_HapticCondition	typeref:typename:Sint16[3]
@@ -17492,6 +17492,7 @@ constant	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    SDL_HapticConstant consta
 country	/opt/homebrew/include/SDL3/SDL_locale.h	/^    const char *country;  \/**< A country, like "US" for America. Can be NULL. *\/$/;"	m	struct:SDL_Locale	typeref:typename:const char *
 crc32_table	/opt/homebrew/include/SDL3/SDL_test_crc32.h	/^    CrcUint32    crc32_table[256]; \/* CRC table *\/$/;"	m	struct:SDLTest_Crc32Context	typeref:typename:CrcUint32[256]
 create_time	/opt/homebrew/include/SDL3/SDL_filesystem.h	/^    SDL_Time create_time;   \/**< the time when the path was created *\/$/;"	m	struct:SDL_PathInfo	typeref:typename:SDL_Time
+cubeCenter	./src/main.c	/^vec3_t cubeCenter;$/;"	v	typeref:typename:vec3_t
 cubePointCloud	./src/main.c	/^vec3_t cubePointCloud[CUBE_DIM * CUBE_DIM * CUBE_DIM];$/;"	v	typeref:typename:vec3_t[]
 cubeRotation	./src/main.c	/^vec3_t cubeRotation = {.x = 0, .y = 0, .z = 0};$/;"	v	typeref:typename:vec3_t
 cubeStart	./src/main.c	/^vec3_t cubeStart;$/;"	v	typeref:typename:vec3_t
@@ -17559,8 +17560,9 @@ down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;      \/**< true if
 down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;      \/**< true if the button is pressed *\/$/;"	m	struct:SDL_PenButtonEvent	typeref:typename:bool
 drawDotGrid	./src/display.c	/^void drawDotGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
 drawGrid	./src/display.c	/^void drawGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
-drawPixel	./src/display.c	/^void drawPixel(int i, int j, uint32_t color) {$/;"	f	typeref:typename:void
-drawRectangle	./src/display.c	/^void drawRectangle(int i, int j, int width, int height, uint32_t color) {$/;"	f	typeref:typename:void
+drawLine	./src/display.c	/^void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {$/;"	f	typeref:typename:void
+drawPixel	./src/display.c	/^void drawPixel(int x, int y, uint32_t color) {$/;"	f	typeref:typename:void
+drawRectangle	./src/display.c	/^void drawRectangle(int x, int y, int width, int height, uint32_t color) {$/;"	f	typeref:typename:void
 drop	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_DropEvent drop;                     \/**< Drag and drop event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_DropEvent
 dst_alpha_blendfactor	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUBlendFactor dst_alpha_blendfactor;     \/**< The value to be multiplied by the destin/;"	m	struct:SDL_GPUColorTargetBlendState	typeref:typename:SDL_GPUBlendFactor
 dst_color_blendfactor	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUBlendFactor dst_color_blendfactor;     \/**< The value to be multiplied by the destin/;"	m	struct:SDL_GPUColorTargetBlendState	typeref:typename:SDL_GPUBlendFactor
@@ -17687,7 +17689,6 @@ height	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 height;                
 hide_cursor	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    bool hide_cursor;$/;"	m	struct:__anonb92e08560108	typeref:typename:bool
 horizontal	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool horizontal;          \/**< true if the list is horizontal, false if it's vertical *\/$/;"	m	struct:SDL_TextEditingCandidatesEvent	typeref:typename:bool
 hour	/opt/homebrew/include/SDL3/SDL_time.h	/^    int hour;                  \/**< Hour [0-23] *\/$/;"	m	struct:SDL_DateTime	typeref:typename:int
-i	./src/display.h	/^typedef struct {int i; int j;} pixel_t;$/;"	m	struct:__anon9ec22d050108	typeref:typename:int
 i	/opt/homebrew/include/SDL3/SDL_test_md5.h	/^    MD5UINT4 i[2];              \/* number of _bits_ handled mod 2^64 *\/$/;"	m	struct:SDLTest_Md5Context	typeref:typename:MD5UINT4[2]
 iHeight	/opt/homebrew/include/SDL3/SDL_egl.h	/^    EGLint iHeight;$/;"	m	struct:EGLClientPixmapHI	typeref:typename:EGLint
 iStride	/opt/homebrew/include/SDL3/SDL_egl.h	/^    EGLint iStride;$/;"	m	struct:EGLClientPixmapHI	typeref:typename:EGLint
@@ -17720,7 +17721,6 @@ interval	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint16 interval;    \/**<
 intptr_t	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^typedef __int64 intptr_t;$/;"	t	typeref:typename:__int64
 intptr_t	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^typedef int intptr_t;$/;"	t	typeref:typename:int
 isRunning	./src/display.c	/^bool isRunning = false; $/;"	v	typeref:typename:bool
-j	./src/display.h	/^typedef struct {int i; int j;} pixel_t;$/;"	m	struct:__anon9ec22d050108	typeref:typename:int
 jaxis	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_JoyAxisEvent jaxis;                 \/**< Joystick axis event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_JoyAxisEvent
 jball	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_JoyBallEvent jball;                 \/**< Joystick ball event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_JoyBallEvent
 jbattery	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_JoyBatteryEvent jbattery;           \/**< Joystick battery event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_JoyBatteryEvent
@@ -18006,7 +18006,7 @@ pinch	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_PinchFingerEvent pinch; 
 pitch	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 pitch;                       \/**< The size of a single element + the offset between /;"	m	struct:SDL_GPUVertexBufferDescription	typeref:typename:Uint32
 pitch	/opt/homebrew/include/SDL3/SDL_surface.h	/^    int pitch;                  \/**< The distance in bytes between rows of pixels, read-only *\/$/;"	m	struct:SDL_Surface	typeref:typename:int
 pixel_density	/opt/homebrew/include/SDL3/SDL_video.h	/^    float pixel_density;            \/**< scale converting size to pixels (e.g. a 1920x1080 mode/;"	m	struct:SDL_DisplayMode	typeref:typename:float
-pixel_t	./src/display.h	/^typedef struct {int i; int j;} pixel_t;$/;"	t	typeref:struct:__anon9ec22d050108
+pixel_t	./src/display.h	/^typedef struct {int x; int y;} pixel_t;$/;"	t	typeref:struct:__anon9ec22d050108
 pixels	/opt/homebrew/include/SDL3/SDL_surface.h	/^    void *pixels;               \/**< A pointer to the pixels of the surface, the pixels are wri/;"	m	struct:SDL_Surface	typeref:typename:void *
 pixels_per_row	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 pixels_per_row;                   \/**< The number of pixels from one row to the next/;"	m	struct:SDL_GPUTextureTransferInfo	typeref:typename:Uint32
 pmotion	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_PenMotionEvent pmotion;             \/**< Pen motion event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_PenMotionEvent
@@ -18121,8 +18121,8 @@ scaleVec2	./src/vector.h	/^inline vec2_t scaleVec2(float r, vec2_t u) {$/;"	f	ty
 scaleVec3	./src/vector.h	/^inline vec3_t scaleVec3(float r, vec3_t u) {$/;"	f	typeref:typename:vec3_t
 scancode	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_Scancode scancode;  \/**< SDL physical key code *\/$/;"	m	struct:SDL_KeyboardEvent	typeref:typename:SDL_Scancode
 screenDown	./src/display.c	/^float screenDown;$/;"	v	typeref:typename:float
-screenLeft	./src/display.c	/^float screenLeft = -1; $/;"	v	typeref:typename:float
-screenRight	./src/display.c	/^float screenRight = 1;$/;"	v	typeref:typename:float
+screenLeft	./src/display.c	/^float screenLeft = -1.0; $/;"	v	typeref:typename:float
+screenRight	./src/display.c	/^float screenRight = 1.0;$/;"	v	typeref:typename:float
 screenSpaceToPixelSpace	./src/display.c	/^pixel_t screenSpaceToPixelSpace(vec2_t coordinate) {$/;"	f	typeref:typename:pixel_t
 screenUp	./src/display.c	/^float screenUp; $/;"	v	typeref:typename:float
 second	/opt/homebrew/include/SDL3/SDL_time.h	/^    int second;                \/**< Seconds [0-60] *\/$/;"	m	struct:SDL_DateTime	typeref:typename:int
@@ -18398,6 +18398,7 @@ window_y	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    int window_y;$/;"	m	
 windows	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    SDL_Window **windows;$/;"	m	struct:__anonb92e08560108	typeref:typename:SDL_Window **
 wmain	/opt/homebrew/include/SDL3/SDL_main_impl.h	/^                    int wmain(int argc, wchar_t *wargv[], wchar_t *wenvp)$/;"	f	typeref:typename:int
 write_mask	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint8 write_mask;                           \/**< Selects the bits of the stencil values upd/;"	m	struct:SDL_GPUDepthStencilState	typeref:typename:Uint8
+x	./src/display.h	/^typedef struct {int x; int y;} pixel_t;$/;"	m	struct:__anon9ec22d050108	typeref:typename:int
 x	./src/vector.h	/^typedef struct {float x; float y; float z;} vec3_t;$/;"	m	struct:__anoncc604dc20208	typeref:typename:float
 x	./src/vector.h	/^typedef struct {float x; float y;} vec2_t;$/;"	m	struct:__anoncc604dc20108	typeref:typename:float
 x	/opt/homebrew/include/SDL3/SDL_events.h	/^    float x;                \/**< X coordinate, relative to window *\/$/;"	m	struct:SDL_PenAxisEvent	typeref:typename:float
@@ -18421,6 +18422,7 @@ x	/opt/homebrew/include/SDL3/SDL_rect.h	/^    int x;$/;"	m	struct:SDL_Point	type
 x	/opt/homebrew/include/SDL3/SDL_touch.h	/^    float x;  \/**< the x-axis location of the touch event, normalized (0...1) *\/$/;"	m	struct:SDL_Finger	typeref:typename:float
 xrel	/opt/homebrew/include/SDL3/SDL_events.h	/^    Sint16 xrel;        \/**< The relative motion in the X direction *\/$/;"	m	struct:SDL_JoyBallEvent	typeref:typename:Sint16
 xrel	/opt/homebrew/include/SDL3/SDL_events.h	/^    float xrel;         \/**< The relative motion in the X direction *\/$/;"	m	struct:SDL_MouseMotionEvent	typeref:typename:float
+y	./src/display.h	/^typedef struct {int x; int y;} pixel_t;$/;"	m	struct:__anon9ec22d050108	typeref:typename:int
 y	./src/vector.h	/^typedef struct {float x; float y; float z;} vec3_t;$/;"	m	struct:__anoncc604dc20208	typeref:typename:float
 y	./src/vector.h	/^typedef struct {float x; float y;} vec2_t;$/;"	m	struct:__anoncc604dc20108	typeref:typename:float
 y	/opt/homebrew/include/SDL3/SDL_events.h	/^    float y;                \/**< Y coordinate, relative to window *\/$/;"	m	struct:SDL_PenAxisEvent	typeref:typename:float

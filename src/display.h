@@ -10,7 +10,7 @@
 #define FPS 60
 #define FRAME_TARGET_TIME (1000/FPS)
 
-typedef struct {int i; int j;} pixel_t;
+typedef struct {int x; int y;} pixel_t;
 
 extern bool isRunning; 
 extern SDL_Window *window;
@@ -34,9 +34,10 @@ bool initializeWindow(void);
 void renderColorBuffer(void);
 void clearColorBuffer(uint32_t color);
 void destroyWindow(void);
-void drawPixel(int i, int j, uint32_t color); 
+void drawPixel(int x, int y, uint32_t color); 
 void drawGrid(int step, uint32_t color);
 void drawDotGrid(int step, uint32_t color);
-void drawRectangle(int i, int j, int width, int height, uint32_t color);
+void drawRectangle(int x, int y, int width, int height, uint32_t color);
+void drawLine(int x0, int y0, int x1, int y1, uint32_t color);
 
 #endif

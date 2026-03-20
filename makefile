@@ -8,10 +8,10 @@ LFLAGS =
 LFLAGS += $(shell pkg-config --libs sdl3)
 LFLAGS += -lm
 
-run: renderer.out
+run: render.out
 	./render.out
 
-renderer.out: src/display.c src/main.c src/vector.c
+render.out: src/display.c src/main.c src/vector.c
 	$(CC) src/*.c -o render.out $(CFLAGS) $(LFLAGS)
 
 
