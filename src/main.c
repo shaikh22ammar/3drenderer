@@ -85,6 +85,7 @@ void processInput(void) {
 }
 
 void update(void) {
+	rotateMesh(&mesh, 0.01, 'x');
 	rotateMesh(&mesh, 0.01, 'y');
 	rotateMesh(&mesh, 0.01, 'z');
 

@@ -73,6 +73,7 @@ bool initializeWindow(void) {
 	SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN, true);
 
 	window = SDL_CreateWindowWithProperties(props);
+	//SDL_GetWindowSizeInPixels(window, &windowWidth, &windowHeight);
 	if (window == NULL) {
 		SDL_Log("Unable to create window: %s", SDL_GetError());
 		return false;
