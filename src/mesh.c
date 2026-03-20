@@ -60,7 +60,7 @@ void drawMeshVertices(mesh_t *mesh, uint32_t color) {
 		vec3_t shiftedVertex = addVec3(origin, currVertex);
 		vec2_t projectedVertex = projectPoint(shiftedVertex);
 		pixel_t rasteredVertex = screenSpaceToPixelSpace(projectedVertex);
-		drawRectangle(rasteredVertex - 2, rasteredVertex.y - 2, 4, 4, color);
+		drawRectangle(rasteredVertex.x - 2, rasteredVertex.y - 2, 4, 4, color);
 	}
 }
 
