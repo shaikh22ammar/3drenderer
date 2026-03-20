@@ -17499,7 +17499,7 @@ confine	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    SDL_Rect confine;$/;"
 constant	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    SDL_HapticConstant constant;    \/**< Constant effect. *\/$/;"	m	union:SDL_HapticEffect	typeref:typename:SDL_HapticConstant
 country	/opt/homebrew/include/SDL3/SDL_locale.h	/^    const char *country;  \/**< A country, like "US" for America. Can be NULL. *\/$/;"	m	struct:SDL_Locale	typeref:typename:const char *
 crc32_table	/opt/homebrew/include/SDL3/SDL_test_crc32.h	/^    CrcUint32    crc32_table[256]; \/* CRC table *\/$/;"	m	struct:SDLTest_Crc32Context	typeref:typename:CrcUint32[256]
-createCubeMesh	./src/main.c	/^void createCubeMesh(void) {$/;"	f	typeref:typename:void
+createCubeMesh	./src/main.c	/^bool createCubeMesh(void) {$/;"	f	typeref:typename:bool
 create_time	/opt/homebrew/include/SDL3/SDL_filesystem.h	/^    SDL_Time create_time;   \/**< the time when the path was created *\/$/;"	m	struct:SDL_PathInfo	typeref:typename:SDL_Time
 cull_mode	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUCullMode cull_mode;         \/**< The facing direction in which triangles will be cul/;"	m	struct:SDL_GPURasterizerState	typeref:typename:SDL_GPUCullMode
 current	/opt/homebrew/include/SDL3/SDL_test_font.h	/^    int current;$/;"	m	struct:SDLTest_TextWindow	typeref:typename:int
@@ -17596,7 +17596,6 @@ entrypoint	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    const char *entrypoint;   
 eraser	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool eraser;        \/**< true if eraser end is used (not all pens support this). *\/$/;"	m	struct:SDL_PenTouchEvent	typeref:typename:bool
 f	/opt/homebrew/include/SDL3/SDL_endian.h	/^        float f;$/;"	m	union:SDL_SwapFloat::__anon279bd51d010a	typeref:typename:float
 face_t	./src/mesh.h	/^} face_t;$/;"	t	typeref:struct:__anond599995c0108
-faces	./src/main.c	/^face_t faces[NUM_FACES];$/;"	v	typeref:typename:face_t[]
 faces	./src/mesh.h	/^	face_t *faces;	$/;"	m	struct:__anond599995c0208	typeref:typename:face_t *
 fade_length	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint16 fade_length;     \/**< Duration of the fade. *\/$/;"	m	struct:SDL_HapticConstant	typeref:typename:Uint16
 fade_length	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint16 fade_length;     \/**< Duration of the fade. *\/$/;"	m	struct:SDL_HapticCustom	typeref:typename:Uint16
@@ -17705,6 +17704,7 @@ iStride	/opt/homebrew/include/SDL3/SDL_egl.h	/^    EGLint iStride;$/;"	m	struct:
 iWidth	/opt/homebrew/include/SDL3/SDL_egl.h	/^    EGLint iWidth;$/;"	m	struct:EGLClientPixmapHI	typeref:typename:EGLint
 id	/opt/homebrew/include/SDL3/SDL_touch.h	/^    SDL_FingerID id;  \/**< the finger ID *\/$/;"	m	struct:SDL_Finger	typeref:typename:SDL_FingerID
 in	/opt/homebrew/include/SDL3/SDL_test_md5.h	/^    unsigned char in[64];       \/* input buffer *\/$/;"	m	struct:SDLTest_Md5Context	typeref:typename:unsigned char[64]
+initializeMesh	./src/mesh.c	/^bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces) {$/;"	f	typeref:typename:bool
 initializeWindow	./src/display.c	/^bool initializeWindow(void) {$/;"	f	typeref:typename:bool
 input	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    } input;$/;"	m	struct:SDL_GamepadBinding	typeref:union:SDL_GamepadBinding::__anonb13838dd010a
 input_rate	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUVertexInputRate input_rate;  \/**< Whether attribute addressing is a function of the /;"	m	struct:SDL_GPUVertexBufferDescription	typeref:typename:SDL_GPUVertexInputRate
@@ -17728,7 +17728,6 @@ interval	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint16 interval;        \
 interval	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint16 interval;        \/**< How soon it can be triggered again after button. *\/$/;"	m	struct:SDL_HapticCustom	typeref:typename:Uint16
 interval	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint16 interval;        \/**< How soon it can be triggered again after button. *\/$/;"	m	struct:SDL_HapticRamp	typeref:typename:Uint16
 interval	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint16 interval;    \/**< How soon it can be triggered again after button. *\/$/;"	m	struct:SDL_HapticPeriodic	typeref:typename:Uint16
-intializeMesh	./src/mesh.c	/^void intializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces) {$/;"	f	typeref:typename:void
 intptr_t	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^typedef __int64 intptr_t;$/;"	t	typeref:typename:__int64
 intptr_t	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^typedef int intptr_t;$/;"	t	typeref:typename:int
 isRunning	./src/display.c	/^bool isRunning = false; $/;"	v	typeref:typename:bool
@@ -18333,7 +18332,6 @@ vertex_buffer_descriptions	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    const SDL_
 vertex_input_state	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUVertexInputState vertex_input_state;     \/**< The vertex layout of the graphics pipe/;"	m	struct:SDL_GPUGraphicsPipelineCreateInfo	typeref:typename:SDL_GPUVertexInputState
 vertex_offset	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Sint32 vertex_offset;  \/**< The value added to the vertex index before indexing into the ve/;"	m	struct:SDL_GPUIndexedIndirectDrawCommand	typeref:typename:Sint32
 vertex_shader	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUShader *vertex_shader;                   \/**< The vertex shader used by the graphics/;"	m	struct:SDL_GPUGraphicsPipelineCreateInfo	typeref:typename:SDL_GPUShader *
-vertices	./src/main.c	/^vec3_t vertices[NUM_VERTICES];$/;"	v	typeref:typename:vec3_t[]
 vertices	./src/mesh.h	/^	vec3_t *vertices;$/;"	m	struct:__anond599995c0208	typeref:typename:vec3_t *
 video_argparser	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    SDLTest_ArgumentParser video_argparser;$/;"	m	struct:__anonb92e08560108	typeref:typename:SDLTest_ArgumentParser
 videodriver	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    const char *videodriver;$/;"	m	struct:__anonb92e08560108	typeref:typename:const char *

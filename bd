@@ -4,7 +4,7 @@
 #include "display.h"
 #include "vector.h"
 #include <string.h>
-#include <stdbool.h>
+#include <bool.h>
 
 bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces) {
 	mesh->nVertices = nVertices;
