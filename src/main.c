@@ -103,21 +103,29 @@ void update(void) {
 	previousFrameTime = SDL_GetTicks();
 }
 
-void render(void) {
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-	SDL_RenderClear(renderer);
-	
-	clearColorBuffer(0xFF000000);
-	drawDotGrid(30, 0x00FFFFFF | (65U << 24));
-	
-	vec3_t pointToDisplay = (vec3_t) {.x = -1, .y = 0, .z = -1};
-	vec2_t point = projectPoint(pointToDisplay);
-	pixel_t pixel = screenSpaceToPixelSpace(point);
+void drawCube(void) {
 	for (int i = 0; i < CUBE_DIM * CUBE_DIM * CUBE_DIM; i++) {
 		pixel_t currentPixel = screenSpaceToPixelSpace(projectedPoints[i]);
 		drawRectangle(currentPixel.x - 2, currentPixel.y - 2, 4, 4,  0xFFFFFF00);
 	}
 	
+}
+
+void render(void) {
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_RenderClear(renderer);
+	
+	clearColorBuffer(0xFF000000);
+	drawGrid(50, 0x00FFFFFF | (65U << 24));
+	drawGrid(100, 0x00FFFFFF | (100U << 24));
+
+	//drawCube();
+
+	//draw a line from (x0, y0) to (x1, y1)
+	int x0 = 500, x1 = 1000;
+	int y0 = 800, y1 = 800;
+	drawLine(x0, y0, x1, y1, 0xFFFFFF00);
+
 	renderColorBuffer();
 
 	SDL_RenderPresent(renderer);
@@ -128,7 +136,7 @@ int main() {
 	isRunning = setup();
 	while(isRunning) {
 		processInput();
-		update();	
+		//update();	
 		render();
 	}
 	destroyWindow();

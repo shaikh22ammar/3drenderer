@@ -17558,6 +17558,7 @@ down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;          \/**< tru
 down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;      \/**< true if the button is pressed *\/$/;"	m	struct:SDL_GamepadButtonEvent	typeref:typename:bool
 down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;      \/**< true if the button is pressed *\/$/;"	m	struct:SDL_JoyButtonEvent	typeref:typename:bool
 down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;      \/**< true if the button is pressed *\/$/;"	m	struct:SDL_PenButtonEvent	typeref:typename:bool
+drawCube	./src/main.c	/^void drawCube(void) {$/;"	f	typeref:typename:void
 drawDotGrid	./src/display.c	/^void drawDotGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
 drawGrid	./src/display.c	/^void drawGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
 drawLine	./src/display.c	/^void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {$/;"	f	typeref:typename:void

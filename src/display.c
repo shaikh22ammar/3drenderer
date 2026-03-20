@@ -167,27 +167,87 @@ void drawRectangle(int x, int y, int width, int height, uint32_t color) {
 }
 
 void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
-	/* The algorithm draws a line from the (y0, x0)-th pixel to (y1, x1)-th pixel.
+	/* The algorithm draws a line from the (x0, y0)-th pixel to (x1, y1)-th pixel.
 	 * dy = y1 - y0, dx = x1 - x0, m = dy/dx.
-	 * x0 and y0 can be interpreted as the abcissa and ordinate of the center of the (y0, x0)-th pixel.
-	 * The "true" ordinate of x-th pixel is f(x) = m * (x - x_0) + y_0, 
+	 * x0 and y0 can be interpreted as the abcissa and ordinate of the center of the (x0, y0)-th pixel.
+	 * The "true" ordinate of x-th pixel is f(x) = m * (x - x0) + y0, 
 	 * the actual "ordinate" is round(f(x)) since coordinates of center of pixels must be integral.
 	 * The error epsilon if f(x) - round(f(x)).
-	 * After finding the actual ordinate of x_0 + 1, the error is recorded and x_0 is incremented, 
-	 * then the same steps are repeated until x_0 equals x_1.
+	 * After finding the actual ordinate of x0 + 1, the error is recorded and x0 is incremented, 
+	 * then the same steps are repeated until x0 equals x1.
 	 *
-	 * First, assume 0 <= m <= 1. In this case, there is exactly one pixel lighting up for every column between x_0 and x_1.
-	 * Given x_0, and its actual ordinate y_0, and the error epsilon, this is how the ordinate of x_0 + 1 is found:
-	 * The true ordinate of x_0 is y_0 + epsilon, 
-	 * the true ordinate of x_0 + 1 is hence, y_0 + epsilon + m.
-	 * Therefore, the actual ordinate of x_0 + 1 is y_0 + 1 iff
-	 * 	y_0 + epsilon + m - y_0 - 1 < -1/2,
+	 * First, assume 0 <= m <= 1. In this case, there is exactly one pixel lighting up for every column between x0 and x1.
+	 * Given x0, and its actual ordinate y0, and the error epsilon, this is how the ordinate of x0 + 1 is found:
+	 * The true ordinate of x0 is y0 + epsilon, 
+	 * the true ordinate of x0 + 1 is hence, y0 + epsilon + m.
+	 * Therefore, the actual ordinate of x0 + 1 is y0 + 1 iff
+	 * 	y0 + epsilon + m - y0 - 1 < -1/2,
 	 * in which case, the error is updated to epsilon + m - 1, otherwise 2 - epsilon - m
 	 *
+	 * In the case -1 <= m < 0, we decrease y instead of increasing
+	 *
+	 * The cases, |m| > 1 is handle by iterating from y0 to y1 instead of x0 to x1
+	 *
 	 * To avoid floating point arithmetic, denominators are normalized, and we instead record epsilon * dx
-	 * This is intialized first as 0 since the initial (y_0, x_0) has no error.
+	 * This is intialized first as 0 since the initial (y0, x0) has no error.
 	 */
+
+	
+
 	int dy = y1 - y0;
 	int dx = x1 - x0;
-	int epsDeeEx = 0;
+
+	// case when |m| <= 1 
+	if (abs(dy) <= abs(dx)) {
+		if (dx < 0) {
+			x0 = x0^x1;
+			x1 = x0^x1;
+			x0 = x0^x1;
+			dx = -dx;
+
+			y0 = y0^y1;
+			y1 = y0^y1;
+			y0 = y0^y1;
+			dy = -dy;
+		}
+		int signDy = (dy > 0) - (dy < 0);
+		int epsDx = 0;
+		while (x0 <= x1) {
+			drawPixel(x0, y0, color);
+			if (abs(2*epsDx + 2*dy - 2*signDy*dx) <= abs(dx)) {
+				epsDx += dy - signDy * dx;
+				y0 += signDy;
+			} else {
+				epsDx += dy;
+			}
+			x0++;
+		}
+		return;
+	}
+	// case when |m| > 1
+	if (dy < 0) {
+		x0 = x0^x1;
+		x1 = x0^x1;
+		x0 = x0^x1;
+		dx = -dx;
+
+		y0 = y0^y1;
+		y1 = y0^y1;
+		y0 = y0^y1;
+		dy = -dy;
+	}
+	while (y0 <= y1) {
+		int signDx = (dx > 0) - (dx < 0);
+		int epsDy = 0;
+		while (y0 <= y1) {
+			drawPixel(x0, y0, color);
+			if (abs(2*epsDy + 2*dx - 2*signDx*dy) <= abs(dy)) {
+				epsDy += dx - signDx*dy;
+				x0 += signDx;
+			} else {
+				epsDy += dx;
+			}
+			y0++;
+		}
+	}
 }
