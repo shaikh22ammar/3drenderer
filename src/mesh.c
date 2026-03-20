@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces) {
+bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces, vec3_t origin) {
 	mesh->nVertices = nVertices;
 	mesh->nFaces = nFaces;
 
@@ -20,16 +20,12 @@ bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, f
 		return false;
 	}
 
+	mesh->origin = origin;
+
 	// memcpy
 	memcpy(mesh->vertices, vertices, sizeof(vec3_t)*nVertices);
 	memcpy(mesh->faces, faces, sizeof(face_t)*nFaces);
 
-	float oneByEnVertices = 1.0 / nVertices;
-	vec3_t centroid = scaleVec3(oneByEnVertices, vertices[0]);
-	for (int i = 1; i < nVertices; i++) {
-		centroid = addVec3(centroid, scaleVec3(oneByEnVertices, vertices[i]));
-	}
-	mesh->centroid = centroid;
 
 	return true;
 }
@@ -37,11 +33,15 @@ bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, f
 void drawMesh(mesh_t *mesh, uint32_t color) {
 	vec3_t *vertices = mesh->vertices;
 	face_t *faces = mesh->faces;
+	vec3_t origin = mesh->origin;
 	for (int i = 0; i < mesh->nFaces; i++) {
 		face_t face = faces[i];
-		pixel_t a = screenSpaceToPixelSpace(projectPoint(vertices[face.a]));
-		pixel_t b = screenSpaceToPixelSpace(projectPoint(vertices[face.b]));
-		pixel_t c = screenSpaceToPixelSpace(projectPoint(vertices[face.c]));
+		vec3_t va = addVec3(origin, vertices[face.a]);
+		vec3_t vb = addVec3(origin, vertices[face.b]);
+		vec3_t vc = addVec3(origin, vertices[face.c]);
+		pixel_t a = screenSpaceToPixelSpace(projectPoint(va));
+		pixel_t b = screenSpaceToPixelSpace(projectPoint(vb));
+		pixel_t c = screenSpaceToPixelSpace(projectPoint(vc));
 		drawTriangle(
 			a.x, a.y,
 			b.x, b.y,
@@ -51,16 +51,24 @@ void drawMesh(mesh_t *mesh, uint32_t color) {
 	}
 }
 
+void drawMeshVertices(mesh_t *mesh, uint32_t color) {
+	vec3_t *vertices = mesh->vertices;
+	int nVertices = mesh->nVertices;
+	vec3_t origin = mesh->origin;
+	for (int i = 0; i < nVertices; i++) {
+		vec3_t currVertex = vertices[i];
+		vec3_t shiftedVertex = addVec3(origin, currVertex);
+		vec2_t projectedVertex = projectPoint(shiftedVertex);
+		pixel_t rasteredVertex = screenSpaceToPixelSpace(projectedVertex);
+		drawRectangle(rasteredVertex - 2, rasteredVertex.y - 2, 4, 4, color);
+	}
+}
+
 void rotateMesh(mesh_t *mesh, float theta, char axis) {
 	int nVertices = mesh->nVertices;
 	vec3_t *vertices = mesh->vertices;
-	vec3_t centroid = mesh->centroid;
-	vec3_t negCentroid = scaleVec3(-1.0, centroid);
 	for (int i = 0; i < nVertices; i++) {
-		vec3_t currVertex = vertices[i];
-		currVertex = addVec3(vertices[i], negCentroid);
-		currVertex = rotateVec3(currVertex, theta, axis);
-		vertices[i] = addVec3(currVertex, centroid);
+		vertices[i] = rotateVec3(vertices[i], theta, axis);
 	}
 }
 

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "vector.h"
-#include "math.h"
+#include <math.h>
 
 bool isRunning = false; 
 SDL_Window *window = NULL;
@@ -11,6 +11,9 @@ uint32_t *colorBuffer = NULL;
 SDL_Texture *colorBufferTexture = NULL;
 int windowWidth = 800; 
 int windowHeight = 600;
+
+
+// Renderer uses a right-handed coordiante system with z axis going inwards, y axis going downwards and x axis going rightwards
 
 // screen space coordinates of left, right, top, and bottom edges of screeen
 float screenLeft = -1.0; 
@@ -39,7 +42,7 @@ pixel_t screenSpaceToPixelSpace(vec2_t coordinate) {
 	/* Maps a coordinate in screen space to the pixel it belongs to using
 	 * screenLeft + x * pixelDim <= p.x < screenLeft + (x+1) * pixelDim,
 	 * screenDown + y * pixelDim <= p.y < screenUp + (y+1) * pixelDim. */
-	if (coordinate.x == NAN || coordinate.y == NAN) {
+	if (isnan(coordinate.x) || isnan(coordinate.y)) {
 		return (pixel_t) {.x = -1, .y = -1};
 	}
 	int x = (int) ((coordinate.x - screenLeft) * oneByPixelDim);

@@ -18,14 +18,14 @@ int previousFrameTime = 0;
 
 bool createCubeMesh(void) {
 	 vec3_t vertices[NUM_VERTICES] = {
-		(vec3_t) {.x = -0.5, .y = -0.5, .z = 3}, // 0
-		(vec3_t) {.x = 0.5, .y = -0.5, .z = 3},  // 1
-		(vec3_t) {.x = 0.5, .y = 0.5, .z = 3},   // 2
-		(vec3_t) {.x = -0.5, .y = 0.5, .z = 3},  // 3
-		(vec3_t) {.x = -0.5, .y = -0.5, .z = 2}, // 4
-		(vec3_t) {.x = 0.5, .y = -0.5, .z = 2},  // 5
-		(vec3_t) {.x = 0.5, .y = 0.5, .z = 2},   // 6
-		(vec3_t) {.x = -0.5, .y = 0.5, .z = 2},  // 7
+		(vec3_t) {.x = -0.5, .y = -0.5, .z = 0.5}, // 0
+		(vec3_t) {.x = 0.5, .y = -0.5, .z = 0.5},  // 1
+		(vec3_t) {.x = 0.5, .y = 0.5, .z = 0.5},   // 2
+		(vec3_t) {.x = -0.5, .y = 0.5, .z = 0.5},  // 3
+		(vec3_t) {.x = -0.5, .y = -0.5, .z = -0.5}, // 4
+		(vec3_t) {.x = 0.5, .y = -0.5, .z = -0.5},  // 5
+		(vec3_t) {.x = 0.5, .y = 0.5, .z = -0.5},   // 6
+		(vec3_t) {.x = -0.5, .y = 0.5, .z = -0.5},  // 7
 	};
 	face_t faces[NUM_FACES] = {
 		(face_t) {.a = 0, .b = 1, .c = 2}, // back
@@ -41,8 +41,9 @@ bool createCubeMesh(void) {
 		(face_t) {.a = 3, .b = 2, .c = 6}, // bottom
 		(face_t) {.a = 6, .b = 7, .c = 3},
 	};
+	vec3_t origin = {.x = 0.0, .y = 0.0, .z = 2.0};
 
-	return initializeMesh(&mesh, NUM_VERTICES, NUM_FACES, vertices, faces);
+	return initializeMesh(&mesh, NUM_VERTICES, NUM_FACES, vertices, faces, origin);
 }
 
 bool setup(void) {
@@ -85,9 +86,9 @@ void processInput(void) {
 }
 
 void update(void) {
-	rotateMesh(&mesh, 0.01, 'x');
-	rotateMesh(&mesh, 0.01, 'y');
-	rotateMesh(&mesh, 0.01, 'z');
+	//rotateMesh(&mesh, 0.01, 'x');
+	//rotateMesh(&mesh, 0.01, 'y');
+	//rotateMesh(&mesh, 0.01, 'z');
 
 	int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - previousFrameTime);
 	if (timeToWait >0 && timeToWait <= FRAME_TARGET_TIME)
@@ -102,7 +103,8 @@ void render(void) {
 	clearColorBuffer(0xFF000000);
 	drawGrid(50, 0x00FFFFFF | (65U << 24));
 	drawGrid(100, 0x00FFFFFF | (100U << 24));
-	drawMesh(&mesh, 0xFFFFFFFF);
+	//	drawMesh(&mesh, 0xFFFFFFFF);
+	drawMeshVertices(&mesh, 0xFFFFFF00);
 
 	renderColorBuffer();
 	SDL_RenderPresent(renderer);

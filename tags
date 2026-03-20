@@ -17462,7 +17462,6 @@ camZ	./src/display.c	/^float camZ = -1.0;$/;"	v	typeref:typename:float
 candidates	/opt/homebrew/include/SDL3/SDL_events.h	/^    const char * const *candidates;    \/**< The list of candidates, or NULL if there are no can/;"	m	struct:SDL_TextEditingCandidatesEvent	typeref:typename:const char * const *
 cdevice	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_CameraDeviceEvent cdevice;          \/**< Camera device event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_CameraDeviceEvent
 center	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Sint16 center[3];       \/**< Position of the dead zone. *\/$/;"	m	struct:SDL_HapticCondition	typeref:typename:Sint16[3]
-centroid	./src/mesh.h	/^	vec3_t centroid;$/;"	m	struct:__anond599995c0208	typeref:typename:vec3_t
 channels	/opt/homebrew/include/SDL3/SDL_audio.h	/^    int channels;               \/**< Number of channels: 1 mono, 2 stereo, etc *\/$/;"	m	struct:SDL_AudioSpec	typeref:typename:int
 channels	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint8 channels;         \/**< Axes to use, minimum of one. *\/$/;"	m	struct:SDL_HapticCustom	typeref:typename:Uint8
 clearColorBuffer	./src/display.c	/^void clearColorBuffer(uint32_t color) {$/;"	f	typeref:typename:void
@@ -17567,6 +17566,7 @@ drawDotGrid	./src/display.c	/^void drawDotGrid(int step, uint32_t color) {$/;"	f
 drawGrid	./src/display.c	/^void drawGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
 drawLine	./src/display.c	/^void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {$/;"	f	typeref:typename:void
 drawMesh	./src/mesh.c	/^void drawMesh(mesh_t *mesh, uint32_t color) {$/;"	f	typeref:typename:void
+drawMeshVertices	./src/mesh.c	/^void drawMeshVertices(mesh_t *mesh, uint32_t color) {$/;"	f	typeref:typename:void
 drawPixel	./src/display.c	/^void drawPixel(int x, int y, uint32_t color) {$/;"	f	typeref:typename:void
 drawRectangle	./src/display.c	/^void drawRectangle(int x, int y, int width, int height, uint32_t color) {$/;"	f	typeref:typename:void
 drawTriangle	./src/display.c	/^void drawTriangle(int x0, int y0,$/;"	f	typeref:typename:void
@@ -17704,7 +17704,7 @@ iStride	/opt/homebrew/include/SDL3/SDL_egl.h	/^    EGLint iStride;$/;"	m	struct:
 iWidth	/opt/homebrew/include/SDL3/SDL_egl.h	/^    EGLint iWidth;$/;"	m	struct:EGLClientPixmapHI	typeref:typename:EGLint
 id	/opt/homebrew/include/SDL3/SDL_touch.h	/^    SDL_FingerID id;  \/**< the finger ID *\/$/;"	m	struct:SDL_Finger	typeref:typename:SDL_FingerID
 in	/opt/homebrew/include/SDL3/SDL_test_md5.h	/^    unsigned char in[64];       \/* input buffer *\/$/;"	m	struct:SDLTest_Md5Context	typeref:typename:unsigned char[64]
-initializeMesh	./src/mesh.c	/^bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces) {$/;"	f	typeref:typename:bool
+initializeMesh	./src/mesh.c	/^bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces, ve/;"	f	typeref:typename:bool
 initializeWindow	./src/display.c	/^bool initializeWindow(void) {$/;"	f	typeref:typename:bool
 input	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    } input;$/;"	m	struct:SDL_GamepadBinding	typeref:union:SDL_GamepadBinding::__anonb13838dd010a
 input_rate	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUVertexInputRate input_rate;  \/**< Whether attribute addressing is a function of the /;"	m	struct:SDL_GPUVertexBufferDescription	typeref:typename:SDL_GPUVertexInputRate
@@ -17943,6 +17943,7 @@ offset	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 offset;          \/**< 
 offset	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 offset;          \/**< The starting byte within the buffer. *\/$/;"	m	struct:SDL_GPUBufferRegion	typeref:typename:Uint32
 offset	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Sint16 offset;      \/**< Mean value of the wave. *\/$/;"	m	struct:SDL_HapticPeriodic	typeref:typename:Sint16
 oneByPixelDim	./src/display.c	/^float oneByPixelDim;$/;"	v	typeref:typename:float
+origin	./src/mesh.h	/^	vec3_t origin;$/;"	m	struct:__anond599995c0208	typeref:typename:vec3_t
 output	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    } output;$/;"	m	struct:SDL_GamepadBinding	typeref:union:SDL_GamepadBinding::__anonb13838dd040a
 output_type	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    SDL_GamepadBindingType output_type;$/;"	m	struct:SDL_GamepadBinding	typeref:typename:SDL_GamepadBindingType
 owner	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool owner;         \/**< are we owning the clipboard (internal update) *\/$/;"	m	struct:SDL_ClipboardEvent	typeref:typename:bool
