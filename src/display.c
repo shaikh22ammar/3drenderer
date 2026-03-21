@@ -9,8 +9,8 @@ SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
 uint32_t *colorBuffer = NULL;
 SDL_Texture *colorBufferTexture = NULL;
-int windowWidth = 800; 
-int windowHeight = 600;
+int windowWidth = 360; 
+int windowHeight = 233;
 
 
 // Renderer uses a right-handed coordiante system with z axis going inwards, y axis going downwards and x axis going rightwards
@@ -68,12 +68,13 @@ bool initializeWindow(void) {
 		return false;
 	}
 	SDL_SetStringProperty(props, SDL_PROP_WINDOW_CREATE_TITLE_STRING, NULL);
-	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER, windowWidth);
-	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER, windowHeight);
+	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER, 360);
+	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER, 233);
 	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_X_NUMBER, SDL_WINDOWPOS_CENTERED);
 	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_Y_NUMBER, SDL_WINDOWPOS_CENTERED);
+	//SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN, true);
 	SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN, true);
-
+	SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN, true);
 	window = SDL_CreateWindowWithProperties(props);
 	SDL_GetWindowSizeInPixels(window, &windowWidth, &windowHeight);
 	updateScreenSpaceCoordinates();
@@ -84,6 +85,8 @@ bool initializeWindow(void) {
 
 	// Creating renderer
 	renderer = SDL_CreateRenderer(window, NULL);
+	//SDL_SetRenderLogicalPresentation(renderer, 360, 233, SDL_LOGICAL_PRESENTATION_INTEGER_SCALE);
+	//SDL_GetRenderOutputSize(renderer, &windowWidth, &windowHeight);
 	if (renderer == NULL) {
 		SDL_Log("Unable to create renderer: %s", SDL_GetError());
 		return false;
@@ -195,6 +198,8 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 	 *
 	 * To avoid floating point arithmetic, denominators are normalized, and we instead record epsilon * dx
 	 * This is intialized first as 0 since the initial (y0, x0) has no error.
+	 *
+	 * Instead of handling the different cases of slopes separately, the coordinates are accordingly swapped.
 	 */
 
 	int dy = y1 - y0;
@@ -202,27 +207,13 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 
 	const bool swapped = (abs(dy) > abs(dx));	
 	if (swapped) {
-		x0 = x0^y0;
-		y0 = x0^y0;
-		x0 = x0^y0;
-
-		x1 = x1^y1;
-		y1 = x1^y1;
-		x1 = x1^y1;
-
-		dx = dx^dy;
-		dy = dx^dy;
-		dx = dx^dy;
+		x0 = x0^y0; y0 = x0^y0; x0 = x0^y0;
+		x1 = x1^y1; y1 = x1^y1; x1 = x1^y1;
+		dx = dx^dy; dy = dx^dy; dx = dx^dy;
 	}
 	if (dx < 0) {
-		x0 = x0^x1;
-		x1 = x0^x1;
-		x0 = x0^x1;
-		dx = -dx;
-
-		y0 = y0^y1;
-		y1 = y0^y1;
-		y0 = y0^y1;
+		x0 = x0^x1; x1 = x0^x1; x0 = x0^x1; dx = -dx;
+		y0 = y0^y1; y1 = y0^y1; y0 = y0^y1;
 		dy = -dy;
 	}
 	int signDy = (dy > 0) - (dy < 0);
@@ -232,7 +223,7 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 			drawPixel(y0, x0, color);
 		else
 			drawPixel(x0, y0, color);
-		if (abs(2*epsDx + 2*dy - 2*signDy*dx) <= abs(dx)) {
+		if (abs(2*epsDx + 2*dy) > abs(dx)) {
 			epsDx += dy - signDy * dx;
 			y0 += signDy;
 		} else {

@@ -18386,7 +18386,7 @@ width	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 width;                  
 window	./src/display.c	/^SDL_Window *window = NULL;$/;"	v	typeref:typename:SDL_Window *
 window	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowEvent window;                 \/**< Window event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_WindowEvent
 window	/opt/homebrew/include/SDL3/SDL_messagebox.h	/^    SDL_Window *window;                 \/**< Parent window, can be NULL *\/$/;"	m	struct:SDL_MessageBoxData	typeref:typename:SDL_Window *
-windowHeight	./src/display.c	/^int windowHeight = 600;$/;"	v	typeref:typename:int
+windowHeight	./src/display.c	/^int windowHeight = 233;$/;"	v	typeref:typename:int
 windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID;      \/**< The window with keyboard focus, if any *\/$/;"	m	struct:SDL_TextEditingCandidatesEvent	typeref:typename:SDL_WindowID
 windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID;      \/**< The window with keyboard focus, if any *\/$/;"	m	struct:SDL_TextEditingEvent	typeref:typename:SDL_WindowID
 windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID;    \/**< The window that was dropped on, if any *\/$/;"	m	struct:SDL_DropEvent	typeref:typename:SDL_WindowID
@@ -18405,7 +18405,7 @@ windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID; \/
 windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID; \/**< The window with mouse focus, if any *\/$/;"	m	struct:SDL_PenButtonEvent	typeref:typename:SDL_WindowID
 windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID; \/**< The window with pen focus, if any *\/$/;"	m	struct:SDL_PenMotionEvent	typeref:typename:SDL_WindowID
 windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID; \/**< The window with pen focus, if any *\/$/;"	m	struct:SDL_PenProximityEvent	typeref:typename:SDL_WindowID
-windowWidth	./src/display.c	/^int windowWidth = 800; $/;"	v	typeref:typename:int
+windowWidth	./src/display.c	/^int windowWidth = 360; $/;"	v	typeref:typename:int
 window_flags	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    SDL_WindowFlags window_flags;$/;"	m	struct:__anonb92e08560108	typeref:typename:SDL_WindowFlags
 window_h	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    int window_h;$/;"	m	struct:__anonb92e08560108	typeref:typename:int
 window_icon	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    const char *window_icon;$/;"	m	struct:__anonb92e08560108	typeref:typename:const char *
