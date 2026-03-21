@@ -17540,6 +17540,7 @@ depth_stencil_state	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUDepthStenc
 description	/opt/homebrew/include/SDL3/SDL_test_harness.h	/^    const char *description;$/;"	m	struct:SDLTest_TestCaseReference	typeref:typename:const char *
 destination	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUBlitRegion destination;  \/**< The destination region for the blit. *\/$/;"	m	struct:SDL_GPUBlitInfo	typeref:typename:SDL_GPUBlitRegion
 destroyMesh	./src/mesh.c	/^void destroyMesh(mesh_t *mesh) {$/;"	f	typeref:typename:void
+destroyMesh	src/mesh.c	/^void destroyMesh(mesh_t *mesh) {$/;"	f	typeref:typename:void
 destroyWindow	./src/display.c	/^void destroyWindow(void) {$/;"	f	typeref:typename:void
 device_extension_count	/opt/homebrew/include/SDL3/SDL_gpu.h	/^	Uint32 device_extension_count; \/**< Number of additional device extensions to require. *\/$/;"	m	struct:SDL_GPUVulkanOptions	typeref:typename:Uint32
 device_extension_names	/opt/homebrew/include/SDL3/SDL_gpu.h	/^	const char **device_extension_names; \/**< Pointer to a list of additional device extensions to/;"	m	struct:SDL_GPUVulkanOptions	typeref:typename:const char **
@@ -17566,7 +17567,9 @@ drawDotGrid	./src/display.c	/^void drawDotGrid(int step, uint32_t color) {$/;"	f
 drawGrid	./src/display.c	/^void drawGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
 drawLine	./src/display.c	/^void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {$/;"	f	typeref:typename:void
 drawMesh	./src/mesh.c	/^void drawMesh(mesh_t *mesh, uint32_t color) {$/;"	f	typeref:typename:void
+drawMesh	src/mesh.c	/^void drawMesh(mesh_t *mesh, uint32_t color) {$/;"	f	typeref:typename:void
 drawMeshVertices	./src/mesh.c	/^void drawMeshVertices(mesh_t *mesh, uint32_t color) {$/;"	f	typeref:typename:void
+drawMeshVertices	src/mesh.c	/^void drawMeshVertices(mesh_t *mesh, uint32_t color) {$/;"	f	typeref:typename:void
 drawPixel	./src/display.c	/^void drawPixel(int x, int y, uint32_t color) {$/;"	f	typeref:typename:void
 drawRectangle	./src/display.c	/^void drawRectangle(int x, int y, int width, int height, uint32_t color) {$/;"	f	typeref:typename:void
 drawTriangle	./src/display.c	/^void drawTriangle(int x0, int y0,$/;"	f	typeref:typename:void
@@ -17705,6 +17708,7 @@ iWidth	/opt/homebrew/include/SDL3/SDL_egl.h	/^    EGLint iWidth;$/;"	m	struct:EG
 id	/opt/homebrew/include/SDL3/SDL_touch.h	/^    SDL_FingerID id;  \/**< the finger ID *\/$/;"	m	struct:SDL_Finger	typeref:typename:SDL_FingerID
 in	/opt/homebrew/include/SDL3/SDL_test_md5.h	/^    unsigned char in[64];       \/* input buffer *\/$/;"	m	struct:SDLTest_Md5Context	typeref:typename:unsigned char[64]
 initializeMesh	./src/mesh.c	/^bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces, ve/;"	f	typeref:typename:bool
+initializeMesh	src/mesh.c	/^bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces, ve/;"	f	typeref:typename:bool
 initializeWindow	./src/display.c	/^bool initializeWindow(void) {$/;"	f	typeref:typename:bool
 input	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    } input;$/;"	m	struct:SDL_GamepadBinding	typeref:union:SDL_GamepadBinding::__anonb13838dd010a
 input_rate	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUVertexInputRate input_rate;  \/**< Whether attribute addressing is a function of the /;"	m	struct:SDL_GPUVertexBufferDescription	typeref:typename:SDL_GPUVertexInputRate
@@ -18056,6 +18060,8 @@ ramp	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    SDL_HapticRamp ramp;         
 rasterizer_state	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPURasterizerState rasterizer_state;        \/**< The rasterizer state of the graphics p/;"	m	struct:SDL_GPUGraphicsPipelineCreateInfo	typeref:typename:SDL_GPURasterizerState
 rate	/opt/homebrew/include/SDL3/SDL_joystick.h	/^    float rate;             \/**< the update frequency of this sensor, may be 0.0f *\/$/;"	m	struct:SDL_VirtualJoystickSensorDesc	typeref:typename:float
 raw	/opt/homebrew/include/SDL3/SDL_events.h	/^    Uint16 raw;             \/**< The platform dependent scancode for this event *\/$/;"	m	struct:SDL_KeyboardEvent	typeref:typename:Uint16
+readWavefront	./src/mesh.c	/^bool readWavefront(char *filepath, int *nVertices, int *nFaces, vec3_t **vertices, face_t **face/;"	f	typeref:typename:bool
+readWavefront	src/mesh.c	/^bool readWavefront(char *filepath, int *nVertices, int *nFaces, vec3_t **vertices, face_t **face/;"	f	typeref:typename:bool
 recording	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool recording; \/**< false if a playback device, true if a recording device. *\/$/;"	m	struct:SDL_AudioDeviceEvent	typeref:typename:bool
 rect	/opt/homebrew/include/SDL3/SDL_test_font.h	/^    SDL_FRect rect;$/;"	m	struct:SDLTest_TextWindow	typeref:typename:SDL_FRect
 refcount	/opt/homebrew/include/SDL3/SDL_pixels.h	/^    int refcount;       \/**< internal use only, do not touch. *\/$/;"	m	struct:SDL_Palette	typeref:typename:int
@@ -18121,6 +18127,7 @@ result	/opt/homebrew/include/SDL3/SDL_asyncio.h	/^    SDL_AsyncIOResult result; 
 right_coeff	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Sint16 right_coeff[3];  \/**< How fast to increase the force towards the positive side. *\/$/;"	m	struct:SDL_HapticCondition	typeref:typename:Sint16[3]
 right_sat	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint16 right_sat[3];    \/**< Level when joystick is to the positive side; max 0xFFFF. *\/$/;"	m	struct:SDL_HapticCondition	typeref:typename:Uint16[3]
 rotateMesh	./src/mesh.c	/^void rotateMesh(mesh_t *mesh, float theta, char axis) {$/;"	f	typeref:typename:void
+rotateMesh	src/mesh.c	/^void rotateMesh(mesh_t *mesh, float theta, char axis) {$/;"	f	typeref:typename:void
 rotateVec2	./src/vector.c	/^vec2_t rotateVec2(vec2_t v, float theta) {$/;"	f	typeref:typename:vec2_t
 rotateVec3	./src/vector.c	/^vec3_t rotateVec3(vec3_t v, float theta, char axis) {$/;"	f	typeref:typename:vec3_t
 rows_per_layer	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 rows_per_layer;                   \/**< The number of rows from one layer\/depth-slic/;"	m	struct:SDL_GPUTextureTransferInfo	typeref:typename:Uint32

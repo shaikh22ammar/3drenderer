@@ -77,3 +77,61 @@ void destroyMesh(mesh_t *mesh) {
 	free(mesh->faces);
 }
 
+bool readWavefront(char *filepath, int *nVertices, int *nFaces, vec3_t **vertices, face_t **faces) {
+	FILE *file = fopen(filepath, "r");
+	if (!file) {
+		fprintf(stderr, "Could not open .obj file");
+		return false;
+	}
+
+	// FIRST PASS: reading the number of vertices and faces
+	int vCount = 0, fCount = 0;
+	char line[256];
+	while (fgets(line, sizeof(line), file)) {
+		if (strncmp(line, "v ", 2) == 0) vCount++;
+		if (strncmp(line, "f ", 2) == 0) fCount++;
+	}
+	*nVertices = vCount;
+	*nFaces = fCount;
+	
+	// Allocating memory for array of vertices and faces
+	vec3_t *verts = (vec3_t *) malloc(sizeof(vec3_t)*vCount);
+	face_t *facs = (face_t *) malloc(sizeof(face_t)*fCount);
+	if (!verts || !facs) {
+		fprintf(stderr, "Error allocating memory for vertices and faces");
+		fclose(file);
+		return false;
+	}
+
+	// SECOND PASS: reading vertices and faces
+	rewind(file);
+	vCount = fCount = 0;
+	while (fgets(line, sizeof(line), file)) {
+		if (strncmp(line, "v ", 2) == 0) {	
+			vec3_t v;
+			if (sscanf(line, "v %f %f %f", &v.x, &v.y, &v.z) == 3) {
+				v.x = -1.0*v.z;
+				v.y = -1.0*v.y;
+				verts[vCount] = v;
+				vCount++;
+			}
+		} else if (strncmp(line, "f ", 2) == 0) {
+			char ta[64], tb[64], tc[64];
+			if (sscanf(line, "f %s %s %s", ta, tb, tc) == 3) {
+				facs[fCount] = (face_t) {.a = atoi(ta) - 1, .b = atoi(tb) - 1, .c = atoi(tc) - 1};
+				fCount++;
+			}
+		}
+	}
+	*vertices = verts;
+	*faces = facs;
+
+	if (vCount != *nVertices || fCount != *nFaces) {
+		fprintf(stderr, "Error: Number of vertices/faces read in the first and second pass do not match");
+		fclose(file);
+		return false;
+	} 
+
+	return true;
+
+}
