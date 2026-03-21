@@ -24,7 +24,7 @@ inline vec3_t scaleVec3(float r, vec3_t u) {
 
 inline vec2_t addVec2(vec2_t u, vec2_t v) {
 	return (vec2_t) {
-		.x = u.x + v.y,
+		.x = u.x + v.x,
 		.y = u.y + v.y
 	};
 }
