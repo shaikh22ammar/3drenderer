@@ -17458,7 +17458,7 @@ bytes_per_pixel	/opt/homebrew/include/SDL3/SDL_pixels.h	/^    Uint8 bytes_per_pi
 bytes_requested	/opt/homebrew/include/SDL3/SDL_asyncio.h	/^    Uint64 bytes_requested;  \/**< number of bytes the task was to read\/write. *\/$/;"	m	struct:SDL_AsyncIOOutcome	typeref:typename:Uint64
 bytes_transferred	/opt/homebrew/include/SDL3/SDL_asyncio.h	/^    Uint64 bytes_transferred;  \/**< actual number of bytes that were read\/written. *\/$/;"	m	struct:SDL_AsyncIOOutcome	typeref:typename:Uint64
 c	./src/mesh.h	/^	int c;$/;"	m	struct:__anond599995c0108	typeref:typename:int
-camZ	./src/display.c	/^float camZ = -1.0;$/;"	v	typeref:typename:float
+camZ	./src/display.c	/^float camZ = -1.0f;$/;"	v	typeref:typename:float
 candidates	/opt/homebrew/include/SDL3/SDL_events.h	/^    const char * const *candidates;    \/**< The list of candidates, or NULL if there are no can/;"	m	struct:SDL_TextEditingCandidatesEvent	typeref:typename:const char * const *
 cdevice	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_CameraDeviceEvent cdevice;          \/**< Camera device event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_CameraDeviceEvent
 center	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Sint16 center[3];       \/**< Position of the dead zone. *\/$/;"	m	struct:SDL_HapticCondition	typeref:typename:Sint16[3]
@@ -18137,8 +18137,8 @@ scaleVec2	./src/vector.h	/^inline vec2_t scaleVec2(float r, vec2_t u) {$/;"	f	ty
 scaleVec3	./src/vector.h	/^inline vec3_t scaleVec3(float r, vec3_t u) {$/;"	f	typeref:typename:vec3_t
 scancode	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_Scancode scancode;  \/**< SDL physical key code *\/$/;"	m	struct:SDL_KeyboardEvent	typeref:typename:SDL_Scancode
 screenDown	./src/display.c	/^float screenDown;$/;"	v	typeref:typename:float
-screenLeft	./src/display.c	/^float screenLeft = -1.0; $/;"	v	typeref:typename:float
-screenRight	./src/display.c	/^float screenRight = 1.0;$/;"	v	typeref:typename:float
+screenLeft	./src/display.c	/^float screenLeft = -1.0f; $/;"	v	typeref:typename:float
+screenRight	./src/display.c	/^float screenRight = 1.0f;$/;"	v	typeref:typename:float
 screenSpaceToPixelSpace	./src/display.c	/^pixel_t screenSpaceToPixelSpace(vec2_t coordinate) {$/;"	f	typeref:typename:pixel_t
 screenUp	./src/display.c	/^float screenUp; $/;"	v	typeref:typename:float
 second	/opt/homebrew/include/SDL3/SDL_time.h	/^    int second;                \/**< Seconds [0-60] *\/$/;"	m	struct:SDL_DateTime	typeref:typename:int

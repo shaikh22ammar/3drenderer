@@ -16,8 +16,8 @@ int windowHeight = 600;
 // Renderer uses a right-handed coordiante system with z axis going inwards, y axis going downwards and x axis going rightwards
 
 // screen space coordinates of left, right, top, and bottom edges of screeen
-float screenLeft = -1.0; 
-float screenRight = 1.0;
+float screenLeft = -1.0f; 
+float screenRight = 1.0f;
 float screenUp; 
 float screenDown;
 
@@ -25,7 +25,7 @@ float screenDown;
 float oneByPixelDim;
 
 // coordinate of camera in front of the screen
-float camZ = -1.0;
+float camZ = -1.0f;
 
 void updateScreenSpaceCoordinates(void) {
 	/* Updates the coordiantes of top and bottom edges of screen according to window width and height.
@@ -33,8 +33,8 @@ void updateScreenSpaceCoordinates(void) {
 	 * We use the equation screenUp + windowHeight * pixelDim = screenUp,
 	 * where pixelDim is the width of the pixel that is found using the equation:
 	 * screenLeft + windowWidth * pixelDim = screenRight */
-	oneByPixelDim = windowWidth * 1.0 / (screenRight - screenLeft);
-	screenUp = - 0.5 * windowHeight * (1.0 / oneByPixelDim);
+	oneByPixelDim = windowWidth * 1.0f / (screenRight - screenLeft);
+	screenUp = - 0.5f * windowHeight * (1.0f / oneByPixelDim);
 	screenDown = -screenUp;
 }
 

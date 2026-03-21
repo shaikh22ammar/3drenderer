@@ -9,8 +9,8 @@ extern vec2_t scaleVec2(float r, vec2_t u);
 
 vec2_t rotateVec2(vec2_t v, float theta) {
 	return (vec2_t) {
-		.x = v.x * cos(theta) - v.y * sin(theta),
-		.y = v.x * sin (theta) + v.y * cos(theta)
+		.x = v.x * cosf(theta) - v.y * sinf(theta),
+		.y = v.x * sinf (theta) + v.y * cosf(theta)
 	};
 }
 
@@ -19,21 +19,21 @@ vec3_t rotateVec3(vec3_t v, float theta, char axis) {
 		case 'x':
 			return (vec3_t) {
 				.x = v.x,
-				.y = v.y * cos(theta) - v.z * sin(theta),
-				.z = v.y * sin(theta) + v.z * cos(theta)
+				.y = v.y * cosf(theta) - v.z * sinf(theta),
+				.z = v.y * sinf(theta) + v.z * cosf(theta)
 			};
 			break;
 		case 'y':
 			return (vec3_t) {
-				.x = v.z * sin(theta) + v.x * cos(theta),
+				.x = v.z * sinf(theta) + v.x * cosf(theta),
 				.y = v.y,
-				.z = v.z * cos(theta) - v.x * sin(theta)
+				.z = v.z * cosf(theta) - v.x * sinf(theta)
 			};
 			break;
 		case 'z':
 			return (vec3_t) {
-				.x = v.x * cos(theta) - v.y * sin(theta),
-				.y = v.x * sin (theta) + v.y * cos(theta),
+				.x = v.x * cosf(theta) - v.y * sinf(theta),
+				.y = v.x * sinf (theta) + v.y * cosf(theta),
 				.z = v.z
 			};
 			break;

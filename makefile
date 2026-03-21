@@ -2,6 +2,7 @@
 
 CC = clang
 CFLAGS = -Wall -std=c11
+CFLAGS += -Wdouble-promotion -Wfloat-conversion
 CFLAGS += $(shell pkg-config --cflags sdl3)
 
 LFLAGS = 

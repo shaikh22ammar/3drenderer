@@ -112,8 +112,8 @@ bool readWavefront(char *filepath, int *nVertices, int *nFaces, vec3_t **vertice
 		if (strncmp(line, "v ", 2) == 0) {	
 			vec3_t v;
 			if (sscanf(line, "v %f %f %f", &v.x, &v.y, &v.z) == 3) {
-				v.z = -1.0*v.z;
-				v.y = -1.0*v.y;
+				v.z = -1.0f*v.z;
+				v.y = -1.0f*v.y;
 				verts[vCount] = v;
 				vCount++;
 			}
