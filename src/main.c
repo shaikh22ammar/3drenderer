@@ -67,8 +67,24 @@ bool setup(void) {
 		SDL_Log("Unable to create color buffer texture %s", SDL_GetError());
 		return false;
 	}
+	
+	int nVertices, nFaces;
+	vec3_t *vertices;
+	face_t *faces;
+	if (!readWavefront("./assets/f22.obj", &nVertices, &nFaces, &vertices, &faces)) {
+		return false;
+	}
+	vec3_t origin = (vec3_t) {.x = 0, .y = 0, .z = 3};
+	if (!initializeMesh(&mesh, nVertices, nFaces, vertices, faces, origin)) {
+		return false;
+	}
+	free(vertices);
+	free(faces);
+	vertices=NULL;
+	faces=NULL;
 
-	return createCubeMesh();
+	return true;
+	
 }
 
 void processInput(void) {
@@ -86,9 +102,9 @@ void processInput(void) {
 }
 
 void update(void) {
-	rotateMesh(&mesh, 0.01, 'x');
+	//rotateMesh(&mesh, 0.01, 'x');
 	rotateMesh(&mesh, 0.01, 'y');
-	rotateMesh(&mesh, 0.01, 'z');
+	//rotateMesh(&mesh, 0.01, 'z');
 
 	int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - previousFrameTime);
 	if (timeToWait >0 && timeToWait <= FRAME_TARGET_TIME)
@@ -103,7 +119,7 @@ void render(void) {
 	clearColorBuffer(0xFF000000);
 	drawGrid(50, 0x00FFFFFF | (65U << 24));
 	drawGrid(100, 0x00FFFFFF | (100U << 24));
-	drawMesh(&mesh, 0xFFFFFFFF);
+	drawMesh(&mesh, 0xFF00FF00);
 	//drawMeshVertices(&mesh, 0xFFFFFF00);
 
 	renderColorBuffer();

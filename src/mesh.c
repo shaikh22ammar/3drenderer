@@ -9,6 +9,7 @@
 bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces, vec3_t origin) {
 	mesh->nVertices = nVertices;
 	mesh->nFaces = nFaces;
+	mesh->origin = origin;
 
 	// mallocate 
 	mesh->vertices = (vec3_t *) malloc(sizeof(vec3_t)*nVertices);
@@ -17,15 +18,16 @@ bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, f
 	if(!(mesh->vertices && mesh->faces)) {
 		free(mesh->vertices);
 		free(mesh->faces);
+		mesh->vertices = NULL;
+		mesh->faces = NULL;
+		fprintf(stderr, "Failed to allocate memory for vertices and faces");
 		return false;
 	}
 
-	mesh->origin = origin;
 
 	// memcpy
 	memcpy(mesh->vertices, vertices, sizeof(vec3_t)*nVertices);
 	memcpy(mesh->faces, faces, sizeof(face_t)*nFaces);
-
 
 	return true;
 }
@@ -110,7 +112,7 @@ bool readWavefront(char *filepath, int *nVertices, int *nFaces, vec3_t **vertice
 		if (strncmp(line, "v ", 2) == 0) {	
 			vec3_t v;
 			if (sscanf(line, "v %f %f %f", &v.x, &v.y, &v.z) == 3) {
-				v.x = -1.0*v.z;
+				v.z = -1.0*v.z;
 				v.y = -1.0*v.y;
 				verts[vCount] = v;
 				vCount++;
