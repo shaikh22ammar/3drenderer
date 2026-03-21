@@ -86,9 +86,9 @@ void processInput(void) {
 }
 
 void update(void) {
-	//rotateMesh(&mesh, 0.01, 'x');
-	//rotateMesh(&mesh, 0.01, 'y');
-	//rotateMesh(&mesh, 0.01, 'z');
+	rotateMesh(&mesh, 0.01, 'x');
+	rotateMesh(&mesh, 0.01, 'y');
+	rotateMesh(&mesh, 0.01, 'z');
 
 	int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - previousFrameTime);
 	if (timeToWait >0 && timeToWait <= FRAME_TARGET_TIME)
@@ -103,8 +103,8 @@ void render(void) {
 	clearColorBuffer(0xFF000000);
 	drawGrid(50, 0x00FFFFFF | (65U << 24));
 	drawGrid(100, 0x00FFFFFF | (100U << 24));
-	//	drawMesh(&mesh, 0xFFFFFFFF);
-	drawMeshVertices(&mesh, 0xFFFFFF00);
+	drawMesh(&mesh, 0xFFFFFFFF);
+	//drawMeshVertices(&mesh, 0xFFFFFF00);
 
 	renderColorBuffer();
 	SDL_RenderPresent(renderer);

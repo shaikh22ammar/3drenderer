@@ -11,9 +11,11 @@ LFLAGS += -lm
 run: render.out
 	./render.out
 
+debug: CFLAGS += -g -O0 -DDEBUG
+debug: render.out
+
 render.out: src/display.c src/main.c src/vector.c
 	$(CC) src/*.c -o render.out $(CFLAGS) $(LFLAGS)
-
 
 clean: 
 	rm render.out

@@ -8,7 +8,7 @@ typedef struct {float x; float y; float z;} vec3_t;
 
 inline vec3_t addVec3(vec3_t u, vec3_t v) {
 	return (vec3_t) {
-		.x = u.x + v.y,
+		.x = u.x + v.x,
 		.y = u.y + v.y,
 		.z = u.z + v.z
 	};
