@@ -200,35 +200,21 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 	int dy = y1 - y0;
 	int dx = x1 - x0;
 
-	// case when |m| <= 1 
-	if (abs(dy) <= abs(dx)) {
-		if (dx < 0) {
-			x0 = x0^x1;
-			x1 = x0^x1;
-			x0 = x0^x1;
-			dx = -dx;
+	const bool swapped = (abs(dy) > abs(dx));	
+	if (swapped) {
+		x0 = x0^y0;
+		y0 = x0^y0;
+		x0 = x0^y0;
 
-			y0 = y0^y1;
-			y1 = y0^y1;
-			y0 = y0^y1;
-			dy = -dy;
-		}
-		int signDy = (dy > 0) - (dy < 0);
-		int epsDx = 0;
-		while (x0 <= x1) {
-			drawPixel(x0, y0, color);
-			if (abs(2*epsDx + 2*dy - 2*signDy*dx) <= abs(dx)) {
-				epsDx += dy - signDy * dx;
-				y0 += signDy;
-			} else {
-				epsDx += dy;
-			}
-			x0++;
-		}
-		return;
+		x1 = x1^y1;
+		y1 = x1^y1;
+		x1 = x1^y1;
+
+		dx = dx^dy;
+		dy = dx^dy;
+		dx = dx^dy;
 	}
-	// case when |m| > 1
-	if (dy < 0) {
+	if (dx < 0) {
 		x0 = x0^x1;
 		x1 = x0^x1;
 		x0 = x0^x1;
@@ -239,19 +225,20 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 		y0 = y0^y1;
 		dy = -dy;
 	}
-	while (y0 <= y1) {
-		int signDx = (dx > 0) - (dx < 0);
-		int epsDy = 0;
-		while (y0 <= y1) {
+	int signDy = (dy > 0) - (dy < 0);
+	int epsDx = 0;
+	while (x0 <= x1) {
+		if (swapped)
+			drawPixel(y0, x0, color);
+		else
 			drawPixel(x0, y0, color);
-			if (abs(2*epsDy + 2*dx - 2*signDx*dy) <= abs(dy)) {
-				epsDy += dx - signDx*dy;
-				x0 += signDx;
-			} else {
-				epsDy += dx;
-			}
-			y0++;
+		if (abs(2*epsDx + 2*dy - 2*signDy*dx) <= abs(dx)) {
+			epsDx += dy - signDy * dx;
+			y0 += signDy;
+		} else {
+			epsDx += dy;
 		}
+		x0++;
 	}
 }
 

@@ -17500,6 +17500,7 @@ country	/opt/homebrew/include/SDL3/SDL_locale.h	/^    const char *country;  \/**
 crc32_table	/opt/homebrew/include/SDL3/SDL_test_crc32.h	/^    CrcUint32    crc32_table[256]; \/* CRC table *\/$/;"	m	struct:SDLTest_Crc32Context	typeref:typename:CrcUint32[256]
 createCubeMesh	./src/main.c	/^bool createCubeMesh(void) {$/;"	f	typeref:typename:bool
 create_time	/opt/homebrew/include/SDL3/SDL_filesystem.h	/^    SDL_Time create_time;   \/**< the time when the path was created *\/$/;"	m	struct:SDL_PathInfo	typeref:typename:SDL_Time
+crossProduct	./src/vector.h	/^inline vec3_t crossProduct(vec3_t u, vec3_t v) {$/;"	f	typeref:typename:vec3_t
 cull_mode	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUCullMode cull_mode;         \/**< The facing direction in which triangles will be cul/;"	m	struct:SDL_GPURasterizerState	typeref:typename:SDL_GPUCullMode
 current	/opt/homebrew/include/SDL3/SDL_test_font.h	/^    int current;$/;"	m	struct:SDLTest_TextWindow	typeref:typename:int
 custom	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    SDL_HapticCustom custom;        \/**< Custom effect. *\/$/;"	m	union:SDL_HapticEffect	typeref:typename:SDL_HapticCustom
@@ -17556,6 +17557,8 @@ displayID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_DisplayID displayID;
 displayID	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    SDL_DisplayID displayID;$/;"	m	struct:__anonb92e08560108	typeref:typename:SDL_DisplayID
 displayID	/opt/homebrew/include/SDL3/SDL_video.h	/^    SDL_DisplayID displayID;        \/**< the display this mode is associated with *\/$/;"	m	struct:SDL_DisplayMode	typeref:typename:SDL_DisplayID
 display_index	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    int display_index;$/;"	m	struct:__anonb92e08560108	typeref:typename:int
+dotProductVec2	./src/vector.h	/^inline float dotProductVec2(vec2_t u, vec2_t v) {$/;"	f	typeref:typename:float
+dotProductVec3	./src/vector.h	/^inline float dotProductVec3(vec3_t u, vec3_t v) {$/;"	f	typeref:typename:float
 down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;              \/**< true if the key is pressed *\/$/;"	m	struct:SDL_KeyboardEvent	typeref:typename:bool
 down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;          \/**< true if the button is pressed *\/$/;"	m	struct:SDL_MouseButtonEvent	typeref:typename:bool
 down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;          \/**< true if the pen is touching or false if the pen is lifted off *\/$/;"	m	struct:SDL_PenTouchEvent	typeref:typename:bool
@@ -17838,6 +17841,8 @@ layer_or_depth_plane	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 layer_or_
 left_coeff	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Sint16 left_coeff[3];   \/**< How fast to increase the force towards the negative side. *\/$/;"	m	struct:SDL_HapticCondition	typeref:typename:Sint16[3]
 left_sat	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint16 left_sat[3];     \/**< Level when joystick is to the negative side; max 0xFFFF. *\/$/;"	m	struct:SDL_HapticCondition	typeref:typename:Uint16[3]
 leftright	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    SDL_HapticLeftRight leftright;  \/**< Left\/Right effect. *\/$/;"	m	union:SDL_HapticEffect	typeref:typename:SDL_HapticLeftRight
+lenVec2	./src/vector.h	/^inline float lenVec2(vec2_t u) {$/;"	f	typeref:typename:float
+lenVec3	./src/vector.h	/^inline float lenVec3(vec3_t u) {$/;"	f	typeref:typename:float
 length	/opt/homebrew/include/SDL3/SDL_events.h	/^    Sint32 length;              \/**< The length of selected editing text, or -1 if not set *\/$/;"	m	struct:SDL_TextEditingEvent	typeref:typename:Sint32
 length	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint32 length;          \/**< Duration of the effect in milliseconds. *\/$/;"	m	struct:SDL_HapticLeftRight	typeref:typename:Uint32
 length	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint32 length;          \/**< Duration of the effect. *\/$/;"	m	struct:SDL_HapticCondition	typeref:typename:Uint32
@@ -17906,6 +17911,8 @@ next	/opt/homebrew/include/SDL3/SDL_hidapi.h	/^    struct SDL_hid_device_info *n
 next	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    struct SDLTest_ArgumentParser *next;$/;"	m	struct:SDLTest_ArgumentParser	typeref:struct:SDLTest_ArgumentParser *
 nfingers	/opt/homebrew/include/SDL3/SDL_joystick.h	/^    Uint16 nfingers;    \/**< the number of simultaneous fingers on this touchpad *\/$/;"	m	struct:SDL_VirtualJoystickTouchpadDesc	typeref:typename:Uint16
 nhats	/opt/homebrew/include/SDL3/SDL_joystick.h	/^    Uint16 nhats;       \/**< the number of hats on this joystick *\/$/;"	m	struct:SDL_VirtualJoystickDesc	typeref:typename:Uint16
+normalizeVec2	./src/vector.h	/^inline vec2_t normalizeVec2(vec2_t u) {$/;"	f	typeref:typename:vec2_t
+normalizeVec3	./src/vector.h	/^inline vec3_t normalizeVec3(vec3_t u) {$/;"	f	typeref:typename:vec3_t
 nsensors	/opt/homebrew/include/SDL3/SDL_joystick.h	/^    Uint16 nsensors;    \/**< the number of sensors on this joystick, requires `sensors` to poin/;"	m	struct:SDL_VirtualJoystickDesc	typeref:typename:Uint16
 ntouchpads	/opt/homebrew/include/SDL3/SDL_joystick.h	/^    Uint16 ntouchpads;  \/**< the number of touchpads on this joystick, requires `touchpads` to /;"	m	struct:SDL_VirtualJoystickDesc	typeref:typename:Uint16
 num_candidates	/opt/homebrew/include/SDL3/SDL_events.h	/^    Sint32 num_candidates;      \/**< The number of strings in `candidates` *\/$/;"	m	struct:SDL_TextEditingCandidatesEvent	typeref:typename:Sint32
