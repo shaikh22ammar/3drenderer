@@ -24,8 +24,9 @@ float screenDown;
 // reciprocal of pixel dimension in screen space coordinates
 float oneByPixelDim;
 
-// coordinate of camera in front of the screen
-float camZ = -1.0f;
+// coordinate of camera and screen
+float screenZ = 1.0f;
+float camZ = 0.0f;
 
 void updateScreenSpaceCoordinates(void) {
 	/* Updates the coordiantes of top and bottom edges of screen according to window width and height.
@@ -124,13 +125,13 @@ void destroyWindow(void) {
 
 vec2_t projectPoint(vec3_t point) {
 	/* Projects a point using the fact that
-	 * |point.x|/|x'| = |point.z - camZ|/|camZ|
-	 * |point.y|/|y'| = |point.z - camZ|/|camZ| */
-	if (point.z < 0) {
+	 * |point.x| / |x'| = |point.z - camZ| / |screenZ - camZ|
+	 * */
+	if (point.z <= camZ + 0.01f) {
 		return (vec2_t) {.x = NAN, .y = NAN};
 	}
-	float x = point.x * camZ / (-point.z + camZ);
-	float y = point.y * camZ / (-point.z + camZ);
+	float x = (point.x) * (screenZ - camZ) / (point.z - camZ);
+	float y = (point.y) * (screenZ - camZ) / (point.z - camZ);
 	return (vec2_t) {.x = x, .y = y};
 }
 
@@ -217,6 +218,7 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 	int signDy = (dy > 0) - (dy < 0);
 	int signDx = (dx > 0) - (dx < 0);
 	int epsDx = 0;
+	bool lineOutOfBounds = x0 < 0 || x0 > windowWidth || y0 < 0 || y0 > windowHeight; 
 	do {
 		drawPixel(swapped ? y0 : x0, swapped ? x0 : y0, color);
 		if (abs(2*epsDx + 2*dy*signDx) > abs(dx)) {
@@ -226,7 +228,8 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 			epsDx += dy*signDx;
 		}
 		x0+=signDx;
-	} while ((dx > 0 && x0 <= x1) || (dx < 0 && x0 >= x1));
+		lineOutOfBounds = x0 < 0 || x0 > windowWidth || y0 < 0 || y0 > windowHeight; 
+	} while (((dx > 0 && x0 <= x1) || (dx < 0 && x0 >= x1)) && !lineOutOfBounds);
 }
 
 void drawTriangle(int x0, int y0,

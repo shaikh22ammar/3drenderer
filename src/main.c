@@ -41,9 +41,27 @@ bool createCubeMesh(void) {
 		(face_t) {.a = 3, .b = 2, .c = 6}, // bottom
 		(face_t) {.a = 6, .b = 7, .c = 3},
 	};
-	vec3_t origin = {.x = 0.0, .y = 0.0, .z = 2.5};
+	vec3_t origin = {.x = 0.0, .y = 0.0, .z = 1.0};
 
 	return initializeMesh(&mesh, NUM_VERTICES, NUM_FACES, vertices, faces, origin);
+}
+
+bool loadMeshFromAssets() {
+	int nVertices, nFaces;
+	vec3_t *vertices;
+	face_t *faces;
+	if (!readWavefront("./assets/f22.obj", &nVertices, &nFaces, &vertices, &faces)) {
+		return false;
+	}
+	vec3_t origin = (vec3_t) {.x = 0, .y = 0, .z = 5};
+	if (!initializeMesh(&mesh, nVertices, nFaces, vertices, faces, origin)) {
+		return false;
+	}
+	free(vertices);
+	free(faces);
+	vertices=NULL;
+	faces=NULL;
+	return true;
 }
 
 bool setup(void) {
@@ -67,23 +85,9 @@ bool setup(void) {
 		SDL_Log("Unable to create color buffer texture %s", SDL_GetError());
 		return false;
 	}
-	
-	int nVertices, nFaces;
-	vec3_t *vertices;
-	face_t *faces;
-	if (!readWavefront("./assets/f22.obj", &nVertices, &nFaces, &vertices, &faces)) {
-		return false;
-	}
-	vec3_t origin = (vec3_t) {.x = 0, .y = 0, .z = 3};
-	if (!initializeMesh(&mesh, nVertices, nFaces, vertices, faces, origin)) {
-		return false;
-	}
-	free(vertices);
-	free(faces);
-	vertices=NULL;
-	faces=NULL;
 
-	return true;
+	// Loading objects in scene
+	return loadMeshFromAssets();	
 	
 }
 
@@ -119,10 +123,9 @@ void render(void) {
 	clearColorBuffer(0xFF000000);
 	drawGrid(100, 0x00FFFFFF | (45U << 24));
 	drawGrid(500, 0x00FFFFFF | (100U << 24));
-	//fillTriangle(500, 1000, 100, 500, 1000, 500, 0xFF00FF00);
-	//drawMesh(&mesh, 0xFF00FF00);
-	//drawMeshVertices(&mesh, 3, 0xFF00FF00);
-	fillMesh(&mesh, 0xFF00FF00);
+	fillMesh(&mesh, 0x0000FF00 | (50U << 24));
+	drawMesh(&mesh, 0xFF00FF00);
+	drawMeshVertices(&mesh, /*raidus = */ 3, 0xFF00FF00);
 
 	renderColorBuffer();
 	SDL_RenderPresent(renderer);

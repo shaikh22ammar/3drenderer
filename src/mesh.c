@@ -38,12 +38,15 @@ void drawMesh(mesh_t *mesh, uint32_t color) {
 	vec3_t origin = mesh->origin;
 	for (int i = 0; i < mesh->nFaces; i++) {
 		face_t face = faces[i];
-		vec3_t va = addVec3(origin, vertices[face.a]);
-		vec3_t vb = addVec3(origin, vertices[face.b]);
-		vec3_t vc = addVec3(origin, vertices[face.c]);
-		pixel_t a = screenSpaceToPixelSpace(projectPoint(va));
-		pixel_t b = screenSpaceToPixelSpace(projectPoint(vb));
-		pixel_t c = screenSpaceToPixelSpace(projectPoint(vc));
+		vec2_t va = projectPoint(addVec3(origin, vertices[face.a]));
+		vec2_t vb = projectPoint(addVec3(origin, vertices[face.b]));
+		vec2_t vc = projectPoint(addVec3(origin, vertices[face.c]));
+
+		if (isnan(va.x) || isnan(vb.x) || isnan(vc.x)) continue;
+
+		pixel_t a = screenSpaceToPixelSpace(va);
+		pixel_t b = screenSpaceToPixelSpace(vb);
+		pixel_t c = screenSpaceToPixelSpace(vc);
 		drawTriangle(
 			a.x, a.y,
 			b.x, b.y,
@@ -72,12 +75,15 @@ void fillMesh(mesh_t *mesh, uint32_t color) {
 	vec3_t origin = mesh->origin;
 	for (int i = 0; i < mesh->nFaces; i++) {
 		face_t face = faces[i];
-		vec3_t va = addVec3(origin, vertices[face.a]);
-		vec3_t vb = addVec3(origin, vertices[face.b]);
-		vec3_t vc = addVec3(origin, vertices[face.c]);
-		pixel_t a = screenSpaceToPixelSpace(projectPoint(va));
-		pixel_t b = screenSpaceToPixelSpace(projectPoint(vb));
-		pixel_t c = screenSpaceToPixelSpace(projectPoint(vc));
+		vec2_t va = projectPoint(addVec3(origin, vertices[face.a]));
+		vec2_t vb = projectPoint(addVec3(origin, vertices[face.b]));
+		vec2_t vc = projectPoint(addVec3(origin, vertices[face.c]));
+
+		if (isnan(va.x) || isnan(vb.x) || isnan(vc.x)) continue;
+
+		pixel_t a = screenSpaceToPixelSpace(va);
+		pixel_t b = screenSpaceToPixelSpace(vb);
+		pixel_t c = screenSpaceToPixelSpace(vc);
 		fillTriangle(
 			a.x, a.y,
 			b.x, b.y,

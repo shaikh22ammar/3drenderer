@@ -17298,7 +17298,6 @@ SDL_zero	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^#define SDL_zero(/;"	d
 SDL_zeroa	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^#define SDL_zeroa(/;"	d
 SDL_zerop	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^#define SDL_zerop(/;"	d
 SWAP_int	./src/display.c	/^#define SWAP_int(/;"	d	file:
-SWAP_int	src/display.c	/^#define SWAP_int(/;"	d	file:
 Sint16	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^typedef int16_t Sint16;$/;"	t	typeref:typename:int16_t
 Sint32	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^typedef int32_t Sint32;$/;"	t	typeref:typename:int32_t
 Sint64	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^typedef int64_t Sint64;$/;"	t	typeref:typename:int64_t
@@ -17460,15 +17459,13 @@ bytes_per_pixel	/opt/homebrew/include/SDL3/SDL_pixels.h	/^    Uint8 bytes_per_pi
 bytes_requested	/opt/homebrew/include/SDL3/SDL_asyncio.h	/^    Uint64 bytes_requested;  \/**< number of bytes the task was to read\/write. *\/$/;"	m	struct:SDL_AsyncIOOutcome	typeref:typename:Uint64
 bytes_transferred	/opt/homebrew/include/SDL3/SDL_asyncio.h	/^    Uint64 bytes_transferred;  \/**< actual number of bytes that were read\/written. *\/$/;"	m	struct:SDL_AsyncIOOutcome	typeref:typename:Uint64
 c	./src/mesh.h	/^	int c;$/;"	m	struct:__anond599995c0108	typeref:typename:int
-camZ	./src/display.c	/^float camZ = -1.0f;$/;"	v	typeref:typename:float
-camZ	src/display.c	/^float camZ = -1.0f;$/;"	v	typeref:typename:float
+camZ	./src/display.c	/^float camZ = 0.0f;$/;"	v	typeref:typename:float
 candidates	/opt/homebrew/include/SDL3/SDL_events.h	/^    const char * const *candidates;    \/**< The list of candidates, or NULL if there are no can/;"	m	struct:SDL_TextEditingCandidatesEvent	typeref:typename:const char * const *
 cdevice	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_CameraDeviceEvent cdevice;          \/**< Camera device event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_CameraDeviceEvent
 center	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Sint16 center[3];       \/**< Position of the dead zone. *\/$/;"	m	struct:SDL_HapticCondition	typeref:typename:Sint16[3]
 channels	/opt/homebrew/include/SDL3/SDL_audio.h	/^    int channels;               \/**< Number of channels: 1 mono, 2 stereo, etc *\/$/;"	m	struct:SDL_AudioSpec	typeref:typename:int
 channels	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint8 channels;         \/**< Axes to use, minimum of one. *\/$/;"	m	struct:SDL_HapticCustom	typeref:typename:Uint8
 clearColorBuffer	./src/display.c	/^void clearColorBuffer(uint32_t color) {$/;"	f	typeref:typename:void
-clearColorBuffer	src/display.c	/^void clearColorBuffer(uint32_t color) {$/;"	f	typeref:typename:void
 clear_color	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_FColor clear_color;          \/**< The color to clear the color target to at the start o/;"	m	struct:SDL_GPUColorTargetInfo	typeref:typename:SDL_FColor
 clear_color	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_FColor clear_color;         \/**< The color to clear the destination region to before th/;"	m	struct:SDL_GPUBlitInfo	typeref:typename:SDL_FColor
 clear_depth	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    float clear_depth;                     \/**< The value to clear the depth component to at th/;"	m	struct:SDL_GPUDepthStencilTargetInfo	typeref:typename:float
@@ -17482,9 +17479,7 @@ code_size	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    size_t code_size;          
 code_size	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    size_t code_size;             \/**< The size in bytes of the code pointed to. *\/$/;"	m	struct:SDL_GPUShaderCreateInfo	typeref:typename:size_t
 color	/opt/homebrew/include/SDL3/SDL_render.h	/^    SDL_FColor color;           \/**< Vertex color *\/$/;"	m	struct:SDL_Vertex	typeref:typename:SDL_FColor
 colorBuffer	./src/display.c	/^uint32_t *colorBuffer = NULL;$/;"	v	typeref:typename:uint32_t *
-colorBuffer	src/display.c	/^uint32_t *colorBuffer = NULL;$/;"	v	typeref:typename:uint32_t *
 colorBufferTexture	./src/display.c	/^SDL_Texture *colorBufferTexture = NULL;$/;"	v	typeref:typename:SDL_Texture *
-colorBufferTexture	src/display.c	/^SDL_Texture *colorBufferTexture = NULL;$/;"	v	typeref:typename:SDL_Texture *
 colorScheme	/opt/homebrew/include/SDL3/SDL_messagebox.h	/^    const SDL_MessageBoxColorScheme *colorScheme;   \/**< SDL_MessageBoxColorScheme, can be NULL/;"	m	struct:SDL_MessageBoxData	typeref:typename:const SDL_MessageBoxColorScheme *
 color_blend_op	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUBlendOp color_blend_op;                \/**< The blend operation for the RGB componen/;"	m	struct:SDL_GPUColorTargetBlendState	typeref:typename:SDL_GPUBlendOp
 color_target_descriptions	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    const SDL_GPUColorTargetDescription *color_target_descriptions;  \/**< A pointer to an array/;"	m	struct:SDL_GPUGraphicsPipelineTargetInfo	typeref:typename:const SDL_GPUColorTargetDescription *
@@ -17548,7 +17543,6 @@ description	/opt/homebrew/include/SDL3/SDL_test_harness.h	/^    const char *desc
 destination	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUBlitRegion destination;  \/**< The destination region for the blit. *\/$/;"	m	struct:SDL_GPUBlitInfo	typeref:typename:SDL_GPUBlitRegion
 destroyMesh	./src/mesh.c	/^void destroyMesh(mesh_t *mesh) {$/;"	f	typeref:typename:void
 destroyWindow	./src/display.c	/^void destroyWindow(void) {$/;"	f	typeref:typename:void
-destroyWindow	src/display.c	/^void destroyWindow(void) {$/;"	f	typeref:typename:void
 device_extension_count	/opt/homebrew/include/SDL3/SDL_gpu.h	/^	Uint32 device_extension_count; \/**< Number of additional device extensions to require. *\/$/;"	m	struct:SDL_GPUVulkanOptions	typeref:typename:Uint32
 device_extension_names	/opt/homebrew/include/SDL3/SDL_gpu.h	/^	const char **device_extension_names; \/**< Pointer to a list of additional device extensions to/;"	m	struct:SDL_GPUVulkanOptions	typeref:typename:const char **
 digest	/opt/homebrew/include/SDL3/SDL_test_md5.h	/^    unsigned char digest[16];   \/* actual digest after Md5Final call *\/$/;"	m	struct:SDLTest_Md5Context	typeref:typename:unsigned char[16]
@@ -17573,19 +17567,13 @@ down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;      \/**< true if
 down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;      \/**< true if the button is pressed *\/$/;"	m	struct:SDL_JoyButtonEvent	typeref:typename:bool
 down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;      \/**< true if the button is pressed *\/$/;"	m	struct:SDL_PenButtonEvent	typeref:typename:bool
 drawDotGrid	./src/display.c	/^void drawDotGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
-drawDotGrid	src/display.c	/^void drawDotGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
 drawGrid	./src/display.c	/^void drawGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
-drawGrid	src/display.c	/^void drawGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
 drawLine	./src/display.c	/^void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {$/;"	f	typeref:typename:void
-drawLine	src/display.c	/^void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {$/;"	f	typeref:typename:void
 drawMesh	./src/mesh.c	/^void drawMesh(mesh_t *mesh, uint32_t color) {$/;"	f	typeref:typename:void
 drawMeshVertices	./src/mesh.c	/^void drawMeshVertices(mesh_t *mesh, int radius, uint32_t color) {$/;"	f	typeref:typename:void
 drawPixel	./src/display.c	/^void drawPixel(int x, int y, uint32_t color) {$/;"	f	typeref:typename:void
-drawPixel	src/display.c	/^void drawPixel(int x, int y, uint32_t color) {$/;"	f	typeref:typename:void
 drawRectangle	./src/display.c	/^void drawRectangle(int x, int y, int width, int height, uint32_t color) {$/;"	f	typeref:typename:void
-drawRectangle	src/display.c	/^void drawRectangle(int x, int y, int width, int height, uint32_t color) {$/;"	f	typeref:typename:void
 drawTriangle	./src/display.c	/^void drawTriangle(int x0, int y0,$/;"	f	typeref:typename:void
-drawTriangle	src/display.c	/^void drawTriangle(int x0, int y0,$/;"	f	typeref:typename:void
 drop	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_DropEvent drop;                     \/**< Drag and drop event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_DropEvent
 dst_alpha_blendfactor	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUBlendFactor dst_alpha_blendfactor;     \/**< The value to be multiplied by the destin/;"	m	struct:SDL_GPUColorTargetBlendState	typeref:typename:SDL_GPUBlendFactor
 dst_color_blendfactor	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUBlendFactor dst_color_blendfactor;     \/**< The value to be multiplied by the destin/;"	m	struct:SDL_GPUColorTargetBlendState	typeref:typename:SDL_GPUBlendFactor
@@ -17626,10 +17614,8 @@ false	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^#define false /;"	d
 feature_list	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    void *feature_list; \/**< Pointer to the first element of a chain of Vulkan feature structs./;"	m	struct:SDL_GPUVulkanOptions	typeref:typename:void *
 filename	/opt/homebrew/include/SDL3/SDL_assert.h	/^    const char *filename;  \/**< The source file where this assert lives. *\/$/;"	m	struct:SDL_AssertData	typeref:typename:const char *
 fillBottomTriangle	./src/display.c	/^void fillBottomTriangle(int x0, int y0,$/;"	f	typeref:typename:void
-fillBottomTriangle	src/display.c	/^void fillBottomTriangle(int x0, int y0,$/;"	f	typeref:typename:void
 fillMesh	./src/mesh.c	/^void fillMesh(mesh_t *mesh, uint32_t color) {$/;"	f	typeref:typename:void
 fillTriangle	./src/display.c	/^void fillTriangle(int x0, int y0,$/;"	f	typeref:typename:void
-fillTriangle	src/display.c	/^void fillTriangle(int x0, int y0,$/;"	f	typeref:typename:void
 fill_mode	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUFillMode fill_mode;         \/**< Whether polygons will be filled in or drawn as line/;"	m	struct:SDL_GPURasterizerState	typeref:typename:SDL_GPUFillMode
 fill_usable_bounds	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    bool fill_usable_bounds;$/;"	m	struct:__anonb92e08560108	typeref:typename:bool
 filter	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUFilter filter;           \/**< The filter mode used when blitting. *\/$/;"	m	struct:SDL_GPUBlitInfo	typeref:typename:SDL_GPUFilter
@@ -17727,7 +17713,6 @@ id	/opt/homebrew/include/SDL3/SDL_touch.h	/^    SDL_FingerID id;  \/**< the fing
 in	/opt/homebrew/include/SDL3/SDL_test_md5.h	/^    unsigned char in[64];       \/* input buffer *\/$/;"	m	struct:SDLTest_Md5Context	typeref:typename:unsigned char[64]
 initializeMesh	./src/mesh.c	/^bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces, ve/;"	f	typeref:typename:bool
 initializeWindow	./src/display.c	/^bool initializeWindow(void) {$/;"	f	typeref:typename:bool
-initializeWindow	src/display.c	/^bool initializeWindow(void) {$/;"	f	typeref:typename:bool
 input	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    } input;$/;"	m	struct:SDL_GamepadBinding	typeref:union:SDL_GamepadBinding::__anonb13838dd010a
 input_rate	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUVertexInputRate input_rate;  \/**< Whether attribute addressing is a function of the /;"	m	struct:SDL_GPUVertexBufferDescription	typeref:typename:SDL_GPUVertexInputRate
 input_type	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    SDL_GamepadBindingType input_type;$/;"	m	struct:SDL_GamepadBinding	typeref:typename:SDL_GamepadBindingType
@@ -17753,7 +17738,6 @@ interval	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint16 interval;    \/**<
 intptr_t	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^typedef __int64 intptr_t;$/;"	t	typeref:typename:__int64
 intptr_t	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^typedef int intptr_t;$/;"	t	typeref:typename:int
 isRunning	./src/display.c	/^bool isRunning = false; $/;"	v	typeref:typename:bool
-isRunning	src/display.c	/^bool isRunning = false; $/;"	v	typeref:typename:bool
 jaxis	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_JoyAxisEvent jaxis;                 \/**< Joystick axis event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_JoyAxisEvent
 jball	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_JoyBallEvent jball;                 \/**< Joystick ball event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_JoyBallEvent
 jbattery	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_JoyBatteryEvent jbattery;           \/**< Joystick battery event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_JoyBatteryEvent
@@ -17873,6 +17857,7 @@ length	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Uint32 length;      \/**< D
 level	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Sint16 level;           \/**< Strength of the constant effect. *\/$/;"	m	struct:SDL_HapticConstant	typeref:typename:Sint16
 linenum	/opt/homebrew/include/SDL3/SDL_assert.h	/^    int linenum;  \/**< The line in `filename` where this assert lives. *\/$/;"	m	struct:SDL_AssertData	typeref:typename:int
 lines	/opt/homebrew/include/SDL3/SDL_test_font.h	/^    char **lines;$/;"	m	struct:SDLTest_TextWindow	typeref:typename:char **
+loadMeshFromAssets	./src/main.c	/^bool loadMeshFromAssets() {$/;"	f	typeref:typename:bool
 load_op	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPULoadOp load_op;                 \/**< What is done with the depth contents at the beg/;"	m	struct:SDL_GPUDepthStencilTargetInfo	typeref:typename:SDL_GPULoadOp
 load_op	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPULoadOp load_op;           \/**< What is done with the contents of the color target at/;"	m	struct:SDL_GPUColorTargetInfo	typeref:typename:SDL_GPULoadOp
 load_op	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPULoadOp load_op;          \/**< What is done with the contents of the destination befo/;"	m	struct:SDL_GPUBlitInfo	typeref:typename:SDL_GPULoadOp
@@ -17970,7 +17955,6 @@ offset	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 offset;          \/**< 
 offset	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 offset;          \/**< The starting byte within the buffer. *\/$/;"	m	struct:SDL_GPUBufferRegion	typeref:typename:Uint32
 offset	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    Sint16 offset;      \/**< Mean value of the wave. *\/$/;"	m	struct:SDL_HapticPeriodic	typeref:typename:Sint16
 oneByPixelDim	./src/display.c	/^float oneByPixelDim;$/;"	v	typeref:typename:float
-oneByPixelDim	src/display.c	/^float oneByPixelDim;$/;"	v	typeref:typename:float
 origin	./src/mesh.h	/^	vec3_t origin;$/;"	m	struct:__anond599995c0208	typeref:typename:vec3_t
 output	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    } output;$/;"	m	struct:SDL_GamepadBinding	typeref:union:SDL_GamepadBinding::__anonb13838dd040a
 output_type	/opt/homebrew/include/SDL3/SDL_gamepad.h	/^    SDL_GamepadBindingType output_type;$/;"	m	struct:SDL_GamepadBinding	typeref:typename:SDL_GamepadBindingType
@@ -18065,7 +18049,6 @@ product_id	/opt/homebrew/include/SDL3/SDL_hidapi.h	/^    unsigned short product_
 product_id	/opt/homebrew/include/SDL3/SDL_joystick.h	/^    Uint16 product_id;  \/**< the USB product ID of this joystick *\/$/;"	m	struct:SDL_VirtualJoystickDesc	typeref:typename:Uint16
 product_string	/opt/homebrew/include/SDL3/SDL_hidapi.h	/^    wchar_t *product_string;$/;"	m	struct:SDL_hid_device_info	typeref:typename:wchar_t *
 projectPoint	./src/display.c	/^vec2_t projectPoint(vec3_t point) {$/;"	f	typeref:typename:vec2_t
-projectPoint	src/display.c	/^vec2_t projectPoint(vec3_t point) {$/;"	f	typeref:typename:vec2_t
 props	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_PropertiesID props;                         \/**< A properties ID for extensions. Should/;"	m	struct:SDL_GPUGraphicsPipelineCreateInfo	typeref:typename:SDL_PropertiesID
 props	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_PropertiesID props;                    \/**< A properties ID for extensions. Should be 0/;"	m	struct:SDL_GPUSamplerCreateInfo	typeref:typename:SDL_PropertiesID
 props	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_PropertiesID props;                 \/**< A properties ID for extensions. Should be 0 if/;"	m	struct:SDL_GPUComputePipelineCreateInfo	typeref:typename:SDL_PropertiesID
@@ -18099,11 +18082,9 @@ release_number	/opt/homebrew/include/SDL3/SDL_hidapi.h	/^    unsigned short rele
 render	./src/main.c	/^void render(void) {$/;"	f	typeref:typename:void
 render	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_RenderEvent render;                 \/**< Render event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_RenderEvent
 renderColorBuffer	./src/display.c	/^void renderColorBuffer(void) {$/;"	f	typeref:typename:void
-renderColorBuffer	src/display.c	/^void renderColorBuffer(void) {$/;"	f	typeref:typename:void
 render_vsync	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    int render_vsync;$/;"	m	struct:__anonb92e08560108	typeref:typename:int
 renderdriver	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    const char *renderdriver;$/;"	m	struct:__anonb92e08560108	typeref:typename:const char *
 renderer	./src/display.c	/^SDL_Renderer *renderer = NULL;$/;"	v	typeref:typename:SDL_Renderer *
-renderer	src/display.c	/^SDL_Renderer *renderer = NULL;$/;"	v	typeref:typename:SDL_Renderer *
 renderers	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    SDL_Renderer **renderers;$/;"	m	struct:__anonb92e08560108	typeref:typename:SDL_Renderer **
 repeat	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool repeat;            \/**< true if this is a key repeat *\/$/;"	m	struct:SDL_KeyboardEvent	typeref:typename:bool
 reserved	/opt/homebrew/include/SDL3/SDL_events.h	/^    Uint32 reserved;$/;"	m	struct:SDL_AudioDeviceEvent	typeref:typename:Uint32
@@ -18168,15 +18149,11 @@ scaleVec2	./src/vector.h	/^inline vec2_t scaleVec2(float r, vec2_t u) {$/;"	f	ty
 scaleVec3	./src/vector.h	/^inline vec3_t scaleVec3(float r, vec3_t u) {$/;"	f	typeref:typename:vec3_t
 scancode	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_Scancode scancode;  \/**< SDL physical key code *\/$/;"	m	struct:SDL_KeyboardEvent	typeref:typename:SDL_Scancode
 screenDown	./src/display.c	/^float screenDown;$/;"	v	typeref:typename:float
-screenDown	src/display.c	/^float screenDown;$/;"	v	typeref:typename:float
 screenLeft	./src/display.c	/^float screenLeft = -1.0f; $/;"	v	typeref:typename:float
-screenLeft	src/display.c	/^float screenLeft = -1.0f; $/;"	v	typeref:typename:float
 screenRight	./src/display.c	/^float screenRight = 1.0f;$/;"	v	typeref:typename:float
-screenRight	src/display.c	/^float screenRight = 1.0f;$/;"	v	typeref:typename:float
 screenSpaceToPixelSpace	./src/display.c	/^pixel_t screenSpaceToPixelSpace(vec2_t coordinate) {$/;"	f	typeref:typename:pixel_t
-screenSpaceToPixelSpace	src/display.c	/^pixel_t screenSpaceToPixelSpace(vec2_t coordinate) {$/;"	f	typeref:typename:pixel_t
 screenUp	./src/display.c	/^float screenUp; $/;"	v	typeref:typename:float
-screenUp	src/display.c	/^float screenUp; $/;"	v	typeref:typename:float
+screenZ	./src/display.c	/^float screenZ = 1.0f;$/;"	v	typeref:typename:float
 second	/opt/homebrew/include/SDL3/SDL_time.h	/^    int second;                \/**< Seconds [0-60] *\/$/;"	m	struct:SDL_DateTime	typeref:typename:int
 selected_candidate	/opt/homebrew/include/SDL3/SDL_events.h	/^    Sint32 selected_candidate;  \/**< The index of the selected candidate, or -1 if no candidate/;"	m	struct:SDL_TextEditingCandidatesEvent	typeref:typename:Sint32
 sensor	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_SensorEvent sensor;                 \/**< Sensor event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_SensorEvent
@@ -18340,7 +18317,6 @@ uintptr_t	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^typedef unsigned __int64 uin
 uintptr_t	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^typedef unsigned int uintptr_t;$/;"	t	typeref:typename:unsigned int
 update	./src/main.c	/^void update(void) {$/;"	f	typeref:typename:void
 updateScreenSpaceCoordinates	./src/display.c	/^void updateScreenSpaceCoordinates(void) {$/;"	f	typeref:typename:void
-updateScreenSpaceCoordinates	src/display.c	/^void updateScreenSpaceCoordinates(void) {$/;"	f	typeref:typename:void
 usage	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUBufferUsageFlags usage;  \/**< How the buffer is intended to be used by the client. */;"	m	struct:SDL_GPUBufferCreateInfo	typeref:typename:SDL_GPUBufferUsageFlags
 usage	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUTextureUsageFlags usage;   \/**< How the texture is intended to be used by the client/;"	m	struct:SDL_GPUTextureCreateInfo	typeref:typename:SDL_GPUTextureUsageFlags
 usage	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUTransferBufferUsage usage;  \/**< How the transfer buffer is intended to be used by t/;"	m	struct:SDL_GPUTransferBufferCreateInfo	typeref:typename:SDL_GPUTransferBufferUsage
@@ -18416,9 +18392,7 @@ width	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint32 width;                  
 window	./src/display.c	/^SDL_Window *window = NULL;$/;"	v	typeref:typename:SDL_Window *
 window	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowEvent window;                 \/**< Window event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_WindowEvent
 window	/opt/homebrew/include/SDL3/SDL_messagebox.h	/^    SDL_Window *window;                 \/**< Parent window, can be NULL *\/$/;"	m	struct:SDL_MessageBoxData	typeref:typename:SDL_Window *
-window	src/display.c	/^SDL_Window *window = NULL;$/;"	v	typeref:typename:SDL_Window *
 windowHeight	./src/display.c	/^int windowHeight = 233;$/;"	v	typeref:typename:int
-windowHeight	src/display.c	/^int windowHeight = 233;$/;"	v	typeref:typename:int
 windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID;      \/**< The window with keyboard focus, if any *\/$/;"	m	struct:SDL_TextEditingCandidatesEvent	typeref:typename:SDL_WindowID
 windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID;      \/**< The window with keyboard focus, if any *\/$/;"	m	struct:SDL_TextEditingEvent	typeref:typename:SDL_WindowID
 windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID;    \/**< The window that was dropped on, if any *\/$/;"	m	struct:SDL_DropEvent	typeref:typename:SDL_WindowID
@@ -18438,7 +18412,6 @@ windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID; \/
 windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID; \/**< The window with pen focus, if any *\/$/;"	m	struct:SDL_PenMotionEvent	typeref:typename:SDL_WindowID
 windowID	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_WindowID windowID; \/**< The window with pen focus, if any *\/$/;"	m	struct:SDL_PenProximityEvent	typeref:typename:SDL_WindowID
 windowWidth	./src/display.c	/^int windowWidth = 360; $/;"	v	typeref:typename:int
-windowWidth	src/display.c	/^int windowWidth = 360; $/;"	v	typeref:typename:int
 window_flags	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    SDL_WindowFlags window_flags;$/;"	m	struct:__anonb92e08560108	typeref:typename:SDL_WindowFlags
 window_h	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    int window_h;$/;"	m	struct:__anonb92e08560108	typeref:typename:int
 window_icon	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    const char *window_icon;$/;"	m	struct:__anonb92e08560108	typeref:typename:const char *
