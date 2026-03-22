@@ -64,7 +64,6 @@ void drawMesh(const mesh_t *mesh, const uint32_t color, const struct renderMetho
 				c.x, c.y,
 				(color & 0x00FFFFFF) | ((uint32_t) fillOpacity<<24)
 			);
-			if (!RENDER_METHOD.cull) continue;
 		} 
 		if (RENDER_METHOD.wire) {
 			drawTriangle(
@@ -79,11 +78,6 @@ void drawMesh(const mesh_t *mesh, const uint32_t color, const struct renderMetho
 			drawRectangle(b.x - vertexRadius, b.y - vertexRadius, 2*vertexRadius, 2*vertexRadius, color);
 			drawRectangle(c.x - vertexRadius, c.y - vertexRadius, 2*vertexRadius, 2*vertexRadius, color);
 		}
-	}
-
-	if (RENDER_METHOD.fill && !RENDER_METHOD.cull && (RENDER_METHOD.wire || RENDER_METHOD.vertex)) {
-		struct renderMethod_t newMethod = {.cull=0u, .fill=0u, .wire=RENDER_METHOD.wire, .vertex=RENDER_METHOD.vertex}; 
-		drawMesh(mesh, color, newMethod, 0u, vertexRadius);
 	}
 }
 

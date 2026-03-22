@@ -51,7 +51,7 @@ bool loadMeshFromAssets() {
 	vec3_t *vertices;
 	face_t *faces;
 	bool insideOut = false;
-	if (!readWavefront("./assets/cube.obj", &nVertices, &nFaces, &vertices, &faces, insideOut)) {
+	if (!readWavefront("./assets/f22.obj", &nVertices, &nFaces, &vertices, &faces, insideOut)) {
 		return false;
 	}
 	vec3_t origin = (vec3_t) {.x = 0, .y = 0, .z = 5};
@@ -132,7 +132,13 @@ void render(void) {
 	drawGrid(100, 0x00FFFFFF | (45U << 24));
 	drawGrid(500, 0x00FFFFFF | (100U << 24));
 
-	drawMesh(&mesh, 0xFF00FF00, RENDER_METHOD, 50U, 4);
+	struct renderMethod_t firstMethod = RENDER_METHOD;
+	struct renderMethod_t secondMethod = RENDER_METHOD;
+	firstMethod.wire = firstMethod.vertex = 0u;
+	secondMethod.fill = 0u;
+	if (RENDER_METHOD.fill)
+		drawMesh(&mesh, 0xFF00FF00, firstMethod, 50U, 4);
+	drawMesh(&mesh, 0xFF00FF00, secondMethod, 0u, 4);
 
 	renderColorBuffer();
 	SDL_RenderPresent(renderer);
