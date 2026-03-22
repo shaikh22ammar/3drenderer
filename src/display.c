@@ -12,6 +12,7 @@ SDL_Texture *colorBufferTexture = NULL;
 int windowWidth = 360; 
 int windowHeight = 233;
 
+struct renderMethod_t RENDER_METHOD = {.wire = 1u, .fill = 1u, .vertex = 1u, .cull = 1u};
 
 // Renderer uses a right-handed coordiante system with z axis going inwards, y axis going downwards and x axis going rightwards
 
@@ -218,7 +219,6 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 	int signDy = (dy > 0) - (dy < 0);
 	int signDx = (dx > 0) - (dx < 0);
 	int epsDx = 0;
-	bool lineOutOfBounds = x0 < 0 || x0 > windowWidth || y0 < 0 || y0 > windowHeight; 
 	do {
 		drawPixel(swapped ? y0 : x0, swapped ? x0 : y0, color);
 		if (abs(2*epsDx + 2*dy*signDx) > abs(dx)) {
@@ -228,8 +228,7 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 			epsDx += dy*signDx;
 		}
 		x0+=signDx;
-		lineOutOfBounds = x0 < 0 || x0 > windowWidth || y0 < 0 || y0 > windowHeight; 
-	} while (((dx > 0 && x0 <= x1) || (dx < 0 && x0 >= x1)) && !lineOutOfBounds);
+	} while ((dx > 0 && x0 <= x1) || (dx < 0 && x0 >= x1));
 }
 
 void drawTriangle(int x0, int y0,

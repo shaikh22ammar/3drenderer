@@ -32,10 +32,11 @@ bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, f
 	return true;
 }
 
-void drawMesh(mesh_t *mesh, uint32_t color) {
+void drawMesh(const mesh_t *mesh, const uint32_t color, const struct renderMethod_t RENDER_METHOD, uint8_t fillOpacity, const int vertexRadius) {
 	vec3_t *vertices = mesh->vertices;
 	face_t *faces = mesh->faces;
 	vec3_t origin = mesh->origin;
+
 	for (int i = 0; i < mesh->nFaces; i++) {
 		face_t face = faces[i];
 		vec2_t va = projectPoint(addVec3(origin, vertices[face.a]));
@@ -47,49 +48,42 @@ void drawMesh(mesh_t *mesh, uint32_t color) {
 		pixel_t a = screenSpaceToPixelSpace(va);
 		pixel_t b = screenSpaceToPixelSpace(vb);
 		pixel_t c = screenSpaceToPixelSpace(vc);
-		drawTriangle(
-			a.x, a.y,
-			b.x, b.y,
-			c.x, c.y,
-			color
-		);
+
+		if (RENDER_METHOD.cull) {
+			if (
+			b.x*c.y - c.x*b.y 
+			- a.x*c.y + c.x*a.y
+			+ a.x*b.y - b.x*a.y > 0) {
+				continue;
+			}
+		}
+		if (RENDER_METHOD.fill) {
+			fillTriangle(
+				a.x, a.y,
+				b.x, b.y,
+				c.x, c.y,
+				(color & 0x00FFFFFF) | ((uint32_t) fillOpacity<<24)
+			);
+			if (!RENDER_METHOD.cull) continue;
+		} 
+		if (RENDER_METHOD.wire) {
+			drawTriangle(
+				a.x, a.y,
+				b.x, b.y,
+				c.x, c.y,
+				color
+			);
+		}
+		if (RENDER_METHOD.vertex) {
+			drawRectangle(a.x - vertexRadius, a.y - vertexRadius, 2*vertexRadius, 2*vertexRadius, color);
+			drawRectangle(b.x - vertexRadius, b.y - vertexRadius, 2*vertexRadius, 2*vertexRadius, color);
+			drawRectangle(c.x - vertexRadius, c.y - vertexRadius, 2*vertexRadius, 2*vertexRadius, color);
+		}
 	}
-}
 
-void drawMeshVertices(mesh_t *mesh, int radius, uint32_t color) {
-	vec3_t *vertices = mesh->vertices;
-	int nVertices = mesh->nVertices;
-	vec3_t origin = mesh->origin;
-	for (int i = 0; i < nVertices; i++) {
-		vec3_t currVertex = vertices[i];
-		vec3_t shiftedVertex = addVec3(origin, currVertex);
-		vec2_t projectedVertex = projectPoint(shiftedVertex);
-		pixel_t rasteredVertex = screenSpaceToPixelSpace(projectedVertex);
-		drawRectangle(rasteredVertex.x - radius, rasteredVertex.y - radius, 2*radius, 2*radius, color);
-	}
-}
-
-void fillMesh(mesh_t *mesh, uint32_t color) {
-	vec3_t *vertices = mesh->vertices;
-	face_t *faces = mesh->faces;
-	vec3_t origin = mesh->origin;
-	for (int i = 0; i < mesh->nFaces; i++) {
-		face_t face = faces[i];
-		vec2_t va = projectPoint(addVec3(origin, vertices[face.a]));
-		vec2_t vb = projectPoint(addVec3(origin, vertices[face.b]));
-		vec2_t vc = projectPoint(addVec3(origin, vertices[face.c]));
-
-		if (isnan(va.x) || isnan(vb.x) || isnan(vc.x)) continue;
-
-		pixel_t a = screenSpaceToPixelSpace(va);
-		pixel_t b = screenSpaceToPixelSpace(vb);
-		pixel_t c = screenSpaceToPixelSpace(vc);
-		fillTriangle(
-			a.x, a.y,
-			b.x, b.y,
-			c.x, c.y,
-			color
-		);
+	if (RENDER_METHOD.fill && !RENDER_METHOD.cull && (RENDER_METHOD.wire || RENDER_METHOD.vertex)) {
+		struct renderMethod_t newMethod = {.cull=0u, .fill=0u, .wire=RENDER_METHOD.wire, .vertex=RENDER_METHOD.vertex}; 
+		drawMesh(mesh, color, newMethod, 0u, vertexRadius);
 	}
 }
 
@@ -106,7 +100,7 @@ void destroyMesh(mesh_t *mesh) {
 	free(mesh->faces);
 }
 
-bool readWavefront(char *filepath, int *nVertices, int *nFaces, vec3_t **vertices, face_t **faces) {
+bool readWavefront(char *filepath, int *nVertices, int *nFaces, vec3_t **vertices, face_t **faces, const bool insideOut) {
 	FILE *file = fopen(filepath, "r");
 	if (!file) {
 		fprintf(stderr, "Could not open .obj file");
@@ -147,7 +141,10 @@ bool readWavefront(char *filepath, int *nVertices, int *nFaces, vec3_t **vertice
 		} else if (strncmp(line, "f ", 2) == 0) {
 			char ta[64], tb[64], tc[64];
 			if (sscanf(line, "f %s %s %s", ta, tb, tc) == 3) {
-				facs[fCount] = (face_t) {.a = atoi(ta) - 1, .b = atoi(tb) - 1, .c = atoi(tc) - 1};
+				if (insideOut)
+					facs[fCount] = (face_t) {.c = atoi(ta) - 1, .b = atoi(tb) - 1, .a = atoi(tc) - 1};
+				else
+					facs[fCount] = (face_t) {.a = atoi(ta) - 1, .b = atoi(tb) - 1, .c = atoi(tc) - 1};
 				fCount++;
 			}
 		}

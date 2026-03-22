@@ -41,7 +41,7 @@ bool createCubeMesh(void) {
 		(face_t) {.a = 3, .b = 2, .c = 6}, // bottom
 		(face_t) {.a = 6, .b = 7, .c = 3},
 	};
-	vec3_t origin = {.x = 0.0, .y = 0.0, .z = 1.0};
+	vec3_t origin = {.x = 0.0, .y = 0.0, .z = 3.0};
 
 	return initializeMesh(&mesh, NUM_VERTICES, NUM_FACES, vertices, faces, origin);
 }
@@ -50,7 +50,8 @@ bool loadMeshFromAssets() {
 	int nVertices, nFaces;
 	vec3_t *vertices;
 	face_t *faces;
-	if (!readWavefront("./assets/f22.obj", &nVertices, &nFaces, &vertices, &faces)) {
+	bool insideOut = true;
+	if (!readWavefront("./assets/cube.obj", &nVertices, &nFaces, &vertices, &faces, insideOut)) {
 		return false;
 	}
 	vec3_t origin = (vec3_t) {.x = 0, .y = 0, .z = 5};
@@ -87,8 +88,7 @@ bool setup(void) {
 	}
 
 	// Loading objects in scene
-	return loadMeshFromAssets();	
-	
+	return createCubeMesh();	
 }
 
 void processInput(void) {
@@ -99,16 +99,24 @@ void processInput(void) {
 			isRunning = false;
 			break;
 		case SDL_EVENT_KEY_DOWN:
-			if (event.key.key == SDLK_ESCAPE)
+			if (event.key.key == SDLK_ESCAPE) 
 				isRunning = false;
+			else if (event.key.key == SDLK_W)
+				RENDER_METHOD.wire ^= 1u;
+			else if (event.key.key == SDLK_F)
+				RENDER_METHOD.fill ^= 1u;
+			else if (event.key.key == SDLK_C)
+				RENDER_METHOD.cull ^= 1u;
+			else if (event.key.key == SDLK_V)
+				RENDER_METHOD.vertex ^= 1u;
 			break;
 	}
 }
 
 void update(void) {
-	//rotateMesh(&mesh, 0.01, 'x');
+	rotateMesh(&mesh, 0.01, 'x');
 	rotateMesh(&mesh, 0.01, 'y');
-	//rotateMesh(&mesh, 0.01, 'z');
+	rotateMesh(&mesh, 0.01, 'z');
 
 	int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - previousFrameTime);
 	if (timeToWait >0 && timeToWait <= FRAME_TARGET_TIME)
@@ -123,9 +131,8 @@ void render(void) {
 	clearColorBuffer(0xFF000000);
 	drawGrid(100, 0x00FFFFFF | (45U << 24));
 	drawGrid(500, 0x00FFFFFF | (100U << 24));
-	fillMesh(&mesh, 0x0000FF00 | (50U << 24));
-	drawMesh(&mesh, 0xFF00FF00);
-	drawMeshVertices(&mesh, /*raidus = */ 3, 0xFF00FF00);
+
+	drawMesh(&mesh, 0xFF00FF00, RENDER_METHOD, 50U, 4);
 
 	renderColorBuffer();
 	SDL_RenderPresent(renderer);

@@ -19,12 +19,20 @@ extern uint32_t *colorBuffer;
 extern SDL_Texture *colorBufferTexture;
 extern int windowWidth, windowHeight;
 
-extern float screenLeft;
+
+extern struct renderMethod_t {
+	unsigned int wire : 1;
+	unsigned int vertex : 1;
+	unsigned int cull : 1;
+	unsigned int fill : 1;
+} RENDER_METHOD;
+
+
+/*extern float screenLeft;
 extern float screenRight;
 extern float screenUp;
 extern float screenDown;
-
-extern float camZ;
+extern float camZ;*/
 
 void updateScreenSpaceCoordinates(void);
 vec2_t projectPoint(vec3_t point);

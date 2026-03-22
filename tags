@@ -12937,6 +12937,7 @@ PFNGLWINDOWRECTANGLESEXTPROC	/opt/homebrew/include/SDL3/SDL_opengl_glext.h	/^typ
 PFNGLWINDOWRECTANGLESEXTPROC	/opt/homebrew/include/SDL3/SDL_opengles2_gl2ext.h	/^typedef void (GL_APIENTRYP PFNGLWINDOWRECTANGLESEXTPROC) (GLenum mode, GLsizei count, const GLin/;"	t	typeref:typename:void (GL_APIENTRYP)(GLenum mode,GLsizei count,const GLint * box)
 PFNGLWRITEMASKEXTPROC	/opt/homebrew/include/SDL3/SDL_opengl_glext.h	/^typedef void (APIENTRYP PFNGLWRITEMASKEXTPROC) (GLuint res, GLuint in, GLenum outX, GLenum outY,/;"	t	typeref:typename:void (APIENTRYP)(GLuint res,GLuint in,GLenum outX,GLenum outY,GLenum outZ,GLenum outW)
 PWSTR	/opt/homebrew/include/SDL3/SDL_main_impl.h	/^            typedef wchar_t *PWSTR;$/;"	t	typeref:typename:wchar_t *
+RENDER_METHOD	./src/display.c	/^struct renderMethod_t RENDER_METHOD = {.wire = 1u, .fill = 1u, .vertex = 1u, .cull = 1u};$/;"	v	typeref:struct:renderMethod_t
 RW_SEEK_CUR	/opt/homebrew/include/SDL3/SDL_oldnames.h	/^#define RW_SEEK_CUR /;"	d
 RW_SEEK_CUR	/opt/homebrew/include/SDL3/SDL_oldnames.h	/^#define RW_SEEK_CUR RW_SEEK_CUR_/;"	d
 RW_SEEK_END	/opt/homebrew/include/SDL3/SDL_oldnames.h	/^#define RW_SEEK_END /;"	d
@@ -17502,6 +17503,7 @@ crc32_table	/opt/homebrew/include/SDL3/SDL_test_crc32.h	/^    CrcUint32    crc32
 createCubeMesh	./src/main.c	/^bool createCubeMesh(void) {$/;"	f	typeref:typename:bool
 create_time	/opt/homebrew/include/SDL3/SDL_filesystem.h	/^    SDL_Time create_time;   \/**< the time when the path was created *\/$/;"	m	struct:SDL_PathInfo	typeref:typename:SDL_Time
 crossProduct	./src/vector.h	/^inline vec3_t crossProduct(vec3_t u, vec3_t v) {$/;"	f	typeref:typename:vec3_t
+cull	./src/display.h	/^	unsigned int cull : 1;$/;"	m	struct:renderMethod_t	typeref:typename:unsigned int:1
 cull_mode	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUCullMode cull_mode;         \/**< The facing direction in which triangles will be cul/;"	m	struct:SDL_GPURasterizerState	typeref:typename:SDL_GPUCullMode
 current	/opt/homebrew/include/SDL3/SDL_test_font.h	/^    int current;$/;"	m	struct:SDLTest_TextWindow	typeref:typename:int
 custom	/opt/homebrew/include/SDL3/SDL_haptic.h	/^    SDL_HapticCustom custom;        \/**< Custom effect. *\/$/;"	m	union:SDL_HapticEffect	typeref:typename:SDL_HapticCustom
@@ -17569,8 +17571,7 @@ down	/opt/homebrew/include/SDL3/SDL_events.h	/^    bool down;      \/**< true if
 drawDotGrid	./src/display.c	/^void drawDotGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
 drawGrid	./src/display.c	/^void drawGrid(int step, uint32_t color) {$/;"	f	typeref:typename:void
 drawLine	./src/display.c	/^void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {$/;"	f	typeref:typename:void
-drawMesh	./src/mesh.c	/^void drawMesh(mesh_t *mesh, uint32_t color) {$/;"	f	typeref:typename:void
-drawMeshVertices	./src/mesh.c	/^void drawMeshVertices(mesh_t *mesh, int radius, uint32_t color) {$/;"	f	typeref:typename:void
+drawMesh	./src/mesh.c	/^void drawMesh(const mesh_t *mesh, const uint32_t color, const struct renderMethod_t RENDER_METHO/;"	f	typeref:typename:void
 drawPixel	./src/display.c	/^void drawPixel(int x, int y, uint32_t color) {$/;"	f	typeref:typename:void
 drawRectangle	./src/display.c	/^void drawRectangle(int x, int y, int width, int height, uint32_t color) {$/;"	f	typeref:typename:void
 drawTriangle	./src/display.c	/^void drawTriangle(int x0, int y0,$/;"	f	typeref:typename:void
@@ -17613,8 +17614,8 @@ fail_op	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUStencilOp fail_op;    
 false	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^#define false /;"	d
 feature_list	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    void *feature_list; \/**< Pointer to the first element of a chain of Vulkan feature structs./;"	m	struct:SDL_GPUVulkanOptions	typeref:typename:void *
 filename	/opt/homebrew/include/SDL3/SDL_assert.h	/^    const char *filename;  \/**< The source file where this assert lives. *\/$/;"	m	struct:SDL_AssertData	typeref:typename:const char *
+fill	./src/display.h	/^	unsigned int fill : 1;$/;"	m	struct:renderMethod_t	typeref:typename:unsigned int:1
 fillBottomTriangle	./src/display.c	/^void fillBottomTriangle(int x0, int y0,$/;"	f	typeref:typename:void
-fillMesh	./src/mesh.c	/^void fillMesh(mesh_t *mesh, uint32_t color) {$/;"	f	typeref:typename:void
 fillTriangle	./src/display.c	/^void fillTriangle(int x0, int y0,$/;"	f	typeref:typename:void
 fill_mode	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUFillMode fill_mode;         \/**< Whether polygons will be filled in or drawn as line/;"	m	struct:SDL_GPURasterizerState	typeref:typename:SDL_GPUFillMode
 fill_usable_bounds	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    bool fill_usable_bounds;$/;"	m	struct:__anonb92e08560108	typeref:typename:bool
@@ -18082,6 +18083,7 @@ release_number	/opt/homebrew/include/SDL3/SDL_hidapi.h	/^    unsigned short rele
 render	./src/main.c	/^void render(void) {$/;"	f	typeref:typename:void
 render	/opt/homebrew/include/SDL3/SDL_events.h	/^    SDL_RenderEvent render;                 \/**< Render event data *\/$/;"	m	union:SDL_Event	typeref:typename:SDL_RenderEvent
 renderColorBuffer	./src/display.c	/^void renderColorBuffer(void) {$/;"	f	typeref:typename:void
+renderMethod_t	./src/display.h	/^extern struct renderMethod_t {$/;"	s
 render_vsync	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    int render_vsync;$/;"	m	struct:__anonb92e08560108	typeref:typename:int
 renderdriver	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    const char *renderdriver;$/;"	m	struct:__anonb92e08560108	typeref:typename:const char *
 renderer	./src/display.c	/^SDL_Renderer *renderer = NULL;$/;"	v	typeref:typename:SDL_Renderer *
@@ -18342,6 +18344,7 @@ version	/opt/homebrew/include/SDL3/SDL_iostream.h	/^    Uint32 version;$/;"	m	st
 version	/opt/homebrew/include/SDL3/SDL_joystick.h	/^    Uint32 version;     \/**< the version of this interface *\/$/;"	m	struct:SDL_VirtualJoystickDesc	typeref:typename:Uint32
 version	/opt/homebrew/include/SDL3/SDL_pixels.h	/^    Uint32 version;     \/**< internal use only, do not touch. *\/$/;"	m	struct:SDL_Palette	typeref:typename:Uint32
 version	/opt/homebrew/include/SDL3/SDL_storage.h	/^    Uint32 version;$/;"	m	struct:SDL_StorageInterface	typeref:typename:Uint32
+vertex	./src/display.h	/^	unsigned int vertex : 1;$/;"	m	struct:renderMethod_t	typeref:typename:unsigned int:1
 vertex_attributes	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    const SDL_GPUVertexAttribute *vertex_attributes;                  \/**< A pointer to an arra/;"	m	struct:SDL_GPUVertexInputState	typeref:typename:const SDL_GPUVertexAttribute *
 vertex_buffer_descriptions	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    const SDL_GPUVertexBufferDescription *vertex_buffer_descriptions; \/**< A pointer to an arra/;"	m	struct:SDL_GPUVertexInputState	typeref:typename:const SDL_GPUVertexBufferDescription *
 vertex_input_state	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUVertexInputState vertex_input_state;     \/**< The vertex layout of the graphics pipe/;"	m	struct:SDL_GPUGraphicsPipelineCreateInfo	typeref:typename:SDL_GPUVertexInputState
@@ -18426,6 +18429,7 @@ window_w	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    int window_w;$/;"	m	
 window_x	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    int window_x;$/;"	m	struct:__anonb92e08560108	typeref:typename:int
 window_y	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    int window_y;$/;"	m	struct:__anonb92e08560108	typeref:typename:int
 windows	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    SDL_Window **windows;$/;"	m	struct:__anonb92e08560108	typeref:typename:SDL_Window **
+wire	./src/display.h	/^	unsigned int wire : 1;$/;"	m	struct:renderMethod_t	typeref:typename:unsigned int:1
 wmain	/opt/homebrew/include/SDL3/SDL_main_impl.h	/^                    int wmain(int argc, wchar_t *wargv[], wchar_t *wenvp)$/;"	f	typeref:typename:int
 write_mask	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    Uint8 write_mask;                           \/**< Selects the bits of the stencil values upd/;"	m	struct:SDL_GPUDepthStencilState	typeref:typename:Uint8
 x	./src/display.h	/^typedef struct {int x; int y;} pixel_t;$/;"	m	struct:__anon9ec22d050108	typeref:typename:int

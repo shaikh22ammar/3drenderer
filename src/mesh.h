@@ -19,11 +19,9 @@ typedef struct {
 } mesh_t;
 
 bool initializeMesh(mesh_t *mesh, int nVertices, int nFaces, vec3_t *vertices, face_t *faces, vec3_t origin); 
-void drawMesh(mesh_t *mesh, uint32_t color);
-void drawMeshVertices(mesh_t *mesh, int radius, uint32_t color);
-void fillMesh(mesh_t *mesh, uint32_t color);
+void drawMesh(const mesh_t *mesh, const uint32_t color, const struct renderMethod_t, uint8_t fillOpacity, const int vertexRadius);
 void destroyMesh(mesh_t *mesh);
 void rotateMesh(mesh_t *mesh, float theta, char axis);
-bool readWavefront(char *filepath, int *nVertices, int *nFaces, vec3_t **vertices, face_t **faces);
+bool readWavefront(char *filepath, int *nVertices, int *nFaces, vec3_t **vertices, face_t **faces, const bool insideOut);
 
 #endif
