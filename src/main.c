@@ -50,7 +50,7 @@ bool loadMeshFromAssets() {
 	int nVertices, nFaces;
 	vec3_t *vertices;
 	face_t *faces;
-	bool insideOut = true;
+	bool insideOut = false;
 	if (!readWavefront("./assets/cube.obj", &nVertices, &nFaces, &vertices, &faces, insideOut)) {
 		return false;
 	}
@@ -88,7 +88,7 @@ bool setup(void) {
 	}
 
 	// Loading objects in scene
-	return createCubeMesh();	
+	return loadMeshFromAssets();	
 }
 
 void processInput(void) {
