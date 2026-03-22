@@ -44,5 +44,13 @@ void drawTriangle(int x0, int y0,
 		int x2, int y2,
 		uint32_t color);
 
+void fillBottomTriangle(int x0, int y0,
+		int x1, int y1,
+		int x2, int y2,
+		uint32_t color);
+void fillTriangle(int x0, int y0,
+		int x1, int y1,
+		int x2, int y2,
+		uint32_t color);
 
 #endif

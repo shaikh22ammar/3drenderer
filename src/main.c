@@ -117,10 +117,12 @@ void render(void) {
 	SDL_RenderClear(renderer);
 	
 	clearColorBuffer(0xFF000000);
-	drawGrid(50, 0x00FFFFFF | (65U << 24));
-	drawGrid(100, 0x00FFFFFF | (100U << 24));
-	drawMesh(&mesh, 0xFF00FF00);
-	//drawMeshVertices(&mesh, 0xFFFFFF00);
+	drawGrid(100, 0x00FFFFFF | (45U << 24));
+	drawGrid(500, 0x00FFFFFF | (100U << 24));
+	//fillTriangle(500, 1000, 100, 500, 1000, 500, 0xFF00FF00);
+	//drawMesh(&mesh, 0xFF00FF00);
+	//drawMeshVertices(&mesh, 3, 0xFF00FF00);
+	fillMesh(&mesh, 0xFF00FF00);
 
 	renderColorBuffer();
 	SDL_RenderPresent(renderer);

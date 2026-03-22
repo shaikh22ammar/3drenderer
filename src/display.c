@@ -174,6 +174,9 @@ void drawRectangle(int x, int y, int width, int height, uint32_t color) {
 	}
 }
 
+#ifndef SWAP_int
+#define SWAP_int(a, b) do { int _t = (a); (a) = (b); (b) = _t; } while(0)
+#endif
 void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 	/* The algorithm draws a line from the (x0, y0)-th pixel to (x1, y1)-th pixel.
 	 * dy = y1 - y0, dx = x1 - x0, m = dy/dx.
@@ -207,30 +210,23 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 
 	const bool swapped = (abs(dy) > abs(dx));	
 	if (swapped) {
-		x0 = x0^y0; y0 = x0^y0; x0 = x0^y0;
-		x1 = x1^y1; y1 = x1^y1; x1 = x1^y1;
-		dx = dx^dy; dy = dx^dy; dx = dx^dy;
-	}
-	if (dx < 0) {
-		x0 = x0^x1; x1 = x0^x1; x0 = x0^x1; dx = -dx;
-		y0 = y0^y1; y1 = y0^y1; y0 = y0^y1;
-		dy = -dy;
+		SWAP_int(x0, y0);
+		SWAP_int(x1, y1);
+		SWAP_int(dx, dy);
 	}
 	int signDy = (dy > 0) - (dy < 0);
+	int signDx = (dx > 0) - (dx < 0);
 	int epsDx = 0;
-	while (x0 <= x1) {
-		if (swapped)
-			drawPixel(y0, x0, color);
-		else
-			drawPixel(x0, y0, color);
-		if (abs(2*epsDx + 2*dy) > abs(dx)) {
-			epsDx += dy - signDy * dx;
+	do {
+		drawPixel(swapped ? y0 : x0, swapped ? x0 : y0, color);
+		if (abs(2*epsDx + 2*dy*signDx) > abs(dx)) {
+			epsDx += dy*signDx - signDy*dx;
 			y0 += signDy;
 		} else {
-			epsDx += dy;
+			epsDx += dy*signDx;
 		}
-		x0++;
-	}
+		x0+=signDx;
+	} while ((dx > 0 && x0 <= x1) || (dx < 0 && x0 >= x1));
 }
 
 void drawTriangle(int x0, int y0,
@@ -240,4 +236,99 @@ void drawTriangle(int x0, int y0,
 	drawLine(x0, y0, x1, y1, color);
 	drawLine(x1, y1, x2, y2, color);
 	drawLine(x2, y2, x0, y0, color);
+}
+
+void fillBottomTriangle(int x0, int y0,
+		int x1, int y1,
+		int x2, int y2,
+		uint32_t color) {
+	// Fills a triangle with horizontal base (x1, y1) -- (x2, y2)
+	//
+	
+	int x01 = x0, y01 = y0;
+	int x02 = x0, y02 = y0;
+
+	int dy01 = y1 - y01; int dy02 = y2 - y01;
+	int dx01 = x1 - x01; int dx02 = x2 - x01;
+
+	const bool swapped01 = (abs(dy01) > abs(dx01));
+	if (swapped01) {
+		SWAP_int(x01, y01);
+		SWAP_int(x1, y1);
+		SWAP_int(dx01, dy01);
+	}
+	const bool swapped02 = (abs(dy02) > abs(dx02));
+	if (swapped02) {
+		SWAP_int(x02, y02);
+		SWAP_int(x2, y2);
+		SWAP_int(dx02, dy02);
+	}
+	int signDy01 = (dy01 > 0) - (dy01 < 0);
+	int signDx01 = (dx01 > 0) - (dx01 < 0);
+	int epsDx01 = 0;
+	int signDy02 = (dy02 > 0) - (dy02 < 0);
+	int signDx02 = (dx02 > 0) - (dx02 < 0);
+	int epsDx02 = 0;
+
+	bool continueDrawing01 = true;
+	bool continueDrawing02 = true;
+	while (continueDrawing01 || continueDrawing02) {
+		const int trueX01 = swapped01 ? y01 : x01;
+		const int trueY01 = swapped01 ? x01 : y01;
+		const int trueX02 = swapped02 ? y02 : x02;
+		const int trueY02 = swapped02 ? x02 : y02;
+		drawLine(trueX01, trueY01, trueX02, trueY02, color);
+		bool movedYDrawing01 = false;
+		bool movedYDrawing02 = false;
+
+		while (!movedYDrawing01 && continueDrawing01) {
+			drawPixel(swapped01 ? y01 : x01, swapped01 ? x01 : y01, color);
+			if (abs(2*epsDx01 + 2*dy01*signDx01) > abs(dx01)) {
+				epsDx01 += dy01*signDx01 - signDy01*dx01;
+				y01 += signDy01;
+				movedYDrawing01 = true;
+			} else {
+				epsDx01 += dy01*signDx01;
+				movedYDrawing01 = swapped01 ? true : false;
+			}
+			x01+=signDx01;
+			continueDrawing01 = (dx01 > 0 && x01 <= x1) || (dx01 < 0 && x01 >= x1);
+		} 
+
+		while (!movedYDrawing02 && continueDrawing02) {
+			drawPixel(swapped02 ? y02 : x02, swapped02 ? x02 : y02, color);
+			if (abs(2*epsDx02 + 2*dy02*signDx02) > abs(dx02)) {
+				epsDx02 += dy02*signDx02 - signDy02*dx02;
+				y02 += signDy02;
+				movedYDrawing02 = true;
+			} else {
+				epsDx02 += dy02*signDx02;
+				movedYDrawing02 = swapped02 ? true : false;
+			}
+			x02+=signDx02;
+			continueDrawing02 = (dx02 > 0 && x02 <= x2) || (dx02 < 0 && x02 >= x2);
+		}  
+		continueDrawing02 = continueDrawing02 || continueDrawing01;
+	}
+}
+
+void fillTriangle(int x0, int y0,
+		int x1, int y1,
+		int x2, int y2,
+		uint32_t color) {
+	if (y1 < y0) {
+		SWAP_int(y1, y0);
+		SWAP_int(x1, x0);
+	}
+	if (y2 < y0) {
+		SWAP_int(y2, y0);
+		SWAP_int(x2, x0);
+	}
+	if (y2 < y1) {
+		SWAP_int(y2, y1);
+		SWAP_int(x2, x1);
+	}
+
+	fillBottomTriangle(x0, y0, x1, y1, x2, y2, color);
+	fillBottomTriangle(x2, y2, x1, y1, x0, y0, color);
 }
