@@ -56,3 +56,8 @@ dkms.conf
 
 # Assets
 *.obj
+
+# Recordings
+*.mov
+*.gif
+*.png
