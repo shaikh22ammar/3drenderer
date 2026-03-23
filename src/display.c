@@ -202,7 +202,7 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 	 * The cases, |m| > 1 is handle by iterating from y0 to y1 instead of x0 to x1
 	 *
 	 * To avoid floating point arithmetic, denominators are normalized, and we instead record epsilon * dx
-	 * This is intialized first as 0 since the initial (y0, x0) has no error.
+	 * This is intialized first as 0 since the initial (x0, y0) has no error.
 	 *
 	 * Instead of handling the different cases of slopes separately, the coordinates are accordingly swapped.
 	 */
@@ -244,8 +244,10 @@ void fillBottomTriangle(int x0, int y0,
 		int x1, int y1,
 		int x2, int y2,
 		uint32_t color) {
-	// Fills a triangle with horizontal base (x1, y1) -- (x2, y2)
-	//
+	// Fills a triangle with horizontal base (x1, y1) -- (x2, y2) using Bresenham's algorithm
+	// If y2 does not equal y1, the algorithm will stop when 01 line has finished
+	// It will render the correct result if y1 is the second largest y-coordinate
+	// This way calculating midpoint is avoided
 	
 	int x01 = x0, y01 = y0;
 	int x02 = x0, y02 = y0;
@@ -274,7 +276,7 @@ void fillBottomTriangle(int x0, int y0,
 
 	bool continueDrawing01 = true;
 	bool continueDrawing02 = true;
-	while (continueDrawing01 || continueDrawing02) {
+	while (continueDrawing01) {// || continueDrawing02) {
 		const int trueX01 = swapped01 ? y01 : x01;
 		const int trueY01 = swapped01 ? x01 : y01;
 		const int trueX02 = swapped02 ? y02 : x02;
@@ -310,10 +312,17 @@ void fillBottomTriangle(int x0, int y0,
 			x02+=signDx02;
 			continueDrawing02 = (dx02 > 0 && x02 <= x2) || (dx02 < 0 && x02 >= x2);
 		}  
-		continueDrawing02 = continueDrawing02 || continueDrawing01;
 	}
 }
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * 			
+ * 			Scaline triangle rasterisation method
+ *
+ * A triangle is split into an upper part with flat bottom and a lower part with flat top
+ * They are rendered using scalines.
+ *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void fillTriangle(int x0, int y0,
 		int x1, int y1,
 		int x2, int y2,
