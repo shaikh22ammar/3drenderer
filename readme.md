@@ -2,8 +2,8 @@
 
 ## Examples
 
-![Wireframe rendering](./recordings/1.gif)
+![Wireframe rendering](1.gif)
 *Figure: Wireframe rendering of an imported wavefront file*
 
-![Backface culling](./recordings/2.gif)
+![Backface culling](2.gif)
 *Figure: Backface culling*
