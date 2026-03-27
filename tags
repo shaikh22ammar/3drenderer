@@ -12964,6 +12964,7 @@ PFNGLWINDOWRECTANGLESEXTPROC	/opt/homebrew/include/SDL3/SDL_opengl_glext.h	/^typ
 PFNGLWINDOWRECTANGLESEXTPROC	/opt/homebrew/include/SDL3/SDL_opengles2_gl2ext.h	/^typedef void (GL_APIENTRYP PFNGLWINDOWRECTANGLESEXTPROC) (GLenum mode, GLsizei count, const GLin/;"	t	typeref:typename:void (GL_APIENTRYP)(GLenum mode,GLsizei count,const GLint * box)
 PFNGLWRITEMASKEXTPROC	/opt/homebrew/include/SDL3/SDL_opengl_glext.h	/^typedef void (APIENTRYP PFNGLWRITEMASKEXTPROC) (GLuint res, GLuint in, GLenum outX, GLenum outY,/;"	t	typeref:typename:void (APIENTRYP)(GLuint res,GLuint in,GLenum outX,GLenum outY,GLenum outZ,GLenum outW)
 PWSTR	/opt/homebrew/include/SDL3/SDL_main_impl.h	/^            typedef wchar_t *PWSTR;$/;"	t	typeref:typename:wchar_t *
+RASTER_H	./src/raster.h	/^#define RASTER_H$/;"	d
 RENDER_METHOD	./src/display.c	/^struct renderMethod_t RENDER_METHOD = {.wire = 1u, .fill = 1u, .vertex = 1u, .cull = 1u};$/;"	v	typeref:struct:renderMethod_t
 RW_SEEK_CUR	/opt/homebrew/include/SDL3/SDL_oldnames.h	/^#define RW_SEEK_CUR /;"	d
 RW_SEEK_CUR	/opt/homebrew/include/SDL3/SDL_oldnames.h	/^#define RW_SEEK_CUR RW_SEEK_CUR_/;"	d
@@ -17454,6 +17455,7 @@ alloca	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^#   define alloca __builtin_all
 alloca	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^#   define alloca _alloca$/;"	d
 alpha_blend_op	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUBlendOp alpha_blend_op;                \/**< The blend operation for the alpha compon/;"	m	struct:SDL_GPUColorTargetBlendState	typeref:typename:SDL_GPUBlendOp
 always_ignore	/opt/homebrew/include/SDL3/SDL_assert.h	/^    bool always_ignore;  \/**< true if app should always continue when assertion is triggered. */;"	m	struct:SDL_AssertData	typeref:typename:bool
+area2	./src/raster.h	/^inline int area2(pixel_t a, pixel_t b, pixel_t c) {$/;"	f	typeref:typename:int
 argparser	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    SDLTest_ArgumentParser *argparser;$/;"	m	struct:__anonb92e08560108	typeref:typename:SDLTest_ArgumentParser *
 argv	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    char **argv;$/;"	m	struct:__anonb92e08560108	typeref:typename:char **
 asyncio	/opt/homebrew/include/SDL3/SDL_asyncio.h	/^    SDL_AsyncIO *asyncio;   \/**< what generated this task. This pointer will be invalid if it w/;"	m	struct:SDL_AsyncIOOutcome	typeref:typename:SDL_AsyncIO *
