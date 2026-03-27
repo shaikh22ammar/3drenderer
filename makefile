@@ -15,8 +15,9 @@ run: render.out
 debug: CFLAGS += -g -O0 -DDEBUG
 debug: render.out
 
-render.out: src/main.c src/display.* src/vector.* src/mesh.*
+render.out: src/*.c
 	$(CC) src/*.c -o render.out $(CFLAGS) $(LFLAGS)
+
 
 clean: 
 	rm render.out

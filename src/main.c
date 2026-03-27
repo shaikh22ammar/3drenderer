@@ -7,16 +7,18 @@
 #include "display.h"
 #include "vector.h"
 #include "mesh.h"
+#include "texture.h"
+#include "color.h"
 
 
 // mesh details
 #define NUM_VERTICES 8
 #define NUM_FACES 12
-mesh_t mesh;
+texturedMesh_t *mesh;
 
 int previousFrameTime = 0;
 
-bool createCubeMesh(void) {
+/*bool createCubeMesh(void) {
 	 vec3_t vertices[NUM_VERTICES] = {
 		(vec3_t) {.x = -0.5, .y = -0.5, .z = 0.5}, // 0
 		(vec3_t) {.x = 0.5, .y = -0.5, .z = 0.5},  // 1
@@ -44,30 +46,43 @@ bool createCubeMesh(void) {
 	vec3_t origin = {.x = 0.0, .y = 0.0, .z = 3.0};
 
 	return initializeMesh(&mesh, NUM_VERTICES, NUM_FACES, vertices, faces, origin);
-}
+}*/
 
 bool loadMeshFromAssets() {
+	mesh = (texturedMesh_t *) malloc (sizeof(texturedMesh_t));
+
 	int nVertices, nFaces;
 	vec3_t *vertices;
 	face_t *faces;
-	bool insideOut = false;
-	if (!readWavefront("./assets/f22.obj", &nVertices, &nFaces, &vertices, &faces, insideOut)) {
+	vec2_t *uv;
+	bool insideOut = true;
+	if (!readWavefront("./assets/cube.obj", &nVertices, &nFaces, &vertices, &faces, &uv, insideOut)) {
+		return false;
+	}
+	if (uv == NULL) {
+		return false;
+	}
+	int texWidth, texHeight;
+	uint32_t *texture;
+	if(!loadPNG("./assets/cube.png", &texture, &texWidth, &texHeight)) {
 		return false;
 	}
 	vec3_t origin = (vec3_t) {.x = 0, .y = 0, .z = 5};
-	if (!initializeMesh(&mesh, nVertices, nFaces, vertices, faces, origin)) {
+	if (!initializeMesh(mesh, nVertices, nFaces, vertices, faces, origin, texture, texWidth, texHeight, uv)) {
 		return false;
 	}
 	free(vertices);
 	free(faces);
+	free(uv);
 	vertices=NULL;
 	faces=NULL;
+	uv=NULL;
 	return true;
 }
 
 bool setup(void) {
 	// Creating raw pixel buffer
-	colorBuffer = (uint32_t *) malloc(sizeof(uint32_t) * windowWidth * windowHeight);
+	colorBuffer = (color32_t *) malloc(sizeof(color32_t) * windowWidth * windowHeight);
 	if (!colorBuffer) {
 		free(colorBuffer);
 		fprintf(stderr, "Failed to allocate memory for color buffer");
@@ -77,7 +92,7 @@ bool setup(void) {
 	// Creating buffer texture
 	colorBufferTexture = SDL_CreateTexture(
 		renderer,
-		SDL_PIXELFORMAT_ARGB8888,
+		SDL_PIXELFORMAT_RGBA8888,
 		SDL_TEXTUREACCESS_STREAMING,
 		windowWidth,
 		windowHeight
@@ -114,9 +129,9 @@ void processInput(void) {
 }
 
 void update(void) {
-	rotateMesh(&mesh, 0.01, 'x');
-	rotateMesh(&mesh, 0.01, 'y');
-	rotateMesh(&mesh, 0.01, 'z');
+	rotateMesh((mesh_t *) mesh, 0.01, 'x');
+	//rotateMesh((mesh_t *) mesh, 0.01, 'y');
+	//rotateMesh((mesh_t *) mesh, 0.01, 'z');
 
 	int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - previousFrameTime);
 	if (timeToWait >0 && timeToWait <= FRAME_TARGET_TIME)
@@ -128,17 +143,11 @@ void render(void) {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
 	
-	clearColorBuffer(0xFF000000);
-	drawGrid(100, 0x00FFFFFF | (45U << 24));
-	drawGrid(500, 0x00FFFFFF | (100U << 24));
+	clearColorBuffer(0x00000000);
+	drawGrid(100, 0xFFFFFF00|45U);
+	drawGrid(500, 0xFFFFFF00|100U);
 
-	struct renderMethod_t firstMethod = RENDER_METHOD;
-	struct renderMethod_t secondMethod = RENDER_METHOD;
-	firstMethod.wire = firstMethod.vertex = 0u;
-	secondMethod.fill = 0u;
-	if (RENDER_METHOD.fill)
-		drawMesh(&mesh, 0xFF00FF00, firstMethod, 50U, 4);
-	drawMesh(&mesh, 0xFF00FF00, secondMethod, 0u, 4);
+	drawMesh(&(mesh->mesh), 0x00FF00FF, RENDER_METHOD, 50u, 2);
 
 	renderColorBuffer();
 	SDL_RenderPresent(renderer);
@@ -154,6 +163,12 @@ int main() {
 		render();
 	}
 	destroyWindow();
-	destroyMesh(&mesh);
+	destroyMesh(mesh);
+
+	color32_t white45 = 0xFFFFFF00|45U;
+	color32_t black00 = 0U;
+	
+	color32_t blendedColor = blendColors(black00, white45);
+
 	return 0;
 }

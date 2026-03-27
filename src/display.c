@@ -7,7 +7,7 @@
 bool isRunning = false; 
 SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
-uint32_t *colorBuffer = NULL;
+color32_t *colorBuffer = NULL;
 SDL_Texture *colorBufferTexture = NULL;
 int windowWidth = 360; 
 int windowHeight = 233;
@@ -61,9 +61,6 @@ bool initializeWindow(void) {
 	}
 
 	// Creating window with properties
-	/*const SDL_DisplayMode *display_mode = SDL_GetCurrentDisplayMode(SDL_GetPrimaryDisplay());
-	windowWidth = display_mode->w;
-	windowHeight = display_mode->h;*/
 	SDL_PropertiesID props = SDL_CreateProperties();
 	if (props == 0) {
 		SDL_Log("Unable to create properties: %s", SDL_GetError());
@@ -72,9 +69,6 @@ bool initializeWindow(void) {
 	SDL_SetStringProperty(props, SDL_PROP_WINDOW_CREATE_TITLE_STRING, NULL);
 	SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER, 360);
 	SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER, 233);
-	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_X_NUMBER, SDL_WINDOWPOS_CENTERED);
-	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_Y_NUMBER, SDL_WINDOWPOS_CENTERED);
-	//SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN, true);
 	SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN, true);
 	SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN, true);
 	window = SDL_CreateWindowWithProperties(props);
@@ -102,12 +96,12 @@ void renderColorBuffer(void) {
 		colorBufferTexture,
 		NULL,
 		colorBuffer,
-		(int) (windowWidth * sizeof (uint32_t))
+		(int) (windowWidth * sizeof (color32_t))
 	);
 	SDL_RenderTexture(renderer, colorBufferTexture, NULL, NULL);
 }
 
-void clearColorBuffer(uint32_t color) {
+void clearColorBuffer(color32_t color) {
 	for (int i = 0; i < windowHeight; i++) {
 		for (int j = 0; j < windowWidth; j++) {
 			colorBuffer[(i*windowWidth) + j] = color;
@@ -136,16 +130,19 @@ vec2_t projectPoint(vec3_t point) {
 	return (vec2_t) {.x = x, .y = y};
 }
 
-void drawPixel(int x, int y, uint32_t color) {
+void drawPixel(int x, int y, color32_t color) {
 	/* Fills the pixel at the y-th row and x-th column with color.
 	 * Note that y goes down as it increases.
 	 */
 	if (y >=0 && y < windowHeight && x >=0 && x < windowWidth) {
-		colorBuffer[y*windowWidth + x] = color;
+		color32_t currentColor = colorBuffer[y*windowWidth + x];
+		colorBuffer[y*windowWidth + x] = blendColors(currentColor, color);
+	} else {
+		fprintf(stderr, "Warning: Pixel tried to be drawn outside bounds, %d, %d\n", x, y);
 	}
 }
 
-void drawGrid(int step, uint32_t color) {
+void drawGrid(int step, color32_t color) {
 	// draw vertical lines
 	for (int j = step - 1; j < windowWidth; j+= step) {
 		for (int i = 0; i < windowHeight; i++) {
@@ -160,7 +157,7 @@ void drawGrid(int step, uint32_t color) {
 	}
 }
 
-void drawDotGrid(int step, uint32_t color) {
+void drawDotGrid(int step, color32_t color) {
 	for (int i = step - 1; i < windowHeight; i += step) {
 		for (int j = step - 1; j < windowWidth; j += step) {
 			drawPixel(j, i, color);
@@ -168,7 +165,7 @@ void drawDotGrid(int step, uint32_t color) {
 	}
 }
 
-void drawRectangle(int x, int y, int width, int height, uint32_t color) {
+void drawRectangle(int x, int y, int width, int height, color32_t color) {
 	for (int i = y; i < y + height; i++) {
 		for (int j = x; j < x + width; j++) {
 			drawPixel(j, i, color);
@@ -179,7 +176,7 @@ void drawRectangle(int x, int y, int width, int height, uint32_t color) {
 #ifndef SWAP_int
 #define SWAP_int(a, b) do { int _t = (a); (a) = (b); (b) = _t; } while(0)
 #endif
-void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
+void drawLine(int x0, int y0, int x1, int y1, color32_t color) {
 	/* The algorithm draws a line from the (x0, y0)-th pixel to (x1, y1)-th pixel.
 	 * dy = y1 - y0, dx = x1 - x0, m = dy/dx.
 	 * x0 and y0 can be interpreted as the abcissa and ordinate of the center of the (x0, y0)-th pixel.
@@ -234,7 +231,7 @@ void drawLine(int x0, int y0, int x1, int y1, uint32_t color) {
 void drawTriangle(int x0, int y0,
 		int x1, int y1,
 		int x2, int y2,
-		uint32_t color) {
+		color32_t color) {
 	drawLine(x0, y0, x1, y1, color);
 	drawLine(x1, y1, x2, y2, color);
 	drawLine(x2, y2, x0, y0, color);
@@ -243,7 +240,7 @@ void drawTriangle(int x0, int y0,
 static void fillBottomTriangle(int x0, int y0,
 		int x1, int y1,
 		int x2, int y2,
-		uint32_t color) {
+		color32_t color) {
 	// Fills a triangle with horizontal base (x1, y1) -- (x2, y2) using Bresenham's algorithm
 	// If y2 does not equal y1, the algorithm will stop when 01 line has finished
 	// It will render the correct result if y1 is the second largest y-coordinate
@@ -326,7 +323,7 @@ static void fillBottomTriangle(int x0, int y0,
 void fillTriangle(int x0, int y0,
 		int x1, int y1,
 		int x2, int y2,
-		uint32_t color) {
+		color32_t color) {
 	if (y1 < y0) {
 		SWAP_int(y1, y0);
 		SWAP_int(x1, x0);
