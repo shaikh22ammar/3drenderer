@@ -147,6 +147,7 @@ void render(void) {
 int main() {
 	isRunning = initializeWindow();
 	isRunning = setup();
+	printf("Window width and height = %d, %d\n", windowWidth, windowHeight);
 	while(isRunning) {
 		processInput();
 		update();	

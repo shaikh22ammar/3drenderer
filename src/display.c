@@ -70,15 +70,14 @@ bool initializeWindow(void) {
 		return false;
 	}
 	SDL_SetStringProperty(props, SDL_PROP_WINDOW_CREATE_TITLE_STRING, NULL);
-	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER, 360);
-	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER, 233);
+	SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_WIDTH_NUMBER, 360);
+	SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_HEIGHT_NUMBER, 233);
 	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_X_NUMBER, SDL_WINDOWPOS_CENTERED);
 	//SDL_SetNumberProperty(props, SDL_PROP_WINDOW_CREATE_Y_NUMBER, SDL_WINDOWPOS_CENTERED);
 	//SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_MAXIMIZED_BOOLEAN, true);
 	SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_FULLSCREEN_BOOLEAN, true);
 	SDL_SetBooleanProperty(props, SDL_PROP_WINDOW_CREATE_HIGH_PIXEL_DENSITY_BOOLEAN, true);
 	window = SDL_CreateWindowWithProperties(props);
-	SDL_GetWindowSizeInPixels(window, &windowWidth, &windowHeight);
 	updateScreenSpaceCoordinates();
 	if (window == NULL) {
 		SDL_Log("Unable to create window: %s", SDL_GetError());
@@ -87,8 +86,9 @@ bool initializeWindow(void) {
 
 	// Creating renderer
 	renderer = SDL_CreateRenderer(window, NULL);
-	//SDL_SetRenderLogicalPresentation(renderer, 360, 233, SDL_LOGICAL_PRESENTATION_INTEGER_SCALE);
-	//SDL_GetRenderOutputSize(renderer, &windowWidth, &windowHeight);
+	SDL_RendererLogicalPresentation mode = SDL_LOGICAL_PRESENTATION_INTEGER_SCALE;
+	SDL_SetRenderLogicalPresentation(renderer, 360, 225, mode);//SDL_LOGICAL_PRESENTATION_STRETCH);
+	SDL_GetRenderLogicalPresentation(renderer, &windowWidth, &windowHeight, &mode);
 	if (renderer == NULL) {
 		SDL_Log("Unable to create renderer: %s", SDL_GetError());
 		return false;
@@ -240,7 +240,7 @@ void drawTriangle(int x0, int y0,
 	drawLine(x2, y2, x0, y0, color);
 }
 
-void fillBottomTriangle(int x0, int y0,
+static void fillBottomTriangle(int x0, int y0,
 		int x1, int y1,
 		int x2, int y2,
 		uint32_t color) {
@@ -276,7 +276,7 @@ void fillBottomTriangle(int x0, int y0,
 
 	bool continueDrawing01 = true;
 	bool continueDrawing02 = true;
-	while (continueDrawing01) {// || continueDrawing02) {
+	while (continueDrawing01) {
 		const int trueX01 = swapped01 ? y01 : x01;
 		const int trueY01 = swapped01 ? x01 : y01;
 		const int trueX02 = swapped02 ? y02 : x02;
@@ -286,7 +286,7 @@ void fillBottomTriangle(int x0, int y0,
 		bool movedYDrawing02 = false;
 
 		while (!movedYDrawing01 && continueDrawing01) {
-			drawPixel(swapped01 ? y01 : x01, swapped01 ? x01 : y01, color);
+			//drawPixel(swapped01 ? y01 : x01, swapped01 ? x01 : y01, color);
 			if (abs(2*epsDx01 + 2*dy01*signDx01) > abs(dx01)) {
 				epsDx01 += dy01*signDx01 - signDy01*dx01;
 				y01 += signDy01;
@@ -300,7 +300,7 @@ void fillBottomTriangle(int x0, int y0,
 		} 
 
 		while (!movedYDrawing02 && continueDrawing02) {
-			drawPixel(swapped02 ? y02 : x02, swapped02 ? x02 : y02, color);
+			//drawPixel(swapped02 ? y02 : x02, swapped02 ? x02 : y02, color);
 			if (abs(2*epsDx02 + 2*dy02*signDx02) > abs(dx02)) {
 				epsDx02 += dy02*signDx02 - signDy02*dx02;
 				y02 += signDy02;

@@ -17615,7 +17615,7 @@ false	/opt/homebrew/include/SDL3/SDL_stdinc.h	/^#define false /;"	d
 feature_list	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    void *feature_list; \/**< Pointer to the first element of a chain of Vulkan feature structs./;"	m	struct:SDL_GPUVulkanOptions	typeref:typename:void *
 filename	/opt/homebrew/include/SDL3/SDL_assert.h	/^    const char *filename;  \/**< The source file where this assert lives. *\/$/;"	m	struct:SDL_AssertData	typeref:typename:const char *
 fill	./src/display.h	/^	unsigned int fill : 1;$/;"	m	struct:renderMethod_t	typeref:typename:unsigned int:1
-fillBottomTriangle	./src/display.c	/^void fillBottomTriangle(int x0, int y0,$/;"	f	typeref:typename:void
+fillBottomTriangle	./src/display.c	/^static void fillBottomTriangle(int x0, int y0,$/;"	f	typeref:typename:void	file:
 fillTriangle	./src/display.c	/^void fillTriangle(int x0, int y0,$/;"	f	typeref:typename:void
 fill_mode	/opt/homebrew/include/SDL3/SDL_gpu.h	/^    SDL_GPUFillMode fill_mode;         \/**< Whether polygons will be filled in or drawn as line/;"	m	struct:SDL_GPURasterizerState	typeref:typename:SDL_GPUFillMode
 fill_usable_bounds	/opt/homebrew/include/SDL3/SDL_test_common.h	/^    bool fill_usable_bounds;$/;"	m	struct:__anonb92e08560108	typeref:typename:bool

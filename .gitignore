@@ -55,7 +55,7 @@ dkms.conf
 *.dwo
 
 # Assets
-*.obj
+assets/
 
 # Recordings
 *.mov
